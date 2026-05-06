@@ -1,21 +1,86 @@
-MIT License
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+CC BY-NC-SA 4.0
 
-Copyright (c) 2026 DresOS
+Copyright (C) 2026 DresOperatingSystems
+https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+=========================================================================
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+You are free to:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+  Share - copy and redistribute this guide in any medium or format
+  Adapt - remix, transform, and build upon it
+
+Under the following terms:
+
+  Attribution - You must give appropriate credit to DresOS, provide a
+  link to this license, and indicate if changes were made. You may do
+  so in any reasonable manner, but not in any way that suggests DresOS
+  endorses you or your use.
+
+  NonCommercial - You may not use this material for commercial purposes.
+  This includes but is not limited to: selling the guide, repackaging
+  it into a paid course or product, placing advertisements on it,
+  using it to generate revenue in any form, or including it in any
+  commercial offering.
+
+  ShareAlike - If you remix, transform, or build upon this material,
+  you must distribute your version under the same CC BY-NC-SA 4.0
+  license. You cannot apply additional restrictions that prevent others
+  from doing what this license permits.
+
+  No additional restrictions - You may not apply legal terms or
+  technological measures that legally restrict others from doing
+  anything the license permits.
+
+=========================================================================
+
+Why CC BY-NC-SA 4.0 instead of MIT:
+
+The previous MIT license allowed anyone to take this guide, modify it,
+sell it commercially, repackage it into a paid security course, or
+distribute it without attribution. MIT provides no protection against
+any of that.
+
+CC BY-NC-SA 4.0 means:
+
+  - Nobody can sell this guide or profit from it in any form
+  - Anyone who shares it must credit DresOS
+  - Anyone who adapts it must release their version under the same
+    license so the community always benefits
+  - The DresOS name and work stays protected from commercial exploitation
+
+=========================================================================
+
+SCOPE OF THIS LICENSE
+
+This license covers:
+
+  - The DresOS Android Defensive Security System guide (README.md)
+  - SECURITY_ARCHITECTURE.md
+  - SYSTEM_CHANGELOG.md
+  - All other documentation in this repository
+
+This license does NOT cover:
+
+  - The DresOS Magisk Modules (licensed separately under GPL-3.0)
+    https://github.com/DresOperatingSystems/DresOS-Magisk-Modules
+
+  - Third party applications listed in the guide. Each application
+    carries its own open source license. Refer to each project
+    directly for their respective license terms.
+
+  - The DresOS name, logo, and branding. These remain the exclusive
+    property of DresOperatingSystems and may not be used without
+    explicit written permission regardless of this license.
+
+=========================================================================
+
+DISCLAIMER
+
+This guide is provided for educational and informational purposes only.
+DresOperatingSystems takes no responsibility for any damage, data loss,
+warranty voiding, or legal consequences resulting from following this
+guide. You proceed entirely at your own risk.
+
+Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
