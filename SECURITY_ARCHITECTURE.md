@@ -198,10 +198,19 @@
 │  ├── Mock GPS location set to anywhere in the world             │
 │  └── All apps requesting location receive the fake coordinates  │
 │                                                                  │
-│  Google Services - Noogle microG                                │
+│  Google Services - DresOS microG Module v2.0.0                  │
 │  ├── Full replacement for Google Play Services                  │
 │  ├── Apps requiring Play Services work without Google tracking  │
-│  └── Signature spoofing via LSPosed + Zygisk                   │
+│  ├── Full microG suite in one flash: GmsCore, Companion          │
+│  │   (FakeStore), GsfProxy, DroidGuard, Aurora Store            │
+│  ├── Bundled Zygisk signature spoof, scoped to microG only       │
+│  │   on arm64 + x86_64. No LSPosed required on those ABIs       │
+│  ├── Cert verified self heal: X.509 SHA-256 read from PMS via    │
+│  │   cmd package dump, no .RSA blob hashing                      │
+│  ├── Runtime debloat via pm disable-user, reversible             │
+│  ├── Per component bootloop sentinel                             │
+│  └── ROMs that already ship microG (Calyx, iode, eOS, Lineage    │
+│      for microG) detected by cert match, ROM copy preserved     │
 └─────────────────────────────────────────────────────────────────┘
 
 
@@ -237,7 +246,7 @@ No single point of failure in the stack.
   Email tracker pixels        -> Stripped by DuckDuckGo before delivery
   Unauthorised app internet   -> Blocked by AFWall+ whitelist
   Weak/reused passwords       -> Prevented by DDG password manager
-  Google Play Services spying -> Replaced by Noogle microG
+  Google Play Services spying -> Replaced by DresOS microG Module
   Malware in APKs             -> Scanned by Hypatia (ClamAV)
   Sensitive files on device   -> AES-256 encrypted by Amaze File Manager
   Censorship / Tor blocking   -> Bypassed by obfs4 bridges
