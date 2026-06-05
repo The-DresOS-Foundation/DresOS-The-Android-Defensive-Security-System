@@ -10,6 +10,8 @@
 ---
 
 > **Project Goal:** Turn any Android phone into a fully private, hardened, FOSS-only device with no Google tracking, no Google Services, no hidden data harvesting, and only open-source replacements then layer on a full defensive security stack to protect against surveillance, malware, censorship, and network-level attacks.
+
+> **See it running:** Watch the full DresOS on Android 16 demo on a Motorola Moto g32, every layer active, on [Ko-fi](https://ko-fi.com/post/DresOS-Android-16-Motorola-Moto-g32-Video-Demo-F5R420TKRN) or directly at [streamable.com/rg3tsm](https://streamable.com/rg3tsm).
 >
 > **Why:** Because of all the restrictions Google is bringing into place over the open-source communities, to bring you back your privacy, to stop your data being sold, and to give you full operational security on a device you actually control.
 
@@ -73,12 +75,14 @@ Proceed at your own risk.
 * [13. HeliBoard](#13-heliboard---offline-keyboard)
 * [14. Tuta Mail](#14-tuta-mail---encrypted-email)
 * [15. DuckDuckGo Privacy Browser](#15-duckduckgo-privacy-browser---primary-browser)
-* [16. AOSmium](#16-aosmium---system-webview-privacy-hardened-webview-engine)
-
-### Appendix
+* [16. AOSmium WebView](#16-aosmium-webview---system-webview-privacy-hardened-webview-engine)
+* [17. Aves Libre](#17-aves-libre---gallery-and-photo-manager)
+* [18. Stratum](#18-stratum---2fa-authenticator)
+* [19. Tuta Calendar](#19-tuta-calendar---encrypted-calendar)
 
 * [Compatible Devices](#compatible-devices)
 * [Contact DresOS](#contact-dresos)
+* [License](#license)
 
 ---
 
@@ -98,19 +102,21 @@ Download **only** from these official links (2026). Install **F-Droid** first - 
 | **TWRP** | Custom recovery (full backups + flashing) | [twrp.me](https://twrp.me/) → search your exact device model |
 | **Magisk** | Root + module framework | [GitHub Releases](https://github.com/topjohnwu/Magisk/releases) |
 | **De-Bloater** | Fine-tune system app removal | [F-Droid](https://f-droid.org/packages/com.sunilpaulmathew.debloater/) / [GitHub](https://github.com/sunilpaulmathew/De-Bloater) |
-| **DresOS microG Module** | Magisk module v2.0.0 - systemless microG suite (GmsCore, Companion, GsfProxy, DroidGuard, Aurora Store) with bundled Zygisk signature spoofing on arm64 and x86_64. No LSPosed required on those ABIs. | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v2.0.0) |
-| **LSPosed (optional fallback)** | Only needed for signature spoofing on armeabi-v7a, armeabi, x86, or riscv64 where the bundled Zygisk hook does not ship a prebuilt object. JingMatrix fork supports Android 8.1 through 16. | [GitHub Releases](https://github.com/JingMatrix/LSPosed/releases) |
-| **DresOS AOSmium WebView Module** | Magisk module v2.1.0 - systemless replacement of Android System WebView with AOSmium via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) |
+| **DresOS microG Module** | Magisk module v3.0.0 - universal systemless microG suite (officially signed GmsCore 0.3.15, Companion, GsfProxy, DroidGuard, Aurora Store, Aurora Services). Pure file overlay: no Zygisk payload, no Xposed, no boot scripts, so it cannot bootloop the device. Signature spoofing is provided by the ROM because the microG APKs carry the official microG key. | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v3.0.0) |
+| **DresOS AOSmium WebView Module** | Magisk module v2.2.0 - systemless replacement of Android System WebView with AOSmium via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) |
 | **AFWall+** | Root-level iptables firewall - per-app kernel-level rules, mobile data proxy redirect, no VPN slot | [F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall) |
 | **SD Maid SE** | Deep system cleaner + remnant finder | [F-Droid](https://f-droid.org/packages/eu.darken.sdmse/) |
-| **Fossify Suite** | Phone, Messages, Gallery, Calendar, Launcher, Contacts, Music | [fossify.org/apps](https://www.fossify.org/apps/) (all via F-Droid) |
+| **Fossify Suite** | Phone, Messages, Calendar, Launcher, Contacts, Music | [fossify.org/apps](https://www.fossify.org/apps/) (all via F-Droid) |
+| **Aves Libre** | Gallery, photo and video manager (replaces Fossify Gallery and Google Photos) | [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/) |
 | **Amaze File Manager** | File manager with built-in AES encryption and root explorer | [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) |
 | **AOSmium** | System WebView - bundled inside the DresOS module ZIP | APK source: [codeberg.org/AXP-OS/app_aosmium/releases](https://codeberg.org/AXP-OS/app_aosmium/releases) |
-| **InviZible Pro** | Tor + I2P + DNSCrypt in proxy + root mode - IP anonymisation, encrypted DNS, no VPN slot used | [F-Droid direct APK](https://f-droid.org/repo/pan.alexander.tordnscrypt.stable_26603.apk) / [F-Droid search: InviZible Pro](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/) |
+| **InviZible Pro** | Tor + I2P + DNSCrypt in proxy + root mode - IP anonymisation, encrypted DNS, no VPN slot used | [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/) |
 | **DuckDuckGo Privacy Browser** | Primary browser (Chrome replacement) | [F-Droid](https://f-droid.org/packages/com.duckduckgo.mobile.android/) |
 | **Aurora Store** | Anonymous Play Store alternative | [F-Droid](https://f-droid.org/packages/com.aurora.store/) |
 | **HeliBoard** | Fully offline keyboard (no Gboard) | [F-Droid](https://f-droid.org/packages/helium314.keyboard/) |
 | **Tuta Mail** | End-to-end encrypted email (no Gmail) | [F-Droid](https://f-droid.org/packages/de.tutao.tutanota/) |
+| **Tuta Calendar** | End-to-end encrypted calendar, syncs with your Tuta account (no Google Calendar) | [F-Droid](https://f-droid.org/packages/de.tutao.calendar/) |
+| **Stratum** | Offline two-factor authenticator (TOTP/HOTP), encrypted backups, no internet, no cloud | [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app) |
 | **Gopeed** | FOSS download manager - HTTP/HTTPS/BitTorrent/magnet, hash verification, no Google components | [F-Droid](https://f-droid.org/packages/com.gopeed/) / [gopeed.com](https://gopeed.com/) |
 | **SAI** | Split APK Installer - FOSS package installer | [F-Droid](https://f-droid.org/packages/com.aefyr.sai.fdroid/) |
 | **Fake Traveler** | GPS location spoofer | [F-Droid](https://f-droid.org/packages/cl.coders.faketraveler/) |
@@ -129,10 +135,13 @@ Here is exactly what each core app replaces and why it is better for privacy:
 | DuckDuckGo Privacy Browser | Chrome | Private search engine, tracker blocking, zero Google telemetry |
 | AOSmium WebView | Android System WebView (Google) | Blocks ads & trackers in **every** app that loads web content |
 | Tuta Mail | Gmail | End-to-end encrypted email (no Google account or content scanning) |
+| Tuta Calendar | Google Calendar | End-to-end encrypted calendar, syncs across your devices through your Tuta account, zero-knowledge |
 | HeliBoard | Gboard | Completely offline keyboard, no data sent anywhere, ever |
 | Aurora Store | Google Play Store | Anonymous downloads, no Google account required |
-| Noogle microG | Google Play Services | Full app compatibility without any Google tracking infrastructure |
-| Fossify Gallery / Calendar / Launcher / Contacts / Music | Stock Google equivalents | All open source, no cloud sync or telemetry |
+| DresOS microG | Google Play Services | Full app compatibility without any Google tracking infrastructure |
+| Fossify Calendar / Launcher / Contacts / Music | Stock Google equivalents | All open source, no cloud sync or telemetry |
+| Aves Libre | Google Photos / Stock Gallery | Open-source photo and video gallery, metadata viewer, map and tag organisation, no cloud, no trackers |
+| Stratum | Google Authenticator / Authy | Offline open-source 2FA, encrypted exportable backups, no cloud lock-in, single permission |
 | Gopeed | Google Download Manager | Modern FOSS download manager - HTTP/BitTorrent/magnet, hash verification, actively maintained |
 | DresOS AOSmium WebView Module | Manual WebView patching process | Single Magisk flash: places AOSmium in systemless tree, ships a static RRO that allowlists it in config_webview_packages, activates via cmd webviewupdate after boot, includes bootloop sentinel |
 | InviZible Pro | Orbot + separate DNS/I2P apps | Combines Tor, I2P, and DNSCrypt in proxy + root mode - no VPN slot used; IP spoofing via Android system proxy; iptables DNS redirect at kernel level |
@@ -219,12 +228,15 @@ Reboot → open Magisk app → you are rooted. Keep Magisk app installed - you n
    * **Inure App Manager**
    * **Shizuku**
    * **SD Maid SE**
-   * **All Fossify apps** (Phone, Messages, Gallery, Calendar, Launcher, Contacts, Music)
+   * **All Fossify apps** (Phone, Messages, Calendar, Launcher, Contacts, Music)
+   * **Aves Libre** (gallery)
    * **Amaze File Manager** (replaces Fossify Files and ZArchiver Pro)
    * **HeliBoard**
    * **DuckDuckGo Privacy Browser**
    * **Aurora Store**
    * **Tuta Mail**
+   * **Tuta Calendar**
+   * **Stratum** (2FA authenticator)
    * **Gopeed** (download manager)
    * **SAI (Split APK Installer)**
    * **Fake Traveler**
@@ -238,18 +250,15 @@ Do **not** open or configure these apps yet - follow each step in order.
 
 Open **Magisk app** → **Modules** → **Install from storage** and flash each of these one at a time, rebooting between them if instructed:
 
-1. **DresOS microG Module v2.0.0** (`dresosmicrog`) - systemless microG suite, single flash. Bundles GmsCore 0.3.7.250932, Companion (FakeStore), GsfProxy, DroidGuard Helper, and Aurora Store. Ships a Zygisk based signature spoof scoped to the microG process only, so on arm64 and x86_64 LSPosed is NOT required. APKs and matching privapp permissions XML land in the same partition (product on API 28 plus, system on API 26 and 27). Cert identity is verified post boot via `cmd package dump` reading the X.509 cert SHA 256. Debloat is runtime `pm disable user`, reversible by uninstall. Includes a per component bootloop sentinel.
+1. **DresOS microG Module v3.0.0** (`dresosmicrog`) - universal systemless microG suite, single flash. Ships the officially signed microG GmsCore 0.3.15, Companion (FakeStore), GsfProxy, DroidGuard Helper, Aurora Store, and Aurora Services as privileged system apps under product, with a privapp-permissions allowlist generated from the bundled manifests. It is a pure file overlay: no Zygisk payload, no Xposed, no runtime PackageManager work, and it never touches other modules, so it cannot bootloop the device and coexists cleanly with the AOSmium WebView module. Signature spoofing is provided by the ROM: because the microG APKs carry the official microG key, any ROM with microG signature spoofing support spoofs them automatically once placed in priv-app.
    * **Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-   * **Download:** [DresOS-microG-v2_0_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v2.0.0)
-   * Replaces the older Noogle microG plus LSPosed plus FakeGApps chain. One flash, no Xposed framework required on arm64 or x86_64.
+   * **Download:** [DresOS-microG-v3_0_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v3.0.0)
    * Full details in Step 6.
-2. **DresOS AOSmium WebView Module v2.1.0** (`dresoswv`) - systemless replacement of Android System WebView with AOSmium. Drops the AOSmium APK into the systemless tree at `system/product/app/AOSmiumWebView/`, ships a static RRO that adds AOSmium plus the AXP.OS signing certificate to the framework `config_webview_packages` allowlist, and activates AOSmium via `cmd webviewupdate set-webview-implementation` after boot complete. Includes a post-fs-data bootloop sentinel and an inert mode fallback so a failed activation cannot bootloop the device.
+2. **DresOS AOSmium WebView Module v2.2.0** (`dresoswv`) - systemless replacement of Android System WebView with AOSmium. Drops the AOSmium APK into the systemless tree at `system/product/app/AOSmiumWebView/`, ships a static RRO that adds AOSmium plus the AXP.OS signing certificate to the framework `config_webview_packages` allowlist, and activates AOSmium via `cmd webviewupdate set-webview-implementation` after boot complete. Includes a post-fs-data bootloop sentinel and an inert mode fallback so a failed activation cannot bootloop the device.
    * **Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-   * **Download:** [DresOS-AOSmium-WebView-v2.1.0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
+   * **Download:** [DresOS-AOSmium-WebView-v2_2_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
    * Handles the entire WebView switch in one flash. Full details in Step 7.
-3. **LSPosed (only on armeabi-v7a, armeabi, x86, or riscv64)** - Xposed style module framework, JingMatrix fork. Only needed on ABIs where the DresOS microG module's bundled Zygisk object does not ship a prebuilt. On arm64 and x86_64 you can skip this module entirely.
-
-Reboot after flashing all the modules above.
+Reboot after flashing both modules above.
 
 ---
 
@@ -259,27 +268,28 @@ The DresOS microG module installs a clean, privacy respecting replacement for Go
 
 What it stages:
 
-- **microG GmsCore** (`com.google.android.gms`) 0.3.7.250932 - the Play Services replacement core
+- **microG GmsCore** (`com.google.android.gms`) 0.3.15.250932 - the Play Services replacement core
 - **microG Companion** (`com.android.vending`) - FakeStore stub so apps that check for Play Store presence see something legitimate
 - **microG GsfProxy** (`com.google.android.gsf`) - Google Services Framework proxy
 - **microG DroidGuard Helper** (`org.microg.gms.droidguard`) - DroidGuard runtime stub
-- **Aurora Store** (`com.aurora.store`) - anonymous Play Store alternative as a user app
+- **Aurora Store** (`com.aurora.store`) - anonymous Play Store alternative
+- **Aurora Services** (`com.aurora.services`) - Aurora privileged extension for silent, prompt-free app installs
 
-Signature spoofing is bundled into the module as a Zygisk hook scoped to the microG process. On arm64 and x86_64 you do NOT need LSPosed or any Xposed style framework. On armeabi-v7a, armeabi, x86, or riscv64 install LSPosed (JingMatrix fork) plus FakeGApps as the signature spoof fallback.
+Signature spoofing is provided by the ROM, not by the module. Because the bundled microG APKs are signed with the official microG key, any ROM that supports microG signature spoofing (LineageOS from 2024-02-26 onward, /e/OS, CalyxOS, iodeOS, DivestOS and similar) activates spoofing automatically once the apps are placed in priv-app. There is no Zygisk hook and no Xposed or LSPosed framework involved on any ABI.
 
 ### Activation
 
 1. Open **Magisk app** → **Modules**. Confirm `DresOS microG` is listed and enabled.
 2. Tap the **Action** button on the DresOS microG entry. This prints the status dashboard, regrants runtime permissions to GmsCore, Companion, GSF, and DroidGuard, and restarts the microG components. Grant root when prompted.
 3. Open the **microG Settings** app from your app drawer.
-4. Go to **Self Check**. Every item should be ticked except SafetyNet (intentionally not in v2.0.0, coming in v2.2.0 which will bundle a Play Integrity Fix).
+4. Go to **Self Check**. The signature spoofing item should read green because the ROM is spoofing the officially signed microG. Every other item should tick, except SafetyNet and Play Integrity, which are planned for a later release.
 5. If signature spoofing reads as failing, reboot once more and re check.
 
 ### Aurora Store
 
 Aurora Store opens automatically once the module is active. Sign in with **Anonymous** (no Google account). You can now install apps from the Play Store catalogue without a Google account.
 
-**Known issue in v2.0.0:** the Aurora Privileged Extension (`com.aurora.services`) does not always land as a system priv app on every device. Aurora Store itself works fine. The silent install path through Aurora Services is the affected piece, which means you will see the standard Android installer prompt for each app install. This is the headline fix for v2.1.0. Updates posted on the website Updates tab.
+**Aurora Services:** v3.0.0 stages the Aurora privileged extension (`com.aurora.services`) as a system priv-app with its own permissions allowlist, so silent prompt-free installs through Aurora Store work without the standard Android installer prompt appearing for every app.
 
 ### Logs and diagnostics
 
@@ -290,7 +300,7 @@ Aurora Store opens automatically once the module is active. Sign in with **Anony
 
 ### On ROMs that already ship microG
 
-LineageOS for microG, CalyxOS, iodeOS, /e/OS already provide native signature spoofing and may ship microG built in. The installer detects upstream signed microG by reading the X.509 certificate SHA 256 via `cmd package dump` and leaves the ROM's microG in place. The bundled Zygisk hook is removed at install time so there is no double spoof, and only the Aurora components are staged on those ROMs.
+LineageOS for microG, CalyxOS, iodeOS, /e/OS already provide native signature spoofing and may ship microG built in. The installer detects an already-present, upstream-signed microG by reading the X.509 certificate SHA-256 via `cmd package dump` and leaves the ROM's microG in place, staging only the Aurora components on those ROMs so there is no duplicate.
 
 GrapheneOS deliberately blocks native signature spoofing and ships its own Sandboxed Google Play. The module detects GrapheneOS and aborts the install.
 
@@ -308,10 +318,10 @@ Your everyday browser is **DuckDuckGo Privacy Browser**. AOSmium runs silently i
 
 ---
 
-### DresOS AOSmium WebView Module v2.1.0
+### DresOS AOSmium WebView Module v2.2.0
 
 **Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-**Download:** [DresOS-AOSmium-WebView-v2.1.0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
+**Download:** [DresOS-AOSmium-WebView-v2_2_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
 
 **What the module does in one flash:**
 
@@ -349,7 +359,7 @@ If the module works on your device, open an issue on the DresOS Magisk Modules r
 
 ### Flash Instructions
 
-1. Download `DresOS-AOSmium-WebView-v2.1.0.zip` from the releases link above
+1. Download `DresOS-AOSmium-WebView-v2_2_0.zip` from the releases link above
 2. Open **Magisk → Modules → Install from storage**
 3. Select the ZIP and wait for installation to complete
 4. Tap **Reboot**
@@ -613,6 +623,7 @@ Go to **Settings → Apps → Default apps** and set:
 | Function | Default App |
 |---|---|
 | Browser | **DuckDuckGo Privacy Browser** |
+| Gallery | **Aves Libre** |
 | Keyboard / Input method | **HeliBoard** |
 | Home / Launcher | **Fossify Launcher** |
 | Phone app | **Fossify Phone** |
@@ -626,9 +637,10 @@ Go to **Settings → Apps → Default apps** and set:
 
 **DuckDuckGo Privacy Browser:** Open it and complete initial setup. **App Tracking Protection can and should be enabled** - InviZible Pro runs in proxy + root mode and does not occupy the Android VPN slot, so there is no conflict. Enable it in DuckDuckGo → Settings → App Tracking Protection → Enable. Android will prompt you to allow a VPN connection for DuckDuckGo - confirm it. This gives you both InviZible Pro's proxy-level Tor/DNSCrypt routing AND DuckDuckGo's in-app tracker blocking running simultaneously.
 
-**LSPosed modules (optional hardening):**
+**Optional hardening (advanced):**
+* **Stratum** - set up your two-factor authentication accounts now; it works fully offline and you can block it from the network in AFWall+
 * **Hide My Applist** - prevents apps from detecting other apps installed on your phone
-* **Play Integrity Fix** - helps microG pass SafetyNet/Play Integrity checks for apps that require it
+* **Play Integrity** - microG passing SafetyNet/Play Integrity for banking and similar apps is planned for a later DresOS microG release rather than the current pure-overlay build
 
 ---
 
@@ -710,7 +722,7 @@ This is the baseline privacy layer - applied at the OS level, before any apps ru
 * Magisk root lets InviZible Pro redirect DNS at the iptables level without any VPN interface
 * Android's built-in system proxy setting routes your traffic through InviZible Pro's Tor HTTP proxy - your apparent IP address to every website and service becomes a Tor exit node IP, not your real IP
 
-**Download:** [pan.alexander.tordnscrypt.stable_26603.apk](https://f-droid.org/repo/pan.alexander.tordnscrypt.stable_26603.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/)
 Or search **InviZible Pro** in F-Droid.
 
 ---
@@ -1069,7 +1081,7 @@ The following apps form the complete DresOS defensive security application suite
 
 ## 1. Amaze File Manager - File Management & AES Encryption
 
-**Download:** [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) / [Direct APK](https://f-droid.org/repo/com.amaze.filemanager_124.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/)
 
 ### What It Is
 
@@ -1122,7 +1134,7 @@ ZArchiver Pro was sourced from an unofficial GitHub mirror and is not available 
 
 ## 2. IYPS - Password Strength Analyser & Generator
 
-**Download:** [IYPS_v1.5.6.apk](https://github.com/StellarSand/IYPS/releases/download/v1.5.6/IYPS_v1.5.6.apk)
+**Download:** [GitHub Releases (latest)](https://github.com/StellarSand/IYPS/releases/latest)
 
 ### What It Is
 
@@ -1157,7 +1169,7 @@ Most people massively overestimate how strong their passwords are. IYPS shows yo
 
 ## 3. RedReader - Private Reddit Client
 
-**Download:** [RedReader-v1.25.1.apk](https://github.com/QuantumBadger/RedReader/releases/download/v1.25.1/RedReader-v1.25.1.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/org.quantumbadger.redreader/)
 
 ### What It Is
 
@@ -1194,7 +1206,7 @@ The official Reddit app is one of the most aggressive data-harvesting apps avail
 
 ## 4. URL Check - Link Scanner
 
-**Download:** [URLCheck-3.4.1.apk](https://github.com/TrianguloY/URLCheck/releases/download/v3.4.1/URLCheck-3.4.1.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/com.trianguloy.urlchecker/)
 
 ### What It Is
 
@@ -1235,7 +1247,7 @@ Phishing and IP logging are two of the most common attack vectors in targeted su
 
 ## 5. Hypatia - Open-Source Antivirus
 
-**Download:** [hypatia_v3.18.apk](https://github.com/MaintainTeam/Hypatia/releases/download/v3.18/hypatia_v3.18.apk)
+**Download:** [GitHub Releases (latest)](https://github.com/MaintainTeam/Hypatia/releases/latest)
 
 ### What It Is
 
@@ -1281,7 +1293,7 @@ Side-loading APKs (which is necessary on a de-Googled phone without Play Protect
 
 ## 6. OONI Probe - Network Censorship Detector
 
-**Download:** [ooniprobe_274.apk](https://f-droid.org/repo/org.openobservatory.ooniprobe_274.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/org.openobservatory.ooniprobe/)
 
 ### What It Is
 
@@ -1325,7 +1337,7 @@ Understanding your threat environment is the first step in defending against it.
 ## 7. InviZible Pro - Tor + I2P + DNSCrypt in Proxy + Root Mode
 
 **App Store Name:** InviZible Pro
-**Download:** [pan.alexander.tordnscrypt.stable_26603.apk](https://f-droid.org/repo/pan.alexander.tordnscrypt.stable_26603.apk)
+**Download:** [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/)
 
 *(Full step-by-step setup in Part 2 - OPSEC Step 2)*
 
@@ -1390,7 +1402,7 @@ Every de-Googled phone still has apps that attempt to reach the internet - analy
 
 ## 9. Metrolist - Private YouTube Music Client
 
-**Download:** [Metrolist.apk](https://github.com/MetrolistGroup/Metrolist/releases/download/v13.3.0/Metrolist.apk)
+**Download:** [GitHub Releases (latest)](https://github.com/MetrolistGroup/Metrolist/releases/latest)
 
 ### What It Is
 
@@ -1431,7 +1443,7 @@ Music streaming should not come with a surveillance apparatus. Metrolist gives y
 
 ## 10. Arcane Chat - Decentralized Encrypted Messaging
 
-**Download:** [ArcaneChat-foss-arm64-v8a-2.43.0.apk](https://github.com/ArcaneChat/android/releases/download/v2.43.0/ArcaneChat-foss-arm64-v8a-2.43.0.apk)
+**Download:** [GitHub Releases (latest)](https://github.com/ArcaneChat/android/releases/latest)
 
 ### What It Is
 
@@ -1528,7 +1540,6 @@ Fossify is a suite of open-source replacements for every core Android system app
 | **Fossify Phone** | Google/Stock Dialer | Open-source dialer, call blocking, call recording (where legal), no analytics |
 | **Fossify Messages** | Google Messages | Open-source SMS/MMS, no Google RCS, no message scanning |
 | **Amaze File Manager** | Files by Google | Local file manager, no cloud sync, no Google One integration |
-| **Fossify Gallery** | Google Photos | Local gallery, no cloud backup to Google, no AI face scanning |
 | **Fossify Calendar** | Google Calendar | Local calendar, optional CalDAV sync with your own server |
 | **Fossify Launcher** | Pixel Launcher | Open-source home screen, no Google Feed integration |
 | **Fossify Contacts** | Google Contacts | Local contacts, no sync to Google's servers |
@@ -1543,12 +1554,12 @@ Fossify is a suite of open-source replacements for every core Android system app
 3. Transfer your data:
    * **Contacts:** Export from old app as `.vcf` → import into Fossify Contacts
    * **Calendar:** Export as `.ics` → import into Fossify Calendar
-   * **Photos:** Already on your storage - open with Fossify Gallery
+   * **Photos:** Already on your storage - open with Aves Libre
    * **Music:** Already on your storage - open with Fossify Music
 
 ### Why It's in the DresOS Suite
 
-Every stock Google app (Dialer, Messages, Files, Gallery, Calendar) contains telemetry that reports usage data, contact metadata, and behavioral information back to Google's servers. Fossify apps are clean replacements with identical functionality and zero reporting.
+Every stock Google app (Dialer, Messages, Files, Calendar) contains telemetry that reports usage data, contact metadata, and behavioral information back to Google's servers. Fossify apps are clean replacements with identical functionality and zero reporting.
 
 ---
 
@@ -1579,6 +1590,15 @@ HeliBoard is a fully open-source, completely offline keyboard for Android. It is
 4. Disable Gboard (or remove it during the debloating step).
 5. Download offline language dictionaries for your languages within HeliBoard settings.
 
+### DresOS HeliBoard Design (One-Tap Restore)
+
+We worked up a ready-made DresOS HeliBoard configuration so you do not have to tune the keyboard by hand. It is a privacy-tuned setup with always-incognito mode on, contacts and personalized dictionaries off, sound off, and the DresOS theme with key borders, a number row, and narrow key gaps. You restore it as a single backup file and the keyboard is fully set up.
+
+1. Download the design file: [DresOS-HeliBoard-Design.zip](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System/raw/main/assets/DresOS-HeliBoard-Design.zip)
+2. Open **HeliBoard** -> **Settings** -> **Backup and restore**.
+3. Tap **Restore**, select the downloaded **DresOS-HeliBoard-Design.zip**, and confirm.
+4. HeliBoard applies the full DresOS configuration immediately. No further setup is needed.
+
 ---
 
 ## 14. Tuta Mail - Encrypted Email
@@ -1597,4 +1617,220 @@ Tuta Mail (formerly Tutanota) is an end-to-end encrypted email service operated 
 * **Zero-knowledge** - Tuta cannot read your emails; they are encrypted before leaving your device
 * **Encrypted contacts and calendar** included in the free plan
 * Encrypted search (searches happen locally on your device, never on the server)
-* **Email aliases** for compartmentalization (use differen
+* **Email aliases** for compartmentalization (use different aliases for different purposes)
+* Secure external email (password-protected messages to non-Tuta recipients)
+* German and EU jurisdiction with GDPR protections
+* Free plan available; paid plans add more aliases and storage
+* Fully open-source client
+
+### Setup and Usage
+
+Full step-by-step setup, including pairing Tuta with DuckDuckGo Duck Addresses, is in Part 2, OPSEC Step 4. In short: create a Tuta account with no phone number, write down the recovery code and store it physically, enable a biometric or PIN lock, and route all your Duck Addresses to your Tuta inbox.
+
+### Why It's in the DresOS Suite
+
+Tuta is the encrypted inbox at the centre of the DresOS email model. Your real address lives only in Tuta, every service gets a disposable Duck Address that forwards into it with trackers stripped, and even Tuta itself cannot read your mail because it is encrypted before it leaves the device.
+
+---
+
+## 15. DuckDuckGo Privacy Browser - Primary Browser
+
+**Download:** [F-Droid](https://f-droid.org/packages/com.duckduckgo.mobile.android/)
+
+### What It Is
+
+DuckDuckGo Privacy Browser is your everyday browser in DresOS and the Chrome replacement. It blocks trackers before they load, forces encrypted connections, and ships a built-in Email Protection service that pairs directly with your Tuta inbox. It needs no Google account and sends no telemetry. AOSmium stays the invisible system WebView engine that other apps render through; DuckDuckGo is the browser you actually open.
+
+### Key Features
+
+* Built-in tracker blocking that stops third-party trackers before they load
+* Smarter Encryption that forces HTTPS wherever a site supports it
+* Fireproofing to keep chosen sites logged in while clearing everything else
+* Automatic cookie pop-up handling and a one-tap Fire Button that wipes tabs and data
+* Email Protection with @duck.com aliases that forward into your Tuta inbox with trackers stripped
+* Global Privacy Control, which broadcasts a legal opt-out signal to websites
+* Duck Player for YouTube, which plays videos in a private, ad-free view and keeps the session out of your Google and YouTube watch and recommendation profile
+* No Google account, no telemetry
+
+### App Tracking Protection - Enable This
+
+DuckDuckGo's App Tracking Protection watches tracker activity inside every other app on the phone using the Android VPN slot. Enable it. InviZible Pro runs in proxy plus root mode and does not touch the Android VPN slot at all, so there is no conflict and both run at once:
+
+* InviZible Pro (proxy plus iptables) handles network-level anonymity: Tor IP routing, DNSCrypt, and I2P
+* DuckDuckGo App Tracking Protection (VPN slot) handles app-layer tracker blocking, stopping trackers inside installed apps from phoning home
+
+Together they form the full DresOS defensive stack running simultaneously.
+
+### Setup and Usage
+
+1. Install DuckDuckGo from F-Droid and complete onboarding.
+2. When it offers App Tracking Protection, enable it. Android will ask you to allow a VPN connection for DuckDuckGo; confirm it. InviZible Pro uses proxy plus root mode and leaves the VPN slot free, so there is no conflict.
+3. Set it as your default browser in **Settings -> Apps -> Default apps -> Browser**.
+4. Set up your Duck Address: **menu -> Settings -> Email Protection -> Get Started**, enter your Tuta Mail address as the forwarding address, and store the generated key alongside your Tuta recovery code. Full pairing steps are in Part 2, OPSEC Step 4.
+5. Allow DuckDuckGo on Wi-Fi and Data in AFWall+, since it is your browser and needs full access.
+6. For YouTube, turn on Duck Player in **menu -> Settings -> Duck Player** and set it to open YouTube videos automatically. Videos then play in a clean, distraction-free window with targeted ads stripped and without YouTube tying the session to your watch history or recommendation profile.
+
+### Why It's in the DresOS Suite
+
+Your browser touches more of the web than any other app, so it has to be the most careful. DuckDuckGo blocks trackers at the source, pairs with Tuta through Duck Addresses so your real inbox never leaks, and runs its App Tracking Protection in the VPN slot that InviZible Pro deliberately leaves free, which lets the whole DresOS stack run at once without conflict.
+
+---
+
+## 16. AOSmium WebView - System WebView (Privacy-Hardened WebView Engine)
+
+**Download:** Installed by the DresOS AOSmium WebView Module in Step 7. Source: [codeberg.org/AXP-OS/app_aosmium](https://codeberg.org/AXP-OS/app_aosmium/releases)
+
+### What It Is
+
+AOSmium, built by the AXP.OS project, is a Chromium-based WebView forked from Mulch and hardened throughout with the security patches from Vanadium, the GrapheneOS browser engine. The Android System WebView is the rendering engine hundreds of apps use internally any time they show web content, from social feeds to sign-in screens to in-app articles. By default that engine is Google's, which phones home on every render. AOSmium replaces it system-wide, so every app that draws web content does so through a Google-free, privacy-hardened engine. It is invisible: you never open AOSmium directly, and your actual browser is DuckDuckGo.
+
+### Key Features
+
+* Chromium-based WebView hardened with Vanadium and Mulch privacy and security patches
+* Replaces Google's Android System WebView for every app on the device at once
+* No Google services, no telemetry, no anti-features
+* Installed systemlessly through the DresOS AOSmium WebView Module, so it is bootloop-safe and fully reversible
+
+### Setup and Usage
+
+AOSmium is not installed by hand. The DresOS AOSmium WebView Module v2.2.0 you flash in Step 7 drops the signed APK into the systemless tree, registers it through a static RRO, and promotes it to the active WebView provider with `cmd webviewupdate set-webview-implementation` after boot. Full flashing and verification steps, including the bootloop sentinel and inert-mode fallback, are in Step 7. Confirm it is active with `adb shell dumpsys webviewupdate | grep "Current WebView package"`, which should report `org.axpos.aosmium_wv`.
+
+### Why It's in the DresOS Suite
+
+The system WebView is the most overlooked privacy hole on Android, because it quietly renders web content for dozens of apps that have nothing to do with browsing. Switching it to AOSmium closes that hole for the whole device in a single flash, which is why it is a core part of DresOS rather than an optional extra.
+
+---
+
+## 17. Aves Libre - Gallery and Photo Manager
+
+**Download:** [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/)
+
+### What It Is
+
+Aves Libre is a fully open-source gallery and photo manager for Android, and the DresOS replacement for Fossify Gallery and Google Photos. It handles photos and videos of every common format, reads and displays full image metadata, and organises your library by album, country, place, tag, and date, all locally on the device with no cloud, no account, and no trackers.
+
+### Key Features
+
+* Photos and videos, including raw, GIF, SVG, and many other formats
+* Map view and place or country grouping from on-device metadata only
+* Tags, favourites, and powerful search across your local library
+* Full EXIF and metadata viewer and editor
+* No cloud sync, no Google Photos backup, no AI face scanning, no telemetry
+* Works fully offline; you can block it from the network in AFWall+
+
+### Setup and Usage
+
+1. Install Aves Libre from F-Droid.
+2. Grant it media and storage access when prompted.
+3. Set it as your default gallery in **Settings -> Apps -> Default apps** where the option is offered, and open your photos with it.
+4. In AFWall+, leave Aves Libre blocked on both Wi-Fi and Data, since a local gallery has no reason to reach the internet.
+
+### Why It's in the DresOS Suite
+
+A gallery app sees every photo on your device, which makes it one of the most privacy-sensitive apps you run. Google Photos uploads and scans your library by design. Aves Libre keeps everything on the device, reads metadata locally, and never phones home, which is exactly why it replaces the stock gallery in DresOS.
+
+---
+
+## 18. Stratum - 2FA Authenticator
+
+**Download:** [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app)
+
+### What It Is
+
+Stratum (formerly Authenticator Pro) is a free and open-source two-factor authentication app, released under GPL 3.0. It generates the rolling login codes that protect your accounts, and unlike Google Authenticator or Authy it does not lock your data in or talk to any server. Everything stays on the device, encrypted, and you can export it at any time.
+
+### Key Features
+
+* TOTP, HOTP, mOTP and more, compatible with almost every provider
+* Fully offline: it requires a single permission and never needs internet access
+* Encrypted, exportable backups so you can move to a new phone without being locked out
+* Password and biometric lock on the code list
+* Import from other authenticator apps
+* Icons, categories, and Material You theming
+* Optional Wear OS companion
+
+### Setup and Usage
+
+1. Install Stratum from the official download page or GitHub.
+2. Open it and set a password plus biometric unlock in the security settings.
+3. For each account choose add, then scan the provider's QR code or paste the secret. Stratum starts generating codes immediately.
+4. Make an encrypted backup from the backup menu and store it somewhere safe, for example inside an AES-256 archive, so you can restore your 2FA if you lose the phone.
+5. In AFWall+, block Stratum on both Wi-Fi and Data. It works entirely offline, so denying it the network is a free privacy and security win.
+
+### Why It's in the DresOS Suite
+
+Two-factor authentication is the single most effective step against account theft after a strong password, but the mainstream authenticators tie your second factor to a cloud account, which is its own risk. Stratum gives you the same protection with no cloud, no account, encrypted local backups, and no network access at all, which fits the rest of the DresOS stack.
+
+---
+
+## 19. Tuta Calendar - Encrypted Calendar
+
+**Download:** [F-Droid](https://f-droid.org/packages/de.tutao.calendar/)
+
+### What It Is
+
+Tuta Calendar is the standalone end-to-end encrypted calendar app from the Tuta team, split out from the Tuta Mail app into its own package. Your events, descriptions, attendees, and notifications are encrypted before they leave the device, and they sync across all your devices through the same Tuta account that holds your encrypted mail. It is the calendar counterpart to Tuta Mail and the DresOS choice when you want an encrypted calendar that syncs, rather than a purely local one.
+
+### Key Features
+
+* End-to-end encrypted events, including titles, descriptions, and attendees
+* Zero-knowledge: Tuta cannot read your calendar
+* Syncs across devices through your existing Tuta account, no Google account
+* Encrypted reminders and recurring events
+* German and EU jurisdiction with GDPR protections
+* Fully open-source client
+
+### Setup and Usage
+
+1. Install Tuta Calendar from F-Droid.
+2. Sign in with the same Tuta account you created in OPSEC Step 4. Your encrypted calendar is available immediately and stays in sync with Tuta Mail.
+3. Set it as your default calendar in **Settings -> Apps -> Default apps** if you want calendar links to open in it.
+4. In AFWall+, allow Tuta Calendar on Wi-Fi and Data, since it needs the network to sync your encrypted calendar.
+
+### Tuta Calendar or Fossify Calendar
+
+Both are open source and private. Choose Tuta Calendar when you want an encrypted calendar that syncs across devices through your Tuta account. Choose Fossify Calendar when you want a calendar that stays entirely on the one device with no account and no sync at all. They can also coexist, with Fossify Calendar for local-only events and Tuta Calendar for anything you want mirrored to your other devices.
+
+### Why It's in the DresOS Suite
+
+A calendar is a complete map of your life: where you will be, when, and with whom. Google Calendar reads all of it. Tuta Calendar gives you the convenience of cross-device sync while keeping every event encrypted so that not even Tuta can read it, which is why it sits alongside Tuta Mail at the centre of the DresOS encrypted account model.
+
+---
+
+## Compatible Devices
+
+DresOS is built for universal compatibility: the degoogling and OPSEC steps work on any rooted Android 10 or newer device, and the Magisk modules are written to run on any ABI and any OEM partition layout. The combinations below are the ones confirmed working end to end so far:
+
+* Motorola Moto G32 (`devon`) on LineageOS, Android 15 and 16
+* Motorola ThinkPhone on Stock Android 15
+* Motorola Moto G7 Plus on Stock Android 10
+* Motorola Moto G7 Plus on LineageOS, Android 15
+* Samsung Galaxy A05s on Stock Android 10
+
+If you run DresOS on a device that is not listed, a confirmation report is welcome so the list can grow.
+
+---
+
+## Contact DresOS
+
+* Project and source code: [github.com/DresOperatingSystems](https://github.com/DresOperatingSystems)
+* This guide: [DresOS-The-Android-Defensive-Security-System](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System)
+* Magisk modules and bug reports: [DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
+* Support the project: [ko-fi.com/dresos](https://ko-fi.com/dresos)
+
+---
+
+## License
+
+This project is released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0). See the [LICENSE](LICENSE) file for the full terms.
+
+---
+
+## Made with ❤️ for privacy by DresOS
+
+You now have a fully de-Googled, operationally secure Android device: no Google apps and no Google Services, AOSmium as the system WebView through the DresOS AOSmium WebView Module v2.2.0, Google Play compatibility through the DresOS microG Module v3.0.0 with the ROM providing signature spoofing, Tor plus I2P plus DNSCrypt through InviZible Pro in proxy plus root mode, a kernel-level iptables firewall through AFWall+, app-layer tracker blocking through DuckDuckGo App Tracking Protection, and the full DresOS defensive app suite on top, from encrypted Tuta mail and calendar to offline two-factor with Stratum, a local Aves Libre gallery, and an offline HeliBoard keyboard. Every tool is open source, every download is sourced directly from a verified developer, and every component is designed to hand control of your device, your data, and your privacy back to you.
+
+---
+---
+
+**This is an update to both the degoogled and opsec project**
