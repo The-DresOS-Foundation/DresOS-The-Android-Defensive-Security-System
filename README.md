@@ -60,6 +60,7 @@ Proceed at your own risk.
 
 ### Part 3 - DresOS Defensive App Suite
 
+* [DresSecureComms - DresOS Secure Communications Suite](#dressecurecomms---dresos-secure-communications-suite)
 * [1. Amaze File Manager](#1-amaze-file-manager---file-management--aes-encryption)
 * [2. IYPS](#2-iyps---password-strength-analyser--generator)
 * [3. RedReader](#3-redreader---private-reddit-client)
@@ -106,7 +107,8 @@ Download **only** from these official links (2026). Install **F-Droid** first - 
 | **DresOS WebView Module** | Magisk module v2.2.0 - systemless replacement of Android System WebView with DresOS WebView via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) |
 | **AFWall+** | Root-level iptables firewall - per-app kernel-level rules, mobile data proxy redirect, no VPN slot | [F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall) |
 | **SD Maid SE** | Deep system cleaner + remnant finder | [F-Droid](https://f-droid.org/packages/eu.darken.sdmse/) |
-| **Fossify Suite** | Phone, Messages, Calendar, Launcher, Contacts, Music | [fossify.org/apps](https://www.fossify.org/apps/) (all via F-Droid) |
+| **DresSecureComms** | DresOS secure communications: SMS, dialer, contacts, link scanning, metadata wipe, geo spoofer (replaces Fossify Phone, Messages, Contacts and Fake Traveler) | [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) |
+| **Fossify Apps** | Launcher, Music, Clock, Notes - the open-source system apps not already covered by DresSecureComms, Aves Libre, Amaze, or Tuta | [fossify.org/apps](https://www.fossify.org/apps/) (via F-Droid) |
 | **Aves Libre** | Gallery, photo and video manager (replaces Fossify Gallery and Google Photos) | [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/) |
 | **Amaze File Manager** | File manager with built-in AES encryption and root explorer | [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) |
 | **DresOS WebView** | System WebView - bundled inside the DresOS module ZIP | APK source: [github.com/DresOperatingSystems/DresOS-WebView/releases](https://github.com/DresOperatingSystems/DresOS-WebView/releases) |
@@ -129,8 +131,7 @@ Here is exactly what each core app replaces and why it is better for privacy:
 
 | App | Replaces | Why It's Better |
 |---|---|---|
-| Fossify Phone | Stock Phone / Dialer | Fully open source, zero telemetry |
-| Fossify Messages | Stock SMS | Privacy-first, no Google tracking |
+| DresSecureComms | Stock Phone, Dialer, SMS, Contacts | DresOS secure comms app: private SMS with optional encryption, full dialer, caller ID and spam screening, encrypted contacts vault, no Google services |
 | Amaze File Manager | Google Files / Stock File Manager / ZArchiver Pro | Open source file manager with built-in AES-256 encryption, biometric lock, root explorer, and APK management |
 | DuckDuckGo Privacy Browser | Chrome | Private search engine, tracker blocking, zero Google telemetry |
 | DresOS WebView | Android System WebView (Google) | Blocks ads & trackers in **every** app that loads web content |
@@ -139,7 +140,7 @@ Here is exactly what each core app replaces and why it is better for privacy:
 | HeliBoard | Gboard | Completely offline keyboard, no data sent anywhere, ever |
 | Aurora Store | Google Play Store | Anonymous downloads, no Google account required |
 | DresOS microG | Google Play Services | Full app compatibility without any Google tracking infrastructure |
-| Fossify Calendar / Launcher / Contacts / Music | Stock Google equivalents | All open source, no cloud sync or telemetry |
+| Fossify Launcher / Music / Clock / Notes | Stock Google equivalents | The open-source system apps not already covered by DresSecureComms, Aves Libre, Amaze, or Tuta |
 | Aves Libre | Google Photos / Stock Gallery | Open-source photo and video gallery, metadata viewer, map and tag organisation, no cloud, no trackers |
 | Stratum | Google Authenticator / Authy | Offline open-source 2FA, encrypted exportable backups, no cloud lock-in, single permission |
 | Gopeed | Google Download Manager | Modern FOSS download manager - HTTP/BitTorrent/magnet, hash verification, actively maintained |
@@ -228,7 +229,7 @@ Reboot → open Magisk app → you are rooted. Keep Magisk app installed - you n
    * **Inure App Manager**
    * **Shizuku**
    * **SD Maid SE**
-   * **All Fossify apps** (Phone, Messages, Calendar, Launcher, Contacts, Music)
+   * **Fossify Launcher, Music, Clock, and Notes** (the system apps not covered by DresSecureComms, Aves Libre, Amaze, or Tuta)
    * **Aves Libre** (gallery)
    * **Amaze File Manager** (replaces Fossify Files and ZArchiver Pro)
    * **HeliBoard**
@@ -240,7 +241,8 @@ Reboot → open Magisk app → you are rooted. Keep Magisk app installed - you n
    * **Gopeed** (download manager)
    * **SAI (Split APK Installer)**
    * **Fake Traveler**
-3. Download the **DresOS WebView module** from [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) - you will flash it in Step 5.
+3. Install **DresSecureComms** from its [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) (it is the default phone, SMS, and contacts app, and is not on F-Droid yet). Set it as your default SMS and phone app after first launch.
+4. Download the **DresOS WebView module** from [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) - you will flash it in Step 5.
 
 Do **not** open or configure these apps yet - follow each step in order.
 
@@ -469,8 +471,7 @@ Now we remove every trace of Google and system bloat safely.
 
 You **must** have installed all replacement apps **before** removing their Google equivalents. Specifically:
 * Install **Tuta Mail** before removing Gmail
-* Install **Fossify Phone** before removing the stock dialer
-* Install **Fossify Messages** before removing the stock SMS app
+* Install **DresSecureComms** and set it as the default phone and SMS app before removing the stock dialer and SMS app
 * Install **DresOS WebView** (via the DresOS module) before removing Chrome and the Google WebView
 * Install **Gopeed** before removing Google Download Manager
 * Install **SAI** before removing the Google Package Installer
@@ -522,7 +523,7 @@ Enable internet for these apps (tap their toggles to green for Wi-Fi and Data):
 | OONI Probe | ✅ WiFi + Data | Network tests |
 | Hypatia | ✅ WiFi only | Signature updates only |
 | microG (com.google.android.gms) | ✅ WiFi + Data | If using microG for push notifications |
-| Fossify Phone | ✅ Data | Calls over mobile data |
+| DresSecureComms | ✅ Data | Calls and SMS over mobile data |
 | Metrolist | ✅ WiFi + Data | Music streaming |
 | RedReader | ✅ WiFi + Data | Reddit client |
 
@@ -629,8 +630,8 @@ Go to **Settings → Apps → Default apps** and set:
 | Gallery | **Aves Libre** |
 | Keyboard / Input method | **HeliBoard** |
 | Home / Launcher | **Fossify Launcher** |
-| Phone app | **Fossify Phone** |
-| SMS / Messages | **Fossify Messages** |
+| Phone app | **DresSecureComms** |
+| SMS / Messages | **DresSecureComms** |
 | Email | **Tuta Mail** (also set for `mailto:` links) |
 | File manager | **Amaze File Manager** |
 | Package installer | **SAI** |
@@ -649,8 +650,8 @@ Go to **Settings → Apps → Default apps** and set:
 
 ## Step 13: Test & Backup
 
-* Make and receive a test phone call via **Fossify Phone**
-* Send and receive a test SMS via **Fossify Messages**
+* Make and receive a test phone call via **DresSecureComms**
+* Send and receive a test SMS via **DresSecureComms**
 * Send and receive a test email via **Tuta Mail**
 * Open a website in **DuckDuckGo Privacy Browser** - confirm it is working and App Tracking Protection shows active
 * Verify DresOS WebView is the active WebView provider via `adb shell dumpsys webviewupdate | grep "Current WebView package"` - the output should show `org.dresos.webview`
@@ -929,8 +930,7 @@ AFWall+ shows all installed apps with toggles for each interface:
 | Hypatia | ✓ | ✗ | Signature updates via Wi-Fi only |
 | OONI Probe | ✓ | ✓ | Needs both for network testing |
 | F-Droid | ✓ | ✗ | Update repo via Wi-Fi only |
-| Fossify Phone | ✓ | ✓ | Calls use data |
-| Fossify Messages | ✓ | ✓ | MMS uses data |
+| DresSecureComms | ✓ | ✓ | Calls and SMS use data |
 | Metrolist | ✓ | ✗ | Stream via Wi-Fi only |
 | Games / offline apps | ✗ | ✗ | Block all - no reason for internet access |
 | Any Google remnant | ✗ | ✗ | Block completely |
@@ -1029,6 +1029,8 @@ Your real address never appears anywhere outside of the DuckDuckGo Email Protect
 
 ## OPSEC Step 5: Spoof Location with Fake Traveler
 
+> **Also in DresSecureComms.** The DresSecureComms app has a built-in Geo Spoofer that sets a fixed or random mock location, an alternative to Fake Traveler.
+
 Physical location is one of the most sensitive data points your phone broadcasts constantly. Fake Traveler lets you replace your real GPS coordinates with any location in the world.
 
 1. Open **Fake Traveler**.
@@ -1079,6 +1081,50 @@ Physical location is one of the most sensitive data points your phone broadcasts
 ## Apps Overview
 
 The following apps form the complete DresOS defensive security application suite. Every single one is open-source, has zero Google dependencies, and is sourced directly from verified developer releases or F-Droid. Together they cover encrypted file storage, password management, private social media, link safety scanning, malware detection, network censorship monitoring, privacy routing, private media, and secure communications - building a complete defensive security ecosystem on your device.
+
+---
+
+## DresSecureComms - DresOS Secure Communications Suite
+
+**Repository:** [github.com/DresOperatingSystems/DresSecureComms](https://github.com/DresOperatingSystems/DresSecureComms)
+
+### What It Is
+
+DresSecureComms is the DresOS in-house secure communications app: a single, FOSS, fully de-Googled application that handles private messaging, calling, contacts, link threat-scanning, photo metadata wiping, and location spoofing. It is built and signed by DresOS and is designed to be set as your default SMS and phone app, consolidating several separate tools from this guide into one hardened app.
+
+### Key Features
+
+* Private offline SMS client with optional per-message AES-256-GCM encryption, using a shared passphrase and readable only by another DresSecureComms user
+* Full default phone app with its own in-call screen (mute, speaker, keypad, hold, add call) and a deletable call history
+* Caller ID and spam screening
+* Encrypted on-device contacts vault with add, edit (name, number, email), and import
+* Threat Scan, which checks any link against VirusTotal and returns a clear safe, suspicious, or dangerous verdict
+* Metadata Wipe, which strips GPS and EXIF data from photos before you share them
+* Geo Spoofer, which sets a fixed or random mock GPS location
+* App lock (fingerprint or device PIN) and an app-wide block-screenshots mode
+* No Google services, no trackers, no analytics; the only network call is the VirusTotal lookup you trigger yourself
+
+### Setup and Usage
+
+1. Install the signed APK from the [DresSecureComms releases](https://github.com/DresOperatingSystems/DresSecureComms/releases).
+2. Open Settings, Apps, DresSecureComms, the three-dot menu, then Allow restricted settings. This is required for sideloaded SMS and phone apps.
+3. In the app, open Settings then Default apps and set it as your default SMS app, default phone app, and caller ID and spam app.
+4. For encrypted SMS, set a shared key in Settings and share it by hand with your contact.
+5. For the geo spoofer, enable Developer options, open Select mock location app, and choose DresSecureComms.
+
+### What It Replaces
+
+DresSecureComms brings several tools from this guide into one app:
+
+* **URL Check** (link scanning) is provided in-app by Threat Scan, the VirusTotal link checker.
+* **Fossify Phone, Messages, and Contacts** are covered by the dialer, the SMS client, and the encrypted contacts vault.
+* **Fake Traveler** (OPSEC Step 5) is covered by the built-in Geo Spoofer.
+
+Coming soon, its scanning engine will extend to media, files, APKs, and ZIPs, taking over the role currently filled by **Hypatia**. That engine is under wraps for now.
+
+### Why It's in the DresOS Suite
+
+It puts the most sensitive parts of the device, your texts, calls, contacts, and the links you open, inside one audited, de-Googled app built by DresOS. Nothing leaves the device except the VirusTotal lookups you choose to run.
 
 ---
 
@@ -1209,6 +1255,8 @@ The official Reddit app is one of the most aggressive data-harvesting apps avail
 
 ## 4. URL Check - Link Scanner
 
+> **Now in DresSecureComms.** The DresOS DresSecureComms app includes Threat Scan, an in-app VirusTotal link checker. URL Check remains available as the standalone, more configurable scanner.
+
 **Download:** [F-Droid](https://f-droid.org/packages/com.trianguloy.urlchecker/)
 
 ### What It Is
@@ -1249,6 +1297,8 @@ Phishing and IP logging are two of the most common attack vectors in targeted su
 ---
 
 ## 5. Hypatia - Open-Source Antivirus
+
+> **Coming to DresSecureComms.** A future DresSecureComms update will scan files, media, APKs, and ZIPs in-app, taking over this antivirus role. Until then, Hypatia is the malware layer.
 
 **Download:** [GitHub Releases (latest)](https://github.com/MaintainTeam/Hypatia/releases/latest)
 
@@ -1530,39 +1580,32 @@ Completely removing Play Store access is impractical for many users - some apps 
 
 ## 12. Fossify Suite - Complete FOSS System Apps
 
+> **Replaceable by DresSecureComms.** DresSecureComms can take the place of Fossify Phone, Messages, and Contacts with a single de-Googled app that adds optional per-message encryption and an encrypted contacts vault.
+
 **Download:** All via F-Droid - search each app name or visit [fossify.org/apps](https://www.fossify.org/apps/)
 
 ### What It Is
 
-Fossify is a suite of open-source replacements for every core Android system app that Google ships with proprietary, tracking-laden stock versions. Together, the Fossify suite replaces the entire Google-provided app layer with fully open-source, zero-telemetry equivalents.
+Fossify is a suite of open-source replacements for core Android system apps. In DresOS several of these are already covered: phone, SMS, and contacts by DresSecureComms, the gallery by Aves Libre, files by Amaze, and the calendar by Tuta Calendar. From Fossify you only need the system apps that nothing else covers, listed below.
 
 ### Apps in the Suite
 
 | App | Replaces | Features |
 |---|---|---|
-| **Fossify Phone** | Google/Stock Dialer | Open-source dialer, call blocking, call recording (where legal), no analytics |
-| **Fossify Messages** | Google Messages | Open-source SMS/MMS, no Google RCS, no message scanning |
-| **Amaze File Manager** | Files by Google | Local file manager, no cloud sync, no Google One integration |
-| **Fossify Calendar** | Google Calendar | Local calendar, optional CalDAV sync with your own server |
 | **Fossify Launcher** | Pixel Launcher | Open-source home screen, no Google Feed integration |
-| **Fossify Contacts** | Google Contacts | Local contacts, no sync to Google's servers |
 | **Fossify Music** | YouTube Music / Play Music | Fully local music player, supports all common audio formats |
 | **Fossify Clock** | Google Clock | Alarm, timer, stopwatch - zero telemetry |
 | **Fossify Notes** | Google Keep | Local encrypted notes, no cloud sync |
 
 ### Setup
 
-1. Install all Fossify apps via F-Droid (search individually or visit the Fossify F-Droid page).
-2. Set each as the default for its function in **Settings → Apps → Default apps**.
-3. Transfer your data:
-   * **Contacts:** Export from old app as `.vcf` → import into Fossify Contacts
-   * **Calendar:** Export as `.ics` → import into Fossify Calendar
-   * **Photos:** Already on your storage - open with Aves Libre
-   * **Music:** Already on your storage - open with Fossify Music
+1. Install Fossify Launcher, Music, Clock, and Notes via F-Droid.
+2. Set Fossify Launcher as your default home app in **Settings → Apps → Default apps**.
+3. Your music is already on your storage - open it with Fossify Music.
 
 ### Why It's in the DresOS Suite
 
-Every stock Google app (Dialer, Messages, Files, Calendar) contains telemetry that reports usage data, contact metadata, and behavioral information back to Google's servers. Fossify apps are clean replacements with identical functionality and zero reporting.
+Stock Google system apps report usage data and metadata back to Google. These Fossify apps are clean, open-source replacements with zero reporting, covering the system functions that DresSecureComms, Aves Libre, Amaze, and Tuta do not.
 
 ---
 
@@ -1790,9 +1833,9 @@ Tuta Calendar is the standalone end-to-end encrypted calendar app from the Tuta 
 3. Set it as your default calendar in **Settings -> Apps -> Default apps** if you want calendar links to open in it.
 4. In AFWall+, allow Tuta Calendar on Wi-Fi and Data, since it needs the network to sync your encrypted calendar.
 
-### Tuta Calendar or Fossify Calendar
+### Calendar Is Covered by Tuta Calendar
 
-Both are open source and private. Choose Tuta Calendar when you want an encrypted calendar that syncs across devices through your Tuta account. Choose Fossify Calendar when you want a calendar that stays entirely on the one device with no account and no sync at all. They can also coexist, with Fossify Calendar for local-only events and Tuta Calendar for anything you want mirrored to your other devices.
+Tuta Calendar covers the calendar role in full, so Fossify Calendar is not part of the DresOS app list. The only reason to add Fossify Calendar is if you specifically want a calendar that lives only on the one device with no account and no sync at all; for the standard build, Tuta Calendar is the calendar.
 
 ### Why It's in the DresOS Suite
 
