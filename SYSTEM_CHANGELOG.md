@@ -1,6 +1,14 @@
 
 # DresOS Android Defensive Security System - Changelog
 
+---
+
+## July 17, 2026 Update
+
+Debloated and refined the entire guide to make building the system much easier to understand, got rid of URL Checker, Fake Traveller along with some other apps that our own brand new app DresSecureComms now covers, reviewed the security throughout and made it less convoluted along with changing some steps to make it all a seamless and flawless build guide.
+
+---
+
 ## June 19, 2026 Update
 
 ---

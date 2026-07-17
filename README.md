@@ -1,23 +1,20 @@
 # DresOS Android Defensive Security System
 
-**A Complete Rooted DeGoogling + Operational Security Guide**
-**TWRP + Magisk + MicroG + Fossify + InviZible Pro + AFWall+ + DresOS App Suite – For 2026**
+---
+
+> **Project Goal:** Turn any Android phone into a fully private, hardened, FOSS only device with no Google tracking, no Google Services, no hidden data harvesting, and only open source replacements then layer on a full defensive security stack to protect against surveillance, malware, censorship, and network level attacks.
+
+> **See it running:** Watch the full DresOS Android 16 demo on a Motorola Moto g32, every layer active, on [Ko-fi](https://ko-fi.com/post/DresOS-Android-16-Motorola-Moto-g32-Video-Demo-F5R420TKRN) or directly at [streamable.com/rg3tsm](https://streamable.com/rg3tsm).
+
+> **Why:** Because of all the restrictions Google is bringing into place over the open source communities, to bring you back your privacy, to stop your data being sold, and to give you full operational security on a device you actually control.
 
 ---
 
-> **Project Goal:** Turn any Android phone into a fully private, hardened, FOSS-only device with no Google tracking, no Google Services, no hidden data harvesting, and only open-source replacements then layer on a full defensive security stack to protect against surveillance, malware, censorship, and network-level attacks.
-
-> **See it running:** Watch the full DresOS on Android 16 demo on a Motorola Moto g32, every layer active, on [Ko-fi](https://ko-fi.com/post/DresOS-Android-16-Motorola-Moto-g32-Video-Demo-F5R420TKRN) or directly at [streamable.com/rg3tsm](https://streamable.com/rg3tsm).
->
-> **Why:** Because of all the restrictions Google is bringing into place over the open-source communities, to bring you back your privacy, to stop your data being sold, and to give you full operational security on a device you actually control.
-
----
-
-## ⚠️ EXTREME WARNING
+## EXTREME WARNING
 
 Rooting and flashing can **brick** your device, void your warranty, trip Knox/SafetyNet, and wipe all data.
 **Back up everything** (photos, apps, files) before starting.
-This is advanced - if you're not comfortable with ADB/fastboot or device-specific guides, stop and use a non-root method.
+This is advanced, if you're not comfortable with ADB/fastboot or device specific guides, stop and use a non root method.
 Proceed at your own risk.
 
 **Make a full TWRP backup after rooting** (Boot + System + Data + Vendor) before any debloating.
@@ -26,7 +23,7 @@ Proceed at your own risk.
 
 ## Table of Contents
 
-### Part 1 - DeGoogling (Full Root Method)
+### Part 1: DeGoogling (Full Root Method)
 
 * [What You Will Need](#what-you-will-need)
 * [Replacement Overview](#replacement-overview)
@@ -35,295 +32,339 @@ Proceed at your own risk.
 * [Step 3: Install Magisk (Root)](#step-3-install-magisk-root)
 * [Step 4: Install Core FOSS Apps](#step-4-install-core-foss-apps)
 * [Step 5: Install Magisk Modules](#step-5-install-magisk-modules)
-* [Step 6: Set Up DresOS microG](#step-6-set-up-dresos-microg-replaces-google-services)
+* [Step 6: Set Up DresOS microG (Replaces Google Services)](#step-6-set-up-dresos-microg-replaces-google-services)
 * [Step 7: Install DresOS WebView as System WebView](#step-7-install-dresos-webview-as-system-webview)
 * [Step 8: Set Up Shizuku](#step-8-set-up-shizuku)
-* [Step 9: Fine-Tune Debloat & Cleanup](#step-9-fine-tune-debloat--cleanup)
-* [Step 10: Install AFWall+ - Root-Level Firewall](#step-10-install-afwall---root-level-firewall)
-* [Step 11: Replace System File Manager, Package Installer & Download Manager](#step-11-replace-system-file-manager-package-installer--download-manager)
-* [Step 12: Final Setup & Defaults](#step-12-final-setup--defaults)
-* [Step 13: Test & Backup](#step-13-test--backup)
+* [Step 9: Fine Tune Debloat & Cleanup](#step-9-fine-tune-debloat--cleanup)
+* [Step 10: Replace System File Manager, Package Installer & Download Manager](#step-10-replace-system-file-manager-package-installer--download-manager)
+* [Step 11: Final Setup & Defaults](#step-11-final-setup--defaults)
 
-### Part 2 - Operational Security (OPSEC Stack)
+### Part 2: Operational Security (OPSEC Stack)
 
 * [OPSEC Overview](#opsec-overview)
 * [OPSEC Step 1: Configure DNS and MAC Randomization](#opsec-step-1-configure-dns-and-mac-randomization)
-* [OPSEC Step 2: Set Up InviZible Pro in Proxy + Root Mode](#opsec-step-2-set-up-invizible-pro-in-proxy--root-mode)
-* [OPSEC Step 3: Set Up AFWall+ - Root-Level Kernel Firewall](#opsec-step-3-set-up-afwall---root-level-kernel-firewall)
-* [OPSEC Step 4: Set Up Secure Email - Tuta + Duck Addresses](#opsec-step-4-set-up-secure-email---tuta--duck-addresses)
-* [OPSEC Step 5: Spoof Location with Fake Traveler](#opsec-step-5-spoof-location-with-fake-traveler)
-* [OPSEC Step 6: Final Checks and Hardening Tips](#opsec-step-6-final-checks-and-hardening-tips)
+* [OPSEC Step 2: Set Up InviZible Pro](#opsec-step-2-set-up-invizible-pro)
+* [OPSEC Step 3: OONI Probe Network Censorship Detector](#opsec-step-3-ooni-probe-network-censorship-detector)
+* [OPSEC Step 4: Install AFWall+ Root Level Firewall](#opsec-step-4-install-afwall-root-level-firewall)
+* [OPSEC Step 5: Set Up The Tuta & DuckDuckGo Suite](#opsec-step-5-set-up-the-tuta--duckduckgo-suite)
+* [OPSEC Step 6: Set up DresSecureComms](#opsec-step-6-set-up-dressecurecomms)
+* [OPSEC Step 7: Final Checks and Hardening Tips](#opsec-step-7-final-checks-and-hardening-tips)
 
-### Part 3 - DresOS Defensive App Suite
+### Part 3: Fossify Suite
 
-* [DresSecureComms - DresOS Secure Communications Suite](#dressecurecomms---dresos-secure-communications-suite)
-* [1. Amaze File Manager](#1-amaze-file-manager---file-management--aes-encryption)
-* [2. IYPS](#2-iyps---password-strength-analyser--generator)
-* [3. RedReader](#3-redreader---private-reddit-client)
-* [4. URL Check](#4-url-check---link-scanner)
-* [5. Hypatia](#5-hypatia---open-source-antivirus)
-* [6. OONI Probe](#6-ooni-probe---network-censorship-detector)
-* [7. InviZible Pro](#7-invizible-pro---tor--i2p--dnscrypt-in-proxy--root-mode)
-* [8. AFWall+](#8-afwall---root-level-iptables-firewall)
-* [9. Metrolist](#9-metrolist---private-youtube-music-client)
-* [10. Arcane Chat](#10-arcane-chat---decentralized-encrypted-messaging)
-* [11. Aurora Store](#11-aurora-store---anonymous-app-store)
-* [12. Fossify Suite](#12-fossify-suite---complete-foss-system-apps)
-* [13. HeliBoard](#13-heliboard---offline-keyboard)
-* [14. Tuta Mail](#14-tuta-mail---encrypted-email)
-* [15. DuckDuckGo Privacy Browser](#15-duckduckgo-privacy-browser---primary-browser)
-* [16. DresOS WebView](#16-dresos-webview---system-webview-privacy-hardened-webview-engine)
-* [17. Aves Libre](#17-aves-libre---gallery-and-photo-manager)
-* [18. Stratum](#18-stratum---2fa-authenticator)
-* [19. Tuta Calendar](#19-tuta-calendar---encrypted-calendar)
+* [Apps in the Suite](#apps-in-the-suite)
 
-* [Compatible Devices](#compatible-devices)
-* [Contact DresOS](#contact-dresos)
+### Part 4: Additional Apps and Core Components
+
+* [Apps Overview](#apps-overview)
+* [1. RedReader, Private Reddit Client](#1-redreader-private-reddit-client)
+* [2. Hypatia, Open Source Antivirus](#2-hypatia-open-source-antivirus)
+* [3. Metrolist, Private YouTube Music Client](#3-metrolist-private-youtube-music-client)
+* [4. Arcane Chat, Decentralized Encrypted Messaging](#4-arcane-chat-decentralized-encrypted-messaging)
+* [5. HeliBoard, Offline Keyboard](#5-heliboard-offline-keyboard)
+* [6. Aves Libre, Gallery and Photo Manager](#6-aves-libre-gallery-and-photo-manager)
+* [7. Stratum, 2FA Authenticator](#7-stratum-2fa-authenticator)
+
+#### Confirmed working devices:
+
+**DresOS is built for universal compatibility: the degoogling and OPSEC steps work on any rooted Android 10 or newer device, and the Magisk modules are written to run on any ABI and any OEM partition layout. The combinations below are the ones confirmed working end to end so far**
+
+| Device | Android version |
+| --- | --- |
+| Motorola Moto G32 | LineageOS Android 15 and 16 |
+| Motorola ThinkPhone | Stock Android 15 |
+| Motorola Moto G7 Plus | Stock Android 10 |
+| Motorola Moto G7 Plus | LineageOS Android 15 |
+| Samsung Galaxy A05s | Stock Android 10 |
+| Samsung Galaxy A02s | Stock Android 12 |
+
+If you run DresOS on a device that is not listed, a confirmation report is welcome so the list can grow.
+
 * [License](#license)
 
 ---
 
----
+## Part 1: DeGoogling (Full Root Method)
 
-# PART 1 - DEGOOGLING
+### What You Will Need
 
-## What You Will Need
-
-Download **only** from these official links (2026). Install **F-Droid** first - it is the backbone of your FOSS ecosystem.
+Download **only** from these official links (2026). Install **F-Droid** first, it is the backbone of your FOSS ecosystem.
 
 | Tool | Purpose | Link |
-|---|---|---|
+| --- | --- | --- |
 | **F-Droid** | Main FOSS app store | [Download APK](https://f-droid.org/F-Droid.apk) / [Site](https://f-droid.org/) |
 | **Inure App Manager** | Debloat + app management | [GitHub Releases](https://github.com/Hamza417/Inure/releases) |
-| **Shizuku** | Root-like advanced system permissions | [GitHub Releases](https://github.com/RikkaApps/Shizuku/releases) |
-| **TWRP** | Custom recovery (full backups + flashing) | [twrp.me](https://twrp.me/) → search your exact device model |
+| **Shizuku** | Root like advanced system permissions | [GitHub Releases](https://github.com/RikkaApps/Shizuku/releases) |
+| **TWRP** | Custom recovery (full backups + flashing) | [twrp.me](https://twrp.me/) search your exact device model |
 | **Magisk** | Root + module framework | [GitHub Releases](https://github.com/topjohnwu/Magisk/releases) |
-| **De-Bloater** | Fine-tune system app removal | [F-Droid](https://f-droid.org/packages/com.sunilpaulmathew.debloater/) / [GitHub](https://github.com/sunilpaulmathew/De-Bloater) |
-| **DresOS microG Module** | Magisk module v3.0.1 - universal systemless microG suite (officially signed GmsCore 0.3.15, Companion, GsfProxy, DroidGuard, Aurora Store, Aurora Services). Pure file overlay: no Zygisk payload, no Xposed, no boot scripts, so it cannot bootloop the device. Signature spoofing is provided by the ROM because the microG APKs carry the official microG key. | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v3.0.1) |
-| **DresOS WebView Module** | Magisk module v2.2.0 - systemless replacement of Android System WebView with DresOS WebView via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) |
-| **AFWall+** | Root-level iptables firewall - per-app kernel-level rules, mobile data proxy redirect, no VPN slot | [F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall) |
+| **DresOS microG Module** | Magisk module v3.1.2, universal systemless microG suite. Pure file overlay: no Zygisk payload, no Xposed, no boot scripts, so it cannot bootloop the device. Signature spoofing is provided by the ROM because the microG APKs carry the official microG key. | [DresOS Magisk Modules releases](https://github.com/The-DresOS-Foundation/DresOS-Magisk-Modules/releases/tag/microg-v3.1.2) |
+| **DresOS WebView Module** | Magisk module v2.2.0, systemless replacement of Android System WebView with DresOS WebView via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS Magisk Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) |
+| **AFWall+** | Root level iptables firewall, per app kernel level rules, mobile data proxy redirect, no VPN slot | [F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall) |
 | **SD Maid SE** | Deep system cleaner + remnant finder | [F-Droid](https://f-droid.org/packages/eu.darken.sdmse/) |
-| **DresSecureComms** | DresOS secure communications: SMS, dialer, contacts, link scanning, metadata wipe, geo spoofer (replaces Fossify Phone, Messages, Contacts and Fake Traveler) | [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) |
-| **Fossify Apps** | Launcher, Music, Clock, Notes - the open-source system apps not already covered by DresSecureComms, Aves Libre, Amaze, or Tuta | [fossify.org/apps](https://www.fossify.org/apps/) (via F-Droid) |
+| **DresSecureComms** | DresOS secure communications: SMS, dialer, contacts, link scanning, metadata wipe, geo spoofer (replaces Fossify Phone, Messages, Contacts, URL Checker and Fake Traveler) | [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) |
+| **Fossify Apps** | Launcher, Clock and Notes | [fossify.org/apps](https://www.fossify.org/apps/) (via F-Droid) |
 | **Aves Libre** | Gallery, photo and video manager (replaces Fossify Gallery and Google Photos) | [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/) |
-| **Amaze File Manager** | File manager with built-in AES encryption and root explorer | [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) |
-| **DresOS WebView** | System WebView - bundled inside the DresOS module ZIP | APK source: [github.com/DresOperatingSystems/DresOS-WebView/releases](https://github.com/DresOperatingSystems/DresOS-WebView/releases) |
-| **InviZible Pro** | Tor + I2P + DNSCrypt in proxy + root mode - IP anonymisation, encrypted DNS, no VPN slot used | [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/) |
+| **Amaze File Manager** | File manager with built in AES encryption and root explorer | [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) |
+| **DresOS WebView** | System WebView, bundled inside the DresOS module ZIP | APK source: [https://github.com/The-DresOS-Foundation/DresOS-WebView/releases/tag/v1.0.0](https://github.com/The-DresOS-Foundation/DresOS-WebView/releases/tag/v1.0.0) |
+| **InviZible Pro** | Tor + I2P + DNSCrypt in proxy + root mode, IP anonymisation, encrypted DNS, no VPN slot used | [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/) |
 | **DuckDuckGo Privacy Browser** | Primary browser (Chrome replacement) | [F-Droid](https://f-droid.org/packages/com.duckduckgo.mobile.android/) |
 | **Aurora Store** | Anonymous Play Store alternative | [F-Droid](https://f-droid.org/packages/com.aurora.store/) |
 | **HeliBoard** | Fully offline keyboard (no Gboard) | [F-Droid](https://f-droid.org/packages/helium314.keyboard/) |
-| **Tuta Mail** | End-to-end encrypted email (no Gmail) | [F-Droid](https://f-droid.org/packages/de.tutao.tutanota/) |
-| **Tuta Calendar** | End-to-end encrypted calendar, syncs with your Tuta account (no Google Calendar) | [F-Droid](https://f-droid.org/packages/de.tutao.calendar/) |
-| **Stratum** | Offline two-factor authenticator (TOTP/HOTP), encrypted backups, no internet, no cloud | [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app) |
-| **Gopeed** | FOSS download manager - HTTP/HTTPS/BitTorrent/magnet, hash verification, no Google components | [F-Droid](https://f-droid.org/packages/com.gopeed/) / [gopeed.com](https://gopeed.com/) |
-| **SAI** | Split APK Installer - FOSS package installer | [F-Droid](https://f-droid.org/packages/com.aefyr.sai.fdroid/) |
-| **Fake Traveler** | GPS location spoofer | [F-Droid](https://f-droid.org/packages/cl.coders.faketraveler/) |
+| **Tuta Mail** | End to end encrypted email (no Gmail) | [F-Droid](https://f-droid.org/packages/de.tutao.tutanota/) |
+| **Tuta Calendar** | End to end encrypted calendar, syncs with your Tuta account (no Google Calendar) | [F-Droid](https://f-droid.org/packages/de.tutao.calendar/) |
+| **Stratum** | Offline two factor authenticator (TOTP/HOTP), encrypted backups, no internet, no cloud | [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app) |
+| **Gopeed** | FOSS download manager, HTTP/HTTPS/BitTorrent/magnet, hash verification, no Google components | [F-Droid](https://f-droid.org/packages/com.gopeed/) / [gopeed.com](https://gopeed.com/) |
+| **SAI** | Split APK Installer, FOSS package installer | [F-Droid](https://f-droid.org/packages/com.aefyr.sai.fdroid/) |
 
 ---
 
-## Replacement Overview
+### Replacement Overview
 
 Here is exactly what each core app replaces and why it is better for privacy:
 
 | App | Replaces | Why It's Better |
-|---|---|---|
-| DresSecureComms | Stock Phone, Dialer, SMS, Contacts | DresOS secure comms app: private SMS with optional encryption, full dialer, caller ID and spam screening, encrypted contacts vault, no Google services |
-| Amaze File Manager | Google Files / Stock File Manager / ZArchiver Pro | Open source file manager with built-in AES-256 encryption, biometric lock, root explorer, and APK management |
+| --- | --- | --- |
+| DresSecureComms | Stock Phone, Dialer, SMS, Contacts | DresOS secure comms app: private SMS with optional encryption, full dialer, caller ID and spam screening, encrypted contacts vault, no Google services and comes with link scanning, file scanning, mock location |
+| Amaze File Manager | Google Files / Stock File Manager / ZArchiver Pro | Open source file manager with built in AES 256 encryption, biometric lock, root explorer, and APK management |
 | DuckDuckGo Privacy Browser | Chrome | Private search engine, tracker blocking, zero Google telemetry |
 | DresOS WebView | Android System WebView (Google) | Blocks ads & trackers in **every** app that loads web content |
-| Tuta Mail | Gmail | End-to-end encrypted email (no Google account or content scanning) |
-| Tuta Calendar | Google Calendar | End-to-end encrypted calendar, syncs across your devices through your Tuta account, zero-knowledge |
+| Tuta Mail | Gmail | End to end encrypted email (no Google account or content scanning) |
+| Tuta Calendar | Google Calendar | End to end encrypted calendar, syncs across your devices through your Tuta account, zero knowledge |
 | HeliBoard | Gboard | Completely offline keyboard, no data sent anywhere, ever |
 | Aurora Store | Google Play Store | Anonymous downloads, no Google account required |
 | DresOS microG | Google Play Services | Full app compatibility without any Google tracking infrastructure |
-| Fossify Launcher / Music / Clock / Notes | Stock Google equivalents | The open-source system apps not already covered by DresSecureComms, Aves Libre, Amaze, or Tuta |
-| Aves Libre | Google Photos / Stock Gallery | Open-source photo and video gallery, metadata viewer, map and tag organisation, no cloud, no trackers |
-| Stratum | Google Authenticator / Authy | Offline open-source 2FA, encrypted exportable backups, no cloud lock-in, single permission |
-| Gopeed | Google Download Manager | Modern FOSS download manager - HTTP/BitTorrent/magnet, hash verification, actively maintained |
+| Fossify Launcher / Clock / Notes | Stock Google equivalents | open source system app replacements |
+| Aves Libre | Google Photos / Stock Gallery | Open source photo and video gallery, metadata viewer, map and tag organisation, no cloud, no trackers |
+| Stratum | Google Authenticator / Authy | Offline open source 2FA, encrypted exportable backups, no cloud lock in, single permission |
+| Gopeed | Google Download Manager | Modern FOSS download manager, HTTP/BitTorrent/magnet, hash verification, actively maintained |
 | DresOS WebView Module | Manual WebView patching process | Single Magisk flash: places DresOS WebView in systemless tree, ships a static RRO that allowlists it in config_webview_packages, activates via cmd webviewupdate after boot, includes bootloop sentinel |
-| InviZible Pro | Orbot + separate DNS/I2P apps | Combines Tor, I2P, and DNSCrypt in proxy + root mode - no VPN slot used; IP spoofing via Android system proxy; iptables DNS redirect at kernel level |
-| AFWall+ | No equivalent in stock Android | Root-level iptables firewall; per-app internet blocking at kernel level; custom rules for mobile data proxy routing; works independently of VPN and proxy layers |
+| InviZible Pro | Orbot + separate DNS/I2P apps | Combines Tor, I2P, and DNSCrypt in proxy + root mode, no VPN slot used; IP spoofing via Android system proxy; iptables DNS redirect at kernel level |
+| AFWall+ | No equivalent in stock Android | Root level iptables firewall; per app internet blocking at kernel level; custom rules for mobile data proxy routing; works independently of VPN and proxy layers |
 
 ---
 
-## Step 1: Unlock the Bootloader
+### Step 1: Unlock the Bootloader
 
-**Device-specific** - required for TWRP + Magisk. Usually wipes all data.
+**Device specific**, required for TWRP + Magisk. Usually wipes all data.
 
-1. Enable **Developer Options**: Settings → About phone → tap **Build number** 7 times.
+1. Enable **Developer Options**: Settings, About phone, tap **Build number** 7 times.
 2. Turn on **OEM unlocking** + **USB debugging**.
 3. Install ADB & Fastboot on your PC (Android Platform Tools from Android Developers).
 4. Connect phone via USB.
 5. Run: `adb reboot bootloader`
 6. Run: `fastboot flashing unlock` (or `fastboot oem unlock` on older devices).
-7. Confirm on phone screen - **this will factory reset the device**.
+7. Confirm on phone screen, **this will factory reset the device**.
 
 **Samsung:** Use Download Mode + Odin with official or unofficial unlock.
-**Huawei / carrier-locked phones:** Use the official unlock code process for your carrier.
+**Huawei / carrier locked phones:** Use the official unlock code process for your carrier.
 **Exact instructions:** Search `[your exact model] unlock bootloader XDA Developers` and follow **that** device's specific guide.
 
-Phone will factory reset. Set it up again and re-enable USB debugging before continuing.
+Phone will factory reset. Set it up again and re enable USB debugging before continuing.
 
 ---
 
-## Step 2: Install TWRP (Custom Recovery)
+### Step 2: Install TWRP (Custom Recovery)
 
 TWRP gives you full device backups and easy module/zip flashing.
 
 1. Go to [twrp.me](https://twrp.me/) and search your **exact** device model and variant.
 2. Download the latest `.img` (and `.zip` if available).
-3. Follow the **exact instructions** on that device's TWRP page - they are device-specific.
+3. Follow the **exact instructions** on that device's TWRP page, they are device specific.
 
 Typical commands:
 
 ```
 adb reboot bootloader
 fastboot boot twrp-xxxx.img           # Temporary boot into TWRP
-# Inside TWRP: Install → select TWRP .zip to make it permanent
-# Or: Advanced → Install Recovery Ramdisk
+# Inside TWRP: Install, select TWRP .zip to make it permanent
+# Or: Advanced, Install Recovery Ramdisk
 ```
 
 Reboot to recovery to confirm TWRP is permanently installed.
 
 **No TWRP for your device?** Use Magisk direct patching method only (see Step 3 below) or check XDA for unofficial TWRP builds. Search `[model] unofficial TWRP`.
 
+**TWRP Backup (if not done already):** Boot to TWRP, Backup, select Boot + System + Data + Vendor, swipe to back up. This is your emergency restore point. Store the backup folder in a safe location off device.
+
+**If anything breaks:** Boot to TWRP, Restore, select your backup, swipe. Your full system is back in minutes.
+
 ---
 
-## Step 3: Install Magisk (Root)
+### Step 3: Install Magisk (Root)
 
-Two methods - pick one based on your situation.
+Two methods, pick one based on your situation.
 
-### Recommended: Magisk Patching Method (works on almost everything)
+#### Recommended: Magisk Patching Method (works on almost everything)
 
 1. Download the latest Magisk APK from GitHub.
 2. Extract your device's `boot.img` (or `init_boot.img`) from the stock firmware ZIP for your exact model and Android version.
 3. Install the Magisk app on your phone.
-4. Open Magisk app → **Install** → **Select and Patch a File** → choose `boot.img`.
+4. Open Magisk app, **Install**, **Select and Patch a File**, choose `boot.img`.
 5. `magisk_patched_xxxx.img` will appear in your Downloads folder.
 6. Pull it to your PC: `adb pull /sdcard/Download/magisk_patched_xxxx.img`
 7. `adb reboot bootloader`
 8. `fastboot flash boot magisk_patched_xxxx.img` (or `init_boot` if your device uses it).
 9. On some devices you also need to flash a patched `vbmeta.img` with flags: `fastboot flash vbmeta vbmeta.img --disable-verity --disable-verification`
-10. Reboot. Open Magisk app - it should show "Installed."
+10. Reboot. Open Magisk app, it should show "Installed."
 
-### Alternative: Via TWRP
+#### Alternative: Via TWRP
 
 1. Rename the Magisk APK file from `.apk` to `.zip`
-2. Boot to TWRP → Install → select and flash the `.zip`
+2. Boot to TWRP, Install, select and flash the `.zip`
 3. Reboot system
 
-**Samsung-specific:** Use Recovery mode + Odin with a patched AP.tar file.
+**Samsung specific:** Use Recovery mode + Odin with a patched AP.tar file.
 
-Reboot → open Magisk app → you are rooted. Keep Magisk app installed - you need it for everything that follows.
+Reboot, open Magisk app, you are rooted. Keep Magisk app installed, you need it for everything that follows.
 
 ---
 
-## Step 4: Install Core FOSS Apps
+### Step 4: Install Core FOSS Apps
 
 1. Transfer the **F-Droid APK** to your phone and install it (allow installs from unknown sources when prompted).
 2. Open F-Droid and from the search/browse install **all** of these:
    * **Inure App Manager**
    * **Shizuku**
    * **SD Maid SE**
-   * **Fossify Launcher, Music, Clock, and Notes** (the system apps not covered by DresSecureComms, Aves Libre, Amaze, or Tuta)
-   * **Aves Libre** (gallery)
-   * **Amaze File Manager** (replaces Fossify Files and ZArchiver Pro)
+   * **Fossify Launcher, Clock, and Notes**
+   * **Aves Libre**
+   * **Amaze File Manager**
    * **HeliBoard**
    * **DuckDuckGo Privacy Browser**
    * **Aurora Store**
    * **Tuta Mail**
    * **Tuta Calendar**
-   * **Stratum** (2FA authenticator)
-   * **Gopeed** (download manager)
+   * **Stratum**
+   * **Gopeed**
    * **SAI (Split APK Installer)**
-   * **Fake Traveler**
-3. Install **DresSecureComms** from its [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) (it is the default phone, SMS, and contacts app, and is not on F-Droid yet). Set it as your default SMS and phone app after first launch.
-4. Download the **DresOS WebView module** from [DresOS-Magisk-Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest) - you will flash it in Step 5.
+3. Install **DresSecureComms** from its [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases). Set it as your default SMS and phone app after first launch.
+4. Download the **DresOS WebView module** from [DresOS Magisk Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest), you will flash it in Step 5.
 
-Do **not** open or configure these apps yet - follow each step in order.
+Do **not** open or configure these apps yet, follow each step in order.
 
 ---
 
-## Step 5: Install Magisk Modules
+### Step 5: Install Magisk Modules
 
-Open **Magisk app** → **Modules** → **Install from storage** and flash each of these one at a time, rebooting between them if instructed:
+Open **Magisk app**, **Modules**, **Install from storage** and flash each of these one at a time, rebooting between them if instructed:
 
-1. **DresOS microG Module v3.0.1** (`dresosmicrog`) - universal systemless microG suite, single flash. Ships the officially signed microG GmsCore 0.3.15, Companion (FakeStore), GsfProxy, DroidGuard Helper, Aurora Store, and Aurora Services as privileged system apps under product, with a privapp-permissions allowlist generated from the bundled manifests. It is a pure file overlay: no Zygisk payload, no Xposed, no runtime PackageManager work, and it never touches other modules, so it cannot bootloop the device and coexists cleanly with the DresOS WebView module. Signature spoofing is provided by the ROM: because the microG APKs carry the official microG key, any ROM with microG signature spoofing support spoofs them automatically once placed in priv-app.
-   * **Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-   * **Download:** [DresOS-microG-v3_0_1.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/tag/microg-v3.0.1)
+1. **DresOS microG Module v3.1.2** (`dresosmicrog`), universal systemless microG suite, single flash. Ships the officially signed microG GmsCore 0.3.15, Companion (FakeStore), GsfProxy, DroidGuard Helper, Aurora Store, and Aurora Services as privileged system apps under product, with a privapp permissions allowlist generated from the bundled manifests. It is a pure file overlay: no Zygisk payload, no Xposed, no runtime PackageManager work, and it never touches other modules, so it cannot bootloop the device and coexists cleanly with the DresOS WebView module. Signature spoofing is provided by the ROM: because the microG APKs carry the official microG key, any ROM with microG signature spoofing support spoofs them automatically once placed in priv app.
+
    * Full details in Step 6.
-2. **DresOS WebView Module v2.2.0** (`dresoswv`) - systemless replacement of Android System WebView with DresOS WebView. Drops the signed DresOS WebView APK into the systemless tree at `system/product/app/DresOSWebView/`, ships a static RRO that adds `org.dresos.webview` plus the DresOS signing certificate to the framework `config_webview_packages` allowlist, and activates DresOS WebView via `cmd webviewupdate set-webview-implementation` after boot complete. Updating over the AOSmium build swaps it out in place. Includes a post-fs-data bootloop sentinel and an inert mode fallback so a failed activation cannot bootloop the device.
-   * **Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-   * **Download:** [DresOS-WebView-v2_2_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
+2. **DresOS WebView Module v2.2.0** (`dresoswv`), systemless replacement of Android System WebView with DresOS WebView. Drops the signed DresOS WebView APK into the systemless tree at `system/product/app/DresOSWebView/`, ships a static RRO that adds `org.dresos.webview` plus the DresOS signing certificate to the framework `config_webview_packages` allowlist, and activates DresOS WebView via `cmd webviewupdate set-webview-implementation` after boot complete. Updating over the AOSmium build swaps it out in place. Includes a post fs data bootloop sentinel and an inert mode fallback so a failed activation cannot bootloop the device.
    * Handles the entire WebView switch in one flash. Full details in Step 7.
+
 Reboot after flashing both modules above.
 
 ---
 
-## Step 6: Set Up DresOS microG (Replaces Google Services)
+### Step 6: Set Up DresOS microG (Replaces Google Services)
 
 The DresOS microG module installs a clean, privacy respecting replacement for Google Play Services as systemless privileged apps. Apps that require Play Services (push notifications, maps, logins, app compatibility) will work through microG with zero Google data harvesting.
 
 What it stages:
 
-- **microG GmsCore** (`com.google.android.gms`) 0.3.15.250932 - the Play Services replacement core
-- **microG Companion** (`com.android.vending`) - FakeStore stub so apps that check for Play Store presence see something legitimate
-- **microG GsfProxy** (`com.google.android.gsf`) - Google Services Framework proxy
-- **microG DroidGuard Helper** (`org.microg.gms.droidguard`) - DroidGuard runtime stub
-- **Aurora Store** (`com.aurora.store`) - anonymous Play Store alternative
-- **Aurora Services** (`com.aurora.services`) - Aurora privileged extension for silent, prompt-free app installs
+- **microG GmsCore** (`com.google.android.gms`) 0.3.15.250932, the Play Services replacement core
+- **microG Companion** (`com.android.vending`), FakeStore stub so apps that check for Play Store presence see something legitimate
+- **microG GsfProxy** (`com.google.android.gsf`), Google Services Framework proxy
+- **microG DroidGuard Helper** (`org.microg.gms.droidguard`), DroidGuard runtime stub
+- **Aurora Store** (`com.aurora.store`), anonymous Play Store alternative
+- **Aurora Services** (`com.aurora.services`), Aurora privileged extension for silent, prompt free app installs
 
-Signature spoofing is provided by the ROM, not by the module. Because the bundled microG APKs are signed with the official microG key, any ROM that supports microG signature spoofing (LineageOS from 2024-02-26 onward, /e/OS, CalyxOS, iodeOS, DivestOS and similar) activates spoofing automatically once the apps are placed in priv-app. There is no Zygisk hook and no Xposed or LSPosed framework involved on any ABI.
+Signature spoofing is provided by the ROM, not by the module. Because the bundled microG APKs are signed with the official microG key, any ROM that supports microG signature spoofing (LineageOS from 2024 02 26 onward, /e/OS, CalyxOS, iodeOS, DivestOS and similar) activates spoofing automatically once the apps are placed in priv app. There is no Zygisk hook and no Xposed or LSPosed framework involved on any ABI.
 
-### Activation
+#### Activation
 
-1. Open **Magisk app** → **Modules**. Confirm `DresOS microG` is listed and enabled.
+1. Open **Magisk app**, **Modules**. Confirm `DresOS microG` is listed and enabled.
 2. Tap the **Action** button on the DresOS microG entry. This prints the status dashboard, regrants runtime permissions to GmsCore, Companion, GSF, and DroidGuard, and restarts the microG components. Grant root when prompted.
 3. Open the **microG Settings** app from your app drawer.
 4. Go to **Self Check**. The signature spoofing item should read green because the ROM is spoofing the officially signed microG. Every other item should tick, except SafetyNet and Play Integrity, which are planned for a later release.
 5. If signature spoofing reads as failing, reboot once more and re check.
 
-### Aurora Store
-
-Aurora Store opens automatically once the module is active. Sign in with **Anonymous** (no Google account). You can now install apps from the Play Store catalogue without a Google account.
-
-**Aurora Services:** v3.0.0 stages the Aurora privileged extension (`com.aurora.services`) as a system priv-app with its own permissions allowlist, so silent prompt-free installs through Aurora Store work without the standard Android installer prompt appearing for every app.
-
-### Logs and diagnostics
+#### Logs and diagnostics
 
 - `/data/adb/modules/dresosmicrog/logs/install.log`
 - `/data/adb/modules/dresosmicrog/logs/boot.log`
 - `/data/adb/modules/dresosmicrog/logs/service.log`
 - `/data/adb/dresosmicrog/` (state dir, decision records, bootloop counter)
 
-### On ROMs that already ship microG
+#### On ROMs that already ship microG
 
-LineageOS for microG, CalyxOS, iodeOS, /e/OS already provide native signature spoofing and may ship microG built in. The installer detects an already-present, upstream-signed microG by reading the X.509 certificate SHA-256 via `cmd package dump` and leaves the ROM's microG in place, staging only the Aurora components on those ROMs so there is no duplicate.
+LineageOS for microG, CalyxOS, iodeOS, /e/OS already provide native signature spoofing and may ship microG built in. The installer detects an already present, upstream signed microG by reading the X.509 certificate SHA 256 via `cmd package dump` and leaves the ROM's microG in place, staging only the Aurora components on those ROMs so there is no duplicate.
 
 GrapheneOS deliberately blocks native signature spoofing and ships its own Sandboxed Google Play. The module detects GrapheneOS and aborts the install.
 
+#### Aurora Store an Anonymous App Store
+
+Aurora Store is an open source, unofficial Google Play Store client that lets you browse, download, and update apps from Google's Play catalogue **without a Google account** and without any Google Play Services telemetry. It is a full Google Play replacement with complete anonymity.
+
+**Source Code:** no need for download link as the module covers that [https://github.com/whyorean/AuroraStore](https://github.com/whyorean/AuroraStore)
+
+Open Aurora Store once the module is active. Sign in with **Anonymous** (no Google account). You can now install apps from the Play Store catalogue without a Google account.
+
+**Aurora Services:** v3.0.0 stages the Aurora privileged extension (`com.aurora.services`) as a system priv app with its own permissions allowlist, so silent prompt free installs through Aurora Store work without the standard Android installer prompt appearing for every app.
+
+#### Key Features
+
+* **Anonymous mode**, browse and download apps using randomly generated anonymous credentials. Google sees an anonymous device, not your account.
+* No Google account login required
+* Full Play Store catalogue access, any app available on Google Play can be downloaded
+* App update management, check for updates for all Play sourced apps
+* **Exodus Privacy integration**, shows you a detailed tracker and permission report for every app before you install it
+* Block automatic app updates for specific apps
+* Spoofed device profile, can present as a different Android device to access region locked apps
+* No ads, no telemetry, zero Google components in the Aurora app itself
+
+#### Setup and Usage
+
+1. Installed via our Microg module.
+2. Open Aurora Store, select **Anonymous** mode during setup. **Do not log in with a Google account.**
+3. Browse, search, and install apps exactly as you would on the Play Store.
+4. **Before installing any app, check its tracker report:**
+   * Tap the app, scroll down to **Privacy**, check the Exodus Privacy report
+   * Apps with many trackers (advertising, analytics, fingerprinting) should be avoided or replaced with FOSS alternatives
+5. **Manage updates:**
+   * Aurora Store, Updates tab, review available updates
+   * Update FOSS apps via F-Droid instead (F-Droid verifies signatures; Aurora Store does not independently verify)
+
 ---
 
-## Step 7: Install DresOS WebView as System WebView
+### Step 7: Install DresOS WebView as System WebView
 
-### What is the System WebView?
+#### What is the System WebView?
 
-The **Android System WebView** is a browser engine baked into Android itself. It is not a browser you open - it powers web content rendering inside hundreds of apps: social media feeds, email clients, news apps, microG sign-in screens, shopping apps, and more. Every time any of those apps display a webpage internally, the System WebView is doing the rendering. Replacing Google's default with DresOS WebView means all of that content runs through a privacy-hardened, Google-free engine rather than Google's WebView.
+The **Android System WebView** is a browser engine baked into Android itself. It is not a browser you open it powers web content rendering inside hundreds of apps: social media feeds, email clients, news apps, microG sign in screens, shopping apps, and more. Every time any of those apps display a webpage internally, the System WebView is doing the rendering. Replacing Google's default with DresOS WebView means all of that content runs through a privacy hardened, Google free engine rather than Google's WebView.
+
+#### Why It's in the DresOS Suite
 
 **DresOS WebView** (built by DresOperatingSystems from [Cromite](https://github.com/uazo/cromite)) is a Chromium engine carrying Cromite's privacy and security hardening, with Google services and telemetry stripped throughout.
 
+**Source Code** [https://github.com/The-DresOS-Foundation/DresOS-WebView](https://github.com/The-DresOS-Foundation/DresOS-WebView)
+
+#### What It Is
+
+DresOS WebView, built by DresOperatingSystems from Cromite, is a Chromium engine carrying Cromite's privacy and security hardening throughout. The Android System WebView is the rendering engine hundreds of apps use internally any time they show web content, from social feeds to sign in screens to in app articles. By default that engine is Google's, which phones home on every render. DresOS WebView replaces it system wide, so every app that draws web content does so through a Google free, privacy hardened engine. It is invisible: you never open DresOS WebView directly, and your actual browser is DuckDuckGo.
+
+#### Key Features
+
+* Chromium engine built from Cromite with its privacy and security hardening throughout
+* Replaces Google's Android System WebView for every app on the device at once
+* No Google services, no telemetry, no anti features
+* Installed systemlessly through the DresOS WebView Module, so it is bootloop safe and fully reversible
+
 Your everyday browser is **DuckDuckGo Privacy Browser**. DresOS WebView runs silently in the background as the engine all other apps use to render web content.
+
+#### Setup and Usage
+
+DresOS WebView is not installed by hand. The DresOS WebView Module v2.2.0 you flash drops the signed APK into the systemless tree, registers it through a static RRO, and promotes it to the active WebView provider with `cmd webviewupdate set-webview-implementation` after boot. Full flashing and verification steps, including the bootloop sentinel and inert mode fallback. Confirm it is active with `adb shell dumpsys webviewupdate | grep "Current WebView package"`, which should report `org.dresos.webview`.
 
 ---
 
-### DresOS WebView Module v2.2.0
-
-**Module repo:** [github.com/DresOperatingSystems/DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-**Download:** [DresOS-WebView-v2_2_0.zip](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest)
+#### DresOS WebView Module v2.2.0
 
 **What the module does in one flash:**
 
-1. Validates the host environment: Magisk 29.0 or newer, Android 10 through 16, arm64. Aborts cleanly on 32-bit arm and on x86/x86_64 (DresOS WebView is currently built for arm64 only), on unknown ABIs, and on devices that ship WebView as an APEX module.
+1. Validates the host environment: Magisk 29.0 or newer, Android 10 through 16, arm64. Aborts cleanly on 32 bit arm and on x86/x86_64 (DresOS WebView is currently built for arm64 only), on unknown ABIs, and on devices that ship WebView as an APEX module.
 2. Drops the signed DresOS WebView APK into the systemless tree at `system/product/app/DresOSWebView/DresOSWebView.apk`. Magisk magic mount makes this visible to PackageManager as a preinstalled system app, satisfying the framework `MATCH_FACTORY_ONLY` scan that `WebViewUpdateService` performs.
 3. Places a static RRO in the systemless overlay partition. The RRO adds `org.dresos.webview` plus the full DresOS signing certificate to the framework `config_webview_packages` resource, which is the canonical allowlist that `WebViewUpdateService` reads at boot. Both `com.google.android.webview` and `com.android.webview` are kept in the allowlist as fallbacks so removing DresOS WebView cannot leave the device without a valid provider.
 4. After `sys.boot_completed`, `service.sh` calls `cmd webviewupdate set-webview-implementation org.dresos.webview` to promote DresOS WebView to the active provider, with a `settings put global webview_provider` fallback write for redundancy.
@@ -333,39 +374,23 @@ Your everyday browser is **DuckDuckGo Privacy Browser**. DresOS WebView runs sil
 
 The module ships with two layers of protection so a failed activation cannot brick the device.
 
-- **post-fs-data sentinel:** drops a `boot_pending` marker on every boot which `service.sh` clears on successful activation. A stale marker on the next boot signals a previous crash and the module auto-disables itself by touching `/data/adb/modules/dresoswv/disable`. Magisk recognises this file and skips the module entirely on subsequent boots.
+- **post fs data sentinel:** drops a `boot_pending` marker on every boot which `service.sh` clears on successful activation. A stale marker on the next boot signals a previous crash and the module auto disables itself by touching `/data/adb/modules/dresoswv/disable`. Magisk recognises this file and skips the module entirely on subsequent boots.
 - **Inert mode flag:** set automatically by `service.sh` on any activation failure (RRO did not register, APK bind mount did not land, framework refused to select DresOS WebView). The module's files remain bind mounted by Magisk but no further activation is attempted on subsequent boots, preventing retry storms.
 
 **Package details:**
 - Package: `org.dresos.webview`
 - Engine: Chromium `145.0.7632.120` (Cromite build)
-- Architecture: `arm64-v8a`
-- Signing cert SHA-256: `B7815F746C3183C66CAD631079CB669C0494A8BE542A2A96E5975D8FABCD92DE` (DresOS RSA 4096)
+- Architecture: `arm64 v8a`
+- Signing cert SHA 256: `B7815F746C3183C66CAD631079CB669C0494A8BE542A2A96E5975D8FABCD92DE` (DresOS RSA 4096)
 
-**Updating from the AOSmium build:**
+#### Flash Instructions
 
-If you previously installed the AOSmium build of this module, just flash this version over it from the Magisk app. It keeps the same module id (`dresoswv`), so it updates in place: the AOSmium engine and its allowlist entry are dropped and replaced with DresOS WebView, the stale provider selection is cleared, and DresOS WebView is promoted on the next boot. There is no need to uninstall the old module first.
-
-**Confirmed working devices:**
-
-| Device | Android version |
-|--------|----------------|
-| Motorola Moto G32 | LineageOS Android 16 |
-| Motorola ThinkPhone | Stock Android 15 |
-| Motorola Moto G7 Plus | Stock Android 10 |
-| Motorola Moto G7 Plus | LineageOS Android 15 |
-| Samsung Galaxy A05s | Stock Android 10 |
-
-If the module works on your device, open an issue on the DresOS Magisk Modules repository so it can be added to the confirmed list. Include device model, Android version, and the output of `adb shell dumpsys webviewupdate | grep Current` after activation.
-
-### Flash Instructions
-
-1. Download `DresOS-WebView-v2_2_0.zip` from the releases link above
-2. Open **Magisk → Modules → Install from storage**
+1. Download `DresOS WebView v2_2_0.zip` from the releases link above
+2. Open **Magisk, Modules, Install from storage**
 3. Select the ZIP and wait for installation to complete
 4. Tap **Reboot**
 
-### After Reboot
+#### After Reboot
 
 No manual step is required. The module activates DresOS WebView automatically after boot complete. To verify activation, from adb:
 
@@ -387,7 +412,7 @@ adb shell cat /data/adb/modules/dresoswv/webview_activation.log
 
 The Developer Options WebView picker may still show the OEM provider as selected on some OEM ROMs even when DresOS WebView is actually active. Trust `dumpsys` over the UI.
 
-### Diagnostic Logs
+#### Diagnostic Logs
 
 If something goes wrong check these files via adb or a terminal app:
 
@@ -398,185 +423,139 @@ If something goes wrong check these files via adb or a terminal app:
 /data/adb/modules/dresoswv/webview_activation.log
 ```
 
-### Uninstalling
+#### Uninstalling
 
-Disable or remove the module in **Magisk → Modules** and reboot. The `uninstall.sh` script clears the framework's saved WebView provider selection and restores either `com.google.android.webview` (on GMS devices) or `com.android.webview` (on AOSP/LineageOS builds) as the active provider.
+Disable or remove the module in **Magisk, Modules** and reboot. The `uninstall.sh` script clears the framework's saved WebView provider selection and restores either `com.google.android.webview` (on GMS devices) or `com.android.webview` (on AOSP/LineageOS builds) as the active provider.
 
 ---
 
-## Step 8: Set Up Shizuku
+### Step 8: Set Up Shizuku
 
-Shizuku gives apps like **Inure App Manager** powerful system-level access - specifically the ability to deeply debloat and manage system apps - without requiring every individual operation to go through a full root prompt. It is safer, more granular, and lighter than running everything root, and it works perfectly alongside your existing Magisk root.
+Shizuku gives apps like **Inure App Manager** powerful system level access, specifically the ability to deeply debloat and manage system apps, without requiring every individual operation to go through a full root prompt. It is safer, more granular, and lighter than running everything root, and it works perfectly alongside your existing Magisk root.
 
-### Why Use Shizuku?
+#### Why Use Shizuku?
 
 * Lets Inure and other tools debloat safely and deeply at the system level.
 * Survives reboots when configured correctly.
-* Uses Android's ADB-equivalent permission layer - no need to expose full root for every operation.
+* Uses Android's ADB equivalent permission layer, no need to expose full root for every operation.
 * Works with several other FOSS tools that support it.
 
-### Step-by-Step Root Setup (Recommended - Device Already Rooted)
+#### Step by Step Root Setup (Recommended As Device Already Rooted)
 
 1. Open the **Shizuku** app.
-2. When Magisk prompts for root permission, grant it to Shizuku **permanently**.
-3. On the main Shizuku screen where it shows the root option, tap **Start** (the big button).
+2. Click start root.
+3. When Magisk prompts for root permission, grant it to Shizuku **permanently**.
 4. You will briefly see a black screen with white text confirming the service has started.
-5. Go to **Shizuku settings** → enable **Auto start on boot** and **Keep alive**.
+5. Go to **Shizuku settings** and enable **Auto start on boot**.
 
-### Grant Permissions to Apps
+#### Grant Permissions to Apps
 
-* When you open **Inure App Manager** for the first time it will automatically request Shizuku access - approve it and grant **all** requested permissions.
-* You can view and manage all apps that have been granted Shizuku access under Shizuku → **Authorized apps**.
+* When you open **Inure App Manager** for the first time it will automatically request Shizuku access, approve it and grant **all** requested permissions.
+* You can view and manage all apps that have been granted Shizuku access under Shizuku via **Authorized apps**.
 
-**Test:** Reboot your phone. Open Shizuku - it should auto-start and show "Running" with root status. If it shows "Not running," open Shizuku and tap Start again.
+**Test:** Reboot your phone. Open Shizuku, it should auto start and show "Running" with root status. If it shows "Not running," open Shizuku and tap Start again.
 
 You are now ready for the deepest, safest debloating possible.
 
 ---
 
-## Step 9: Fine-Tune Debloat & Cleanup
+### Step 9: Fine Tune Debloat & Cleanup
 
 Now we remove every trace of Google and system bloat safely.
 
-### 9.1 Inure App Manager (Recommended Bulk Removal)
+#### 9.1 Inure App Manager (Recommended Bulk Removal)
 
 1. Open **Inure App Manager**.
-2. Grant it **full access** - choose **Root** and **Shizuku**. Approve **everything** it asks for.
+2. Grant it **full access**, choose **Root** and **Shizuku**. Approve **everything** it asks for.
 3. Go to the **Debloat** tab.
 4. Tap the **select all** icon.
 5. Select the **Recommended** debloat list.
 6. This automatically selects everything your device does not need: Google bloat, carrier apps, unused system services, etc.
-7. Review the list carefully. Uncheck anything you want to keep. Then tap **Debloat** to remove everything.
+7. Review the list carefully. Uncheck anything you want to keep. Then tap **Debloat** then **uninstall** to remove everything.
 8. Restart the phone.
 
-> **Note:** If Inure looks like it is doing nothing after you tap Debloat - leave it running. It is digging through your system to safely remove everything. This can take several minutes.
+#### 9.2 (Fine Tuning Pass)
 
-### 9.2 De-Bloater App (Fine-Tuning Pass)
+Only do this if you have installed the replacement apps
 
-1. Open the **De-Bloater** app (it will detect Magisk root automatically).
-2. Scan system apps.
+1. Reopen **inure**
+2. Go back to the Debloat tab.
 3. Remove **all** remaining Google system apps, including:
    * Gmail
    * Google Search
    * Chrome
    * Google Play Services remnants (anything not replaced by microG)
-   * Any other carrier or OEM bloat
+   * Stock Apps (phone, messages, clock, gallery, camera etc)
+   * Any other carrier or OEM bloat that is safe to remove (inure will explain what the proccess/app is for and if its safe or not to remove and will warn you if removal causes bootloop)
 4. Apply changes and reboot.
 
-### ⚠️ CRITICAL WARNING
+> **Note:** If Inure looks like it is doing nothing after you tap Debloat, leave it running. It is digging through your system to safely remove everything. This can take several minutes. Remember every device is different so be careful when fine tuning.
+
+#### CRITICAL WARNING
 
 You **must** have installed all replacement apps **before** removing their Google equivalents. Specifically:
 * Install **Tuta Mail** before removing Gmail
 * Install **DresSecureComms** and set it as the default phone and SMS app before removing the stock dialer and SMS app
-* Install **DresOS WebView** (via the DresOS module) before removing Chrome and the Google WebView
+* Install **DresOS WebView** (via the DresOS module) before removing Chrome and Google WebView
 * Install **Gopeed** before removing Google Download Manager
 * Install **SAI** before removing the Google Package Installer
 
-Removing a system app without a replacement can break core phone functions until you restore a TWRP backup.
+Removing a system app without a replacement can break core phone functions until you restore a backup.
 
-### 9.3 Final Cleanup with SD Maid SE
+#### 9.3 Final Cleanup with SD Maid SE
 
-Open **SD Maid SE** → run **Full Scan** + **CorpseFinder** → delete every Google remnant, leftover data folder, and orphaned system file.
-
----
-
-## Step 10: Install AFWall+ - Root-Level Firewall
-
-**Download:** F-Droid - [dev.ukanth.ufirewall](https://f-droid.org/packages/dev.ukanth.ufirewall/)
-
-AFWall+ (Android Firewall+) is a root-level firewall that uses **iptables** - the same Linux kernel-level packet filtering used in professional firewalls and servers. Unlike app-based firewalls that operate through the Android VPN slot, AFWall+ works at the kernel level, meaning it intercepts and controls network traffic before any app can touch it. No VPN slot is used. No app can bypass it. It runs silently in the background and survives reboots via Magisk root.
-
-This is your system-wide network policy layer. InviZible Pro (covered in Part 2) handles routing your traffic through Tor/I2P/DNSCrypt via proxy. AFWall+ handles which apps are permitted to reach the network at all - including blocking apps that would try to bypass the proxy entirely.
-
-### Why AFWall+ Instead of InviZible Pro's Internal Firewall
-
-InviZible Pro is configured in **proxy mode** (not VPN mode) so the Android VPN slot remains free for DuckDuckGo App Tracking Protection. In proxy mode, InviZible Pro cannot enforce firewall rules on apps that ignore or bypass the system proxy - some apps do exactly this. AFWall+ operates at a level those apps cannot reach: the kernel's iptables chains, which sit below the entire Android app layer.
-
-### Setup
-
-1. Install AFWall+ from F-Droid.
-2. Open AFWall+ - it will request root via Magisk. Grant it permanently.
-3. The main screen shows every installed app as a row with toggle switches for:
-   * **WiFi** (left column) - allow/block on Wi-Fi networks
-   * **Data** (middle column) - allow/block on mobile data
-   * **VPN/Roaming** (right column, if shown) - allow/block on VPN or roaming
-4. **Set the default policy first:**
-   * Tap the **≡ menu → Set Default Policy → Deny (White List)**
-   * This means **all apps are blocked by default** - you explicitly whitelist only what needs internet. This is the most secure posture.
-
-### Recommended Rules
-
-Enable internet for these apps (tap their toggles to green for Wi-Fi and Data):
-
-| App | Allow | Notes |
-|---|---|---|
-| DuckDuckGo | ✅ WiFi + Data | Your browser - needs full access |
-| InviZible Pro | ✅ WiFi + Data | Proxy engine - must reach Tor/I2P/DNS servers |
-| Tuta Mail | ✅ WiFi + Data | Email push notifications |
-| F-Droid | ✅ WiFi only | App updates - Wi-Fi only to avoid data leaks |
-| Aurora Store | ✅ WiFi only | App updates - Wi-Fi only |
-| Arcane Chat | ✅ WiFi + Data | Messaging - needs constant connectivity |
-| OONI Probe | ✅ WiFi + Data | Network tests |
-| Hypatia | ✅ WiFi only | Signature updates only |
-| microG (com.google.android.gms) | ✅ WiFi + Data | If using microG for push notifications |
-| DresSecureComms | ✅ Data | Calls and SMS over mobile data |
-| Metrolist | ✅ WiFi + Data | Music streaming |
-| RedReader | ✅ WiFi + Data | Reddit client |
-
-Block everything else - games, offline tools, system apps that have no reason to phone home, and any remaining Google service remnants.
-
-### Advanced: Force Apps Through InviZible Pro Proxy via iptables
-
-On rooted devices, AFWall+ can redirect traffic at the kernel level to ensure apps route through InviZible Pro's local Tor proxy even if they do not respect Android's system proxy setting. Go to:
-
-**AFWall+ → ≡ menu → Custom Scripts → Startup Script**
-
-Add the following rule to redirect all outgoing HTTP/HTTPS traffic through InviZible Pro's Tor HTTP proxy on port 8118 (replace `UID` with the app's Android user ID from Settings → Apps → [App] → App info):
-
-```bash
-iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner UID -j DNAT --to-destination 127.0.0.1:8118
-```
-
-> For most users, the combination of InviZible Pro system proxy + DuckDuckGo App Tracking Protection + AFWall+ default-deny whitelist is sufficient without custom iptables rules. The custom script approach is for advanced users who want guaranteed per-app Tor enforcement regardless of system proxy compliance.
-
-### Logs
-
-AFWall+ → **≡ menu → Logs** shows you every blocked connection attempt in real time - which app tried to reach which IP, when, and whether it was blocked. This is an excellent way to spot apps trying to phone home that you did not expect.
+Open **SD Maid SE**, run **Full Scan** + **CorpseFinder**, delete every Google remnant, leftover data folder, and orphaned system file.
 
 ---
 
-## Step 11: Replace System File Manager, Package Installer & Download Manager
+### Step 10: Replace System File Manager, Package Installer & Download Manager
 
-A truly de-Googled phone requires replacing not just apps but the system-level utilities Google embeds for file management, app installation, and downloading. Here is the full FOSS replacement stack - zero Google components:
+A truly de Googled phone requires replacing not just apps but the system level utilities Google embeds for file management, app installation, and downloading. Here is the full FOSS replacement stack, zero Google components:
 
-### File Management and Encryption: Amaze File Manager
+#### File Management and Encryption: Amaze File Manager
 
-**Amaze File Manager** replaces both Fossify Files and ZArchiver Pro in a single app. It is a fully open-source file manager (GPL-3.0) built by Team Amaze with Material Design, available on F-Droid with no Google dependencies.
+**Download:** [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/)
 
-Install from F-Droid: `https://f-droid.org/packages/com.amaze.filemanager/`
+Amaze File Manager is a fully open source (GPL 3.0) file manager built by Team Amaze. It replaces both a standard file manager and a separate encryption tool in a single app. Available on F-Droid with no Google dependencies, actively maintained, and supports Android 5.0 and up.
+
+#### Key Features
+
+- Full file management: cut, copy, move, delete, rename, compress, extract
+- Built in AES 256 encryption and decryption of files and folders
+- Biometric lock (fingerprint and face unlock) for the entire app
+- Multiple tabs open simultaneously
+- Root explorer for advanced system access on rooted devices
+- Built in APK reader, installer, and App Manager
+- Built in ZIP/RAR reader, text editor, and database viewer
+- SMB, SSH, FTP and SFTP support for network shares
+- No ads, no trackers, no Google dependencies
+
+#### Setup and Usage
+
+1. Install via F-Droid.
+2. Open Amaze File Manager and grant storage permission.
+3. Set as default file manager: Settings, Apps, Default apps, Files, Amaze.
 
 Key features relevant to the DresOS build:
 
-**File management:** Full local file browsing across internal storage, SD card, and USB OTG. Cut, copy, move, delete, rename, create folders. Multiple tabs open simultaneously. Bookmark frequently used directories. Built-in text editor, ZIP/RAR reader, APK reader, and database reader.
+**File management:** Full local file browsing across internal storage, SD card, and USB OTG. Cut, copy, move, delete, rename, create folders. Multiple tabs open simultaneously. Bookmark frequently used directories. Built in text editor, ZIP/RAR reader, APK reader, and database reader.
 
-**AES-256 encryption:** Amaze has built-in AES encryption for files and folders - no separate archiving app needed. To encrypt a file: long-press it, tap the overflow menu, select Encrypt, set a password. The encrypted file gets an `.aes` extension. To decrypt: tap the `.aes` file, enter the password. Encrypted files cannot be read without the password even with full physical access to the device.
+**AES 256 encryption:** Amaze has built in AES encryption for files and folders, no separate archiving app needed. To encrypt a file: Press the options menu on the right hand side of the file, select Encrypt, set a password. The encrypted file gets an `.aes` extension. To decrypt: tap the `.aes` file, enter the password. Encrypted files cannot be read without the password even with full physical access to the device.
 
-**Biometric lock:** Lock the entire app behind fingerprint or face unlock via Settings → Security → Fingerprint. This prevents anyone who picks up your phone from accessing your files.
+**Biometric lock:** Lock the entire app behind fingerprint or face unlock via Settings, Security, Fingerprint. This prevents anyone who picks up your phone from accessing your files.
 
-**Root explorer:** On your rooted device, enable root mode in Settings → Root Explorer. This lets you browse and manage system directories directly - useful for advanced DresOS maintenance.
+**Root explorer:** On your rooted device, enable root mode in Settings, Root Explorer. This lets you browse and manage system directories directly, useful for advanced DresOS maintenance.
 
-**APK management:** Long-press any APK file to install it directly, or use the built-in App Manager to backup, view, or uninstall installed apps.
+**APK management:** Long press any APK file to install it directly, or use the built in App Manager to backup, view, or uninstall installed apps.
 
-Set **Amaze File Manager** as your default file manager in Settings → Apps → Default apps → Files.
+Set **Amaze File Manager** as your default file manager in Settings, Apps, Default apps, Files.
 
-> **Why Amaze instead of Fossify Files + ZArchiver Pro separately:** Fossify Files is a clean everyday browser but has no encryption. ZArchiver Pro is not fully open-source and requires a separate download from an unofficial GitHub mirror. Amaze is GPL-3.0, on F-Droid, actively maintained, and covers both use cases in one install.
+#### Package Installer: SAI (Split APK Installer)
 
-### Package Installer: SAI (Split APK Installer)
-
-**SAI** (Split APK Installer) is a fully open-source replacement for Google's PackageInstaller. It supports:
+**SAI** (Split APK Installer) is a fully open source replacement for Google's PackageInstaller. It supports:
 
 * Standard APK installation
-* Split APK packages (.apks / .xapk files) - the format many apps use
+* Split APK packages (.apks / .xapk files), the format many apps use
 * APK signature verification before installing
 * Batch installation from ZIP archives
 * Root and Shizuku installation modes for seamless installs without confirmation prompts
@@ -584,44 +563,44 @@ Set **Amaze File Manager** as your default file manager in Settings → Apps →
 
 Install from F-Droid: `https://f-droid.org/packages/com.aefyr.sai.fdroid/`
 
-Set SAI as the default app opener for `.apk` files in Settings → Apps → Default apps → Opening links, or by long-pressing an APK in Amaze File Manager and selecting SAI.
+Set SAI as the default app opener for `.apk` files in Settings, Apps, Default apps, Opening links, or by long pressing an APK in Amaze File Manager and selecting SAI.
 
-### Download Manager: Gopeed
+#### Download Manager: Gopeed
 
-**Gopeed** is a modern, actively maintained open-source download manager that replaces Google's hidden Download Manager service entirely. It is under active development with regular releases and supports a broader range of protocols than older Android download managers.
+**Gopeed** is a modern, actively maintained open source download manager that replaces Google's hidden Download Manager service entirely. It is under active development with regular releases and supports a broader range of protocols than older Android download managers.
 
 Install from F-Droid: `https://f-droid.org/packages/com.gopeed/`
 Or download from [gopeed.com](https://gopeed.com/)
 
 Key features:
 - HTTP, HTTPS, BitTorrent, magnet link, and ed2k support
-- Multi-threaded downloads with resumable transfers
-- File hash verification (SHA-256/MD5) to confirm download integrity
-- Wi-Fi only mode - restrict downloads to unmetered connections
+- Multi threaded downloads with resumable transfers
+- File hash verification (SHA 256/MD5) to confirm download integrity
+- Wi Fi only mode, restrict downloads to unmetered connections
 - Clean modern interface with download queue management
 - Zero Google dependencies, zero tracking
 
-After installing, go to **Settings → Apps → Default apps → Opening links** and ensure Gopeed handles download intents. In **DuckDuckGo Privacy Browser**, set Gopeed as the external download handler if prompted.
+After installing, go to **Settings, Apps, Default apps, Opening links** and ensure Gopeed handles download intents. In **DuckDuckGo Privacy Browser**, set Gopeed as the external download handler if prompted.
 
-> **Why This Matters:** Google's Download Manager is a background service that silently handles every file download on the phone and can log metadata. Gopeed replaces it entirely with a transparent, open-source alternative that is actively maintained.
+> **Why This Matters:** Google's Download Manager is a background service that silently handles every file download on the phone and can log metadata. Gopeed replaces it entirely with a transparent, open source alternative that is actively maintained.
 
-### APK Manager: F-Droid + Aurora Store
+#### APK Manager: F-Droid + Aurora Store
 
 For sourcing and updating apps:
 
-* **F-Droid** handles all open-source apps from its repository and any added repos (like IzzyOnDroid for DresOS WebView). F-Droid verifies all APK signatures against developer keys.
+* **F-Droid** handles all open source apps from its repository and any added repos (like IzzyOnDroid for DresSecureComms). F-Droid verifies all APK signatures against developer keys.
 * **Aurora Store** provides anonymous access to the Google Play Store catalogue without a Google account. Use **Anonymous** login mode only.
 
 Together, these two replace the Google Play Store ecosystem completely.
 
 ---
 
-## Step 12: Final Setup & Defaults
+### Step 11: Final Setup & Defaults
 
-Go to **Settings → Apps → Default apps** and set:
+Go to **Settings, Apps, Default apps** and set:
 
 | Function | Default App |
-|---|---|
+| --- | --- |
 | Browser | **DuckDuckGo Privacy Browser** |
 | Gallery | **Aves Libre** |
 | Keyboard / Input method | **HeliBoard** |
@@ -633,1155 +612,746 @@ Go to **Settings → Apps → Default apps** and set:
 | Package installer | **SAI** |
 | Download manager | **Gopeed** |
 
-**Aurora Store:** Open it → Settings → set **Anonymous** login mode. Do not log in with any Google account.
-
-**DuckDuckGo Privacy Browser:** Open it and complete initial setup. **App Tracking Protection can and should be enabled** - InviZible Pro runs in proxy + root mode and does not occupy the Android VPN slot, so there is no conflict. Enable it in DuckDuckGo → Settings → App Tracking Protection → Enable. Android will prompt you to allow a VPN connection for DuckDuckGo - confirm it. This gives you both InviZible Pro's proxy-level Tor/DNSCrypt routing AND DuckDuckGo's in-app tracker blocking running simultaneously.
+**DuckDuckGo Privacy Browser:** Open it and complete initial setup. **App Tracking Protection can and should be enabled**, InviZible Pro runs in proxy mode and does not occupy the Android VPN slot, so there is no conflict. Enable it in DuckDuckGo, Settings, App Tracking Protection, Enable. Android will prompt you to allow a VPN connection for DuckDuckGo, confirm it. This gives you both InviZible Pro's proxy level Tor/DNSCrypt routing AND DuckDuckGo's in app tracker blocking running simultaneously.
 
 **Optional hardening (advanced):**
-* **Stratum** - set up your two-factor authentication accounts now; it works fully offline and you can block it from the network in AFWall+
-* **Hide My Applist** - prevents apps from detecting other apps installed on your phone
-* **Play Integrity** - microG passing SafetyNet/Play Integrity for banking and similar apps is planned for a later DresOS microG release rather than the current pure-overlay build
+* **Stratum**, set up your two factor authentication accounts now; it works fully offline and you can block it from the network in AFWall+
+* **Hide My Applist**, prevents apps from detecting other apps installed on your phone
+* **Play Integrity**, microG passing SafetyNet/Play Integrity for banking and similar apps is planned for a later DresOS microG release rather than the current pure overlay build
 
 ---
 
-## Step 13: Test & Backup
+## Part 2: Operational Security (OPSEC Stack)
 
-* Make and receive a test phone call via **DresSecureComms**
-* Send and receive a test SMS via **DresSecureComms**
-* Send and receive a test email via **Tuta Mail**
-* Open a website in **DuckDuckGo Privacy Browser** - confirm it is working and App Tracking Protection shows active
-* Verify DresOS WebView is the active WebView provider via `adb shell dumpsys webviewupdate | grep "Current WebView package"` - the output should show `org.dresos.webview`
-* Open **AFWall+** - confirm firewall rules are applied and iptables is active
-* Open **Aurora Store** - verify apps load and anonymous mode works
-* Open an APK via **SAI** - confirm it installs correctly
-* Download a file in **DuckDuckGo** - confirm it opens in **Gopeed**
-* Everything working through microG and DresOS WebView as expected
+### OPSEC Overview
 
-**TWRP Backup (if not done already):** Boot to TWRP → Backup → select Boot + System + Data + Vendor → swipe to back up. This is your emergency restore point. Store the backup folder in a safe location off-device.
+This repository provides a guide to enhancing operational security (OPSEC) and cybersecurity on Android devices. It focuses on protecting against phishing, malware, IP tracking, data mining, device fingerprinting, censorship detection, and network surveillance, using free, open source tools only.
 
-**If anything breaks:** Boot to TWRP → Restore → select your backup → swipe. Your full system is back in minutes.
+This method creates a layered privacy setup: encrypted DNS at the OS level (Quad9 DNS over TLS), Tor routing + DNSCrypt + I2P at the network level via InviZible Pro in proxy + root mode (which leaves the VPN slot free), a root level iptables firewall via AFWall+ enforcing per app access control at the kernel level, app layer tracker blocking via DuckDuckGo App Tracking Protection in the VPN slot, and location spoofing at the sensor level via Fake Traveler. The result is an extremely hardened device with multiple independent, non conflicting privacy layers operating simultaneously.
 
 ---
 
----
+### OPSEC Step 1: Configure DNS and MAC Randomization
 
-# PART 2 - OPERATIONAL SECURITY (OPSEC STACK)
+This is the baseline privacy layer, applied at the OS level, before any apps run.
 
-## OPSEC Overview
+#### DNS over TLS (Quad9)
 
-This repository provides a guide to enhancing operational security (OPSEC) and cybersecurity on Android devices. It focuses on protecting against phishing, malware, IP tracking, data mining, device fingerprinting, censorship detection, and network surveillance - using free, open-source tools only.
-
-This method creates a layered privacy setup: encrypted DNS at the OS level (Quad9 DNS-over-TLS), Tor routing + DNSCrypt + I2P at the network level via InviZible Pro in proxy + root mode (which leaves the VPN slot free), a root-level iptables firewall via AFWall+ enforcing per-app access control at the kernel level, app-layer tracker blocking via DuckDuckGo App Tracking Protection in the VPN slot, and location spoofing at the sensor level via Fake Traveler. The result is an extremely hardened device with multiple independent, non-conflicting privacy layers operating simultaneously.
-
-**Compatibility:** Android 10 or later. The degoogling steps in Part 1 are recommended but most OPSEC steps work on stock Android too.
-
-> **Architecture Note:** InviZible Pro runs in **proxy + root mode** - not VPN mode. It exposes Tor as an HTTP proxy on `127.0.0.1:8118`, and uses iptables (via Magisk root) to redirect all DNS to DNSCrypt at the kernel level. The Android system proxy setting routes HTTP/HTTPS traffic from all cooperating apps through Tor. The **Android VPN slot remains completely free**, meaning DuckDuckGo's **App Tracking Protection can and should be fully enabled** to run alongside InviZible Pro. **AFWall+** adds a second independent kernel-level firewall layer - per-app access control and mobile data proxy redirect - that operates entirely outside of both the proxy and VPN systems.
-
----
-
-## OPSEC Step 1: Configure DNS and MAC Randomization
-
-This is the baseline privacy layer - applied at the OS level, before any apps run.
-
-### DNS over TLS (Quad9)
-
-1. Go to **Settings → Network & Internet → Private DNS**.
+1. Go to **Settings, Network & Internet, Private DNS**.
 2. Select **Private DNS provider hostname**.
 3. Enter: `dns.quad9.net`
 4. Save.
 
-**What this does:** Quad9 DNS blocks malicious domains, protects against malware and phishing at the DNS resolution level, and does not log or collect user data - unlike Google DNS (8.8.8.8) or Cloudflare DNS (1.1.1.1) which both log queries. Quad9 is operated by a Swiss nonprofit. All DNS queries are now encrypted via DNS-over-TLS and filtered against Quad9's threat intelligence database.
+**What this does:** Quad9 DNS blocks malicious domains, protects against malware and phishing at the DNS resolution level, and does not log or collect user data, unlike Google DNS (8.8.8.8) or Cloudflare DNS (1.1.1.1) which both log queries. Quad9 is operated by a Swiss nonprofit. All DNS queries are now encrypted via DNS over TLS and filtered against Quad9's threat intelligence database.
 
-> Note: Once InviZible Pro is running in proxy mode (Step 2), it takes over DNS resolution via DNSCrypt, which is more private than system-level DNS-over-TLS. The Quad9 setting here serves as a fallback for when InviZible Pro is not active.
+> Note: Once InviZible Pro is running in proxy mode (Step 2), it takes over DNS resolution via DNSCrypt, which is more private than system level DNS over TLS. The Quad9 setting here serves as a fallback if InviZible Pro fails.
 
-### MAC Address Randomization
+#### MAC Address Randomization
 
-1. Go to **Settings → Network & Internet → Internet** → tap your Wi-Fi network.
-2. Tap **Network usage** → set to **Treat as unmetered** (reduces certain monitoring behaviors).
+1. Go to **Settings, Network & Internet, Internet**, tap your Wi Fi network.
+2. Tap **Network usage**, set to **Treat as unmetered** (reduces certain monitoring behaviors).
 3. Go to **Privacy** (within the same network settings).
 4. Enable **Use randomized MAC address**.
 5. Disable **Send device name**.
+6. Go to **Developer options**:
+7. Enable **Non persistent MAC** (complements the randomization above across reboots)
+8. Enable **Tethering hardware acceleration** (improves performance when hotspot is used)
 
-**What this does:** Every Wi-Fi device has a hardware MAC address that uniquely identifies it. By default, this allows any network operator to track your device across time even if you change your IP. Randomized MAC changes your device's hardware identifier on each network, preventing this form of persistent tracking. Your device might appear as a completely random hardware identifier - preventing physical location tracking via Wi-Fi network logs.
-
-### Developer Options Hardening
-
-1. Go to **Settings → About phone** → tap **Build number** seven times to unlock Developer Options.
-2. In **Developer options**:
-   * Enable **Non-persistent MAC** (complements the randomization above across reboots)
-   * Enable **Tethering hardware acceleration** (improves performance when hotspot is used)
+**What this does:** Every Wi Fi device has a hardware MAC address that uniquely identifies it. By default, this allows any network operator to track your device across time even if you change your IP. Randomized MAC changes your device's hardware identifier on each network, preventing this form of persistent tracking. Your device might appear as a completely random hardware identifier, preventing physical location tracking via Wi Fi network logs.
 
 ---
 
-## OPSEC Step 2: Set Up InviZible Pro in Proxy + Root Mode
+### OPSEC Step 2: Set Up InviZible Pro
 
-**InviZible Pro** (the app listed in stores as **iVizblePro**) is the network privacy engine of the DresOS stack. It combines **Tor**, **I2P**, and **DNSCrypt** into a single application. In this setup it runs in **proxy mode with root**, which means:
+**InviZiblePro** is the network privacy engine of the DresOS stack. It combines **Tor**, **I2P**, and **DNSCrypt** into a single application. In this setup it runs in **proxy mode with root**, which means:
 
-* It runs as a local proxy server on your device - the **Android VPN slot is not used at all**
+* It runs as a local proxy server on your device, the **Android VPN slot is not used at all**
 * DuckDuckGo's **App Tracking Protection** can be fully enabled alongside it with zero conflict
 * Magisk root lets InviZible Pro redirect DNS at the iptables level without any VPN interface
-* Android's built-in system proxy setting routes your traffic through InviZible Pro's Tor HTTP proxy - your apparent IP address to every website and service becomes a Tor exit node IP, not your real IP
-
-**Download:** [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/)
-Or search **InviZible Pro** in F-Droid.
+* Android's built in system proxy setting routes your traffic through InviZible Pro's Tor HTTP proxy, your apparent IP address to every website and service becomes a Tor exit node IP, not your real IP
 
 ---
 
-### What Each Component Does
+#### What Each Component Does
 
 **DNSCrypt:**
-DNS converts domain names like `example.com` into IP addresses. By default this happens in plain text - your ISP, network operator, and any middlebox on the network can see every domain you visit, even when page content is HTTPS-encrypted. DNSCrypt encrypts and cryptographically authenticates every DNS query. In proxy + root mode, InviZible Pro uses iptables to redirect all DNS traffic (UDP and TCP port 53) to its local DNSCrypt listener at port 5354 - no app can bypass it, no VPN is needed.
+DNS converts domain names like `example.com` into IP addresses. By default this happens in plain text, your ISP, network operator, and any middlebox on the network can see every domain you visit, even when page content is HTTPS encrypted. DNSCrypt encrypts and cryptographically authenticates every DNS query. In proxy + root mode, InviZible Pro uses iptables to redirect all DNS traffic (UDP and TCP port 53) to its local DNSCrypt listener at port 5354, no app can bypass it, no VPN is needed.
 
 **Tor (The Onion Router):**
-Tor routes your traffic through three volunteer-operated relays. Each relay only knows the immediately previous and next hop - no single relay can identify both your identity and your destination. InviZible Pro exposes Tor as a local HTTP proxy on port `8118`. When you set Android's system proxy to `127.0.0.1:8118`, all apps that respect the system proxy route their traffic through Tor. From the perspective of every website and service you connect to, your IP address is the Tor exit node's IP - a relay in another country, different from your real IP, rotating every 10 minutes.
+Tor routes your traffic through three volunteer operated relays. Each relay only knows the immediately previous and next hop, no single relay can identify both your identity and your destination. InviZible Pro exposes Tor as a local HTTP proxy on port `8118`. When you set Android's system proxy to `127.0.0.1:8118`, all apps that respect the system proxy route their traffic through Tor. From the perspective of every website and service you connect to, your IP address is the Tor exit node's IP, a relay in another country, different from your real IP, rotating every 10 minutes.
 
 **I2P (Invisible Internet Project):**
 A separate anonymising network using garlic routing (bundles multiple encrypted messages per hop). Independent of Tor, runs on its own relay network. Suited for accessing `.i2p` hidden services (eepsites) and provides a different anonymity model from Tor that resists certain traffic correlation attacks differently. InviZible Pro exposes the I2P HTTP proxy locally on port `4444`.
 
 **Root Mode / iptables DNS Redirection:**
-With Magisk root, InviZible Pro writes iptables rules at the kernel level to redirect all outbound DNS queries (port 53 → port 5354) to DNSCrypt - regardless of which app generates them. No VPN slot needed. This runs below the application layer: it cannot be bypassed by any app.
+With Magisk root, InviZible Pro writes iptables rules at the kernel level to redirect all outbound DNS queries (port 53 to port 5354) to DNSCrypt, regardless of which app generates them. No VPN slot needed. This runs below the application layer: it cannot be bypassed by any app.
+
+* **Proxy mode**, exposes Tor as HTTP proxy on `127.0.0.1:8118` and SOCKS5 on `127.0.0.1:9050`; Android system proxy routes all compatible app traffic through Tor without touching the VPN slot. **Works alongside DuckDuckGo App Tracking Protection (VPN slot is completely free).**
 
 ---
 
-### Full Setup: Proxy + Root Mode with Tor + I2P + DNSCrypt
+#### Full Setup: Proxy + Root Mode with Tor + I2P + DNSCrypt
 
 Follow these steps in order. Do not start any service until Phase 6.
 
-#### Phase 1: Install and Open
+##### Phase 1: Install and Open
 
 1. Install InviZible Pro via F-Droid or the direct APK link above (install with SAI).
 2. Open **InviZible Pro**.
 3. Allow notification permissions when prompted.
 4. Do not tap Start on anything yet.
 
-#### Phase 2: Set Connection Mode to Proxy + Enable Root
+##### Phase 2: Set Connection Mode to Proxy + Enable Root
 
-1. Tap the **≡ hamburger menu** (top-left corner) → **Settings** → **Common settings**.
-2. Find **Run mode** or **Connection method** → select **Proxy mode** (not VPN mode, not Root-only mode).
-3. Under **Root settings** in the same screen:
-   * Enable **Run modules with root** - allows InviZible Pro to use your Magisk root for iptables and more reliable process control
-   * Enable **Redirect DNS to DNSCrypt** - this is the iptables rule that forces all port-53 DNS from every app through DNSCrypt on port 5354
-   * Enable **Fix TTL for tethering** - useful if you share your connection via hotspot
-4. Under **Proxy settings** (still in Common settings):
+1. Tap the **menu**, top right corner, **Settings**, **Common settings**.
+2. Select **Proxy mode** (not VPN mode, not Root only mode).
+3. Enable InviZble Pro in Magisk
+4. Under settings in the top left:
    * Confirm **SOCKS5 proxy port:** `9050` (Tor SOCKS5)
-   * Confirm **HTTP proxy port:** `8118` (Tor HTTP CONNECT proxy - this is what you will enter into Android's Wi-Fi proxy setting)
-5. Enable **Start on boot** - restores all services and iptables rules automatically after every reboot.
+   * Confirm **HTTP proxy port:** `8118` (Tor HTTP CONNECT proxy, this is what you will enter into Android's Wi Fi proxy setting)
+5. Go to fast settings Enable All, restores all services and iptables rules automatically after every reboot.
 6. Go back to the main screen.
 
-#### Phase 3: Configure DNSCrypt
+##### Phase 3: Configure DNSCrypt
 
-1. Tap the **DNSCrypt** tab.
-2. Tap the **settings gear** icon.
-3. Under **DNS servers**, select resolvers that meet all of these criteria:
-   * `nolog` - server does not log your queries
-   * `nodump` - server does not share data with third parties
-   * `dnssec` - server validates DNS responses cryptographically
-   * **Recommended:** `quad9-dnscrypt-ip4-filter-pri` (Quad9, Swiss non-profit, malware domain blocking), `mullvad-adblock` (Mullvad VPN's resolver, strict no-log, Swedish jurisdiction)
-   * **Always avoid:** Any `cloudflare` entry (logs queries), any Google resolver
-4. Select 2–3 qualifying servers for redundancy.
-5. Under **DNSCrypt settings**, enable:
-   * **DNSSEC** - cryptographic validation of all DNS responses; rejects spoofed or tampered answers
-   * **Require DNSSEC** - filters server list to DNSSEC-supporting resolvers only
-   * **Require no logging** - filters list to strictly non-logging resolvers only
-   * **Block IPv6** - reduces attack surface if you do not actively use IPv6 services
-   * **Bootstrap resolvers** - allows initial encrypted resolver list fetch; only contacts a plain resolver once for bootstrapping, then stays encrypted
-6. Go back.
-
-#### Phase 4: Configure Tor
-
-1. Tap the **Tor** tab.
-2. Tap the **settings gear** icon.
-3. Under **Tor settings**, enable:
-   * **Isolate destination addresses** - forces each destination domain to use a separate Tor circuit; prevents one service from correlating your traffic to another
-   * **Isolate destination ports** - additional circuit isolation per port number
-   * **Isolate SOCKS auth** - further isolation if apps use SOCKS5 authentication
-4. Note the HTTP proxy port is `8118` (used in Phase 7 below).
-5. Under **Bridges** - enable this if you are in a country where Tor is blocked, or for extra obfuscation on any network:
-   * Enable **Use bridges**
-   * Select bridge type: **obfs4** - disguises Tor traffic as ordinary HTTPS, bypasses deep packet inspection (DPI)
-   * Tap **Request new bridges** (fetches fresh bridges from Tor Project) or enter bridges manually from [bridges.torproject.org](https://bridges.torproject.org/)
-6. Go back.
-
-#### Phase 5: Configure I2P
-
-1. Tap the **I2P** tab.
-2. Tap the **settings gear** icon.
-3. For most users, default settings are correct. If you plan to access I2P eepsites, confirm the I2P HTTP proxy is enabled on port `4444`.
-4. Enable **Tunnel bandwidth** limiting if your device is battery-sensitive.
+1. Tap the **settings gear** icon.
+2. In **DNS settings**, enable all of these:
+   * `suspicious logging`, can reveal presence of malware etc
+   * `require no log`, server does not share data with third parties
+   * `require dnssec`, server validates DNS responses cryptographically
+3. **Block IPv6**, reduces attack surface if you do not actively use IPv6 services
+4. Click **Bootstrap resolvers**, allows initial encrypted resolver list fetch; only contacts a plain resolver once for bootstrapping, then stays encrypted
 5. Go back.
-6. Note: I2P takes 10–20 minutes to fully build its routing table on first run - this is expected behaviour, not an error.
 
-#### Phase 6: Start All Services (In Order)
+##### Phase 4: Configure Tor
 
-From the InviZible Pro main screen, start services in this exact order:
+1. Tap the **settings gear** icon.
+2. Under **Tor settings**, enable:
+   * **Isolate dest addr**, forces each destination domain to use a separate Tor circuit; prevents one service from correlating your traffic to another
+   * **Isolate dest port**, additional circuit isolation per port number
+3. Note the HTTP Tunnel port is `8118` (used in Phase 7 below).
+4. Go Back
+5. Do this if you are in a country where Tor is blocked:
+   * Go to fast settings and click Use bridges
+   * Tap **Request bridges** click the bridges you want then it will get them for you automatically (fetches fresh bridges from Tor Project) or enter bridges manually from [bridges.torproject.org](https://bridges.torproject.org/)
+6. Go back.
 
-1. **DNSCrypt** → tap **Start** → wait for status: **Running**
-2. **Tor** → tap **Start** → wait for bootstrap to reach **100%** (30–90 seconds)
-3. **I2P** → tap **Start** → bootstrap begins (10–20 min first run; much faster after that)
+##### Phase 5: Configure I2P
 
-InviZible Pro is now running. The iptables DNS redirect is active (all DNS → DNSCrypt). Your local Tor HTTP proxy is live at `127.0.0.1:8118`.
+For most users the default settings are correct. If you plan to access I2P eepsites, go into settings and confirm the I2P HTTP proxy is enabled on port `4444`.
 
-#### Phase 7: Configure Android System Proxy for IP Spoofing via Tor
+Note: I2P takes 10 to 20 minutes to fully build its routing table on first run, this is expected behaviour, not an error.
 
-This is how you route app traffic through InviZible Pro's Tor proxy using Android's built-in system proxy - **no VPN slot used**. Apps that respect the system proxy will have their HTTP/HTTPS traffic exit through a Tor exit node. Your real IP is not visible to any destination.
+##### Phase 6: Start All Services
 
-**Repeat this for every Wi-Fi network you connect to:**
+On the main screen tick all 3 Boxes then click the big start buttom.
 
-1. **Settings → Network & Internet → Wi-Fi**
-2. Long-press your network name → **Modify network** (or tap the pencil icon)
-3. Expand **Advanced options**
-4. Under **Proxy** → select **Manual**
-5. Enter:
+InviZible Pro is now running. The iptables DNS redirect is active (all DNS to DNSCrypt). Your local Tor HTTP proxy is live at `127.0.0.1:8118`.
+
+##### Phase 7: Configure Android System Proxy for IP Spoofing via Tor
+
+This is how you route app traffic through InviZible Pro's Tor proxy using Android's built in system proxy, no VPN slot used. Apps that respect the system proxy will have their HTTP/HTTPS traffic exit through a Tor exit node. Your real IP is not visible to any destination.
+
+**Repeat this for every Wi Fi network you connect to:**
+
+1. **Settings, Network & Internet, Wi Fi**
+2. Press the settings icon on the network you're connected to
+3. Press the pencil in the upper right hand corner
+4. Expand **Advanced options**
+5. Under **Proxy**, select **Manual**
+6. Enter:
    * **Proxy hostname:** `127.0.0.1`
    * **Proxy port:** `8118`
    * **Bypass proxy for:** `localhost,127.0.0.1`
-6. Tap **Save**
+7. Tap **Save**
 
-> **Mobile data:** Android's system proxy setting is Wi-Fi only in standard UI. For cellular data, AFWall+ (OPSEC Step 3) with custom iptables rules can enforce routing at the kernel level. For most users, Wi-Fi proxy coverage is sufficient.
+> **Mobile data:** Android's system proxy setting is Wi Fi only in standard UI. For cellular data, AFWall+ (OPSEC Step 4) with custom iptables rules can enforce routing at the kernel level. For most users, Wi Fi proxy coverage is sufficient.
 
-#### Phase 8: Enable DuckDuckGo App Tracking Protection
+##### Phase 9: Verify Everything Is Working
 
-Now that the VPN slot is free:
-
-1. Open **DuckDuckGo Privacy Browser**
-2. Tap **≡ menu → Settings → App Tracking Protection → Enable**
-3. Android prompts to allow DuckDuckGo to create a VPN connection - tap **OK**
-4. DuckDuckGo App Tracking Protection is now running in the VPN slot, blocking trackers inside all other apps
-
-This gives you two independent protection layers running simultaneously:
-* **InviZible Pro** - handles network-level anonymity (Tor IP spoofing, DNSCrypt, I2P) via proxy + iptables
-* **DuckDuckGo App Tracking Protection** - handles app-layer tracker blocking via the VPN slot
-
-#### Phase 9: Verify Everything Is Working
-
-1. InviZible Pro main screen - all three services: **Running** (green)
+1. InviZible Pro main screen, all three services: **Running** (green)
 2. Open **DuckDuckGo Privacy Browser**
-3. Visit `https://check.torproject.org` → should confirm **"Congratulations. This browser is configured to use Tor."**
-4. Visit `https://dnsleaktest.com` → run Extended Test → DNS should resolve through your DNSCrypt server, not your ISP
-5. Visit `https://whatismyipaddress.com` → IP shown should be a Tor exit node IP, not your real IP or ISP IP
+3. Visit `https://check.torproject.org`, should confirm **"Congratulations. This browser is configured to use Tor."**
+4. Visit `https://dnsleaktest.com`, run Extended Test, DNS should resolve through your DNSCrypt server, not your ISP
+5. Visit `https://whatismyipaddress.com`, IP shown should be a Tor exit node IP, not your real IP or ISP IP
 6. All three checks passing = DNS encrypted, traffic anonymised through Tor, real IP hidden
 
-#### Ongoing Usage Tips
+##### Ongoing Usage Tips
 
 * InviZible Pro restores services and iptables rules on every boot automatically.
 * If Tor is slow: stop I2P temporarily to free bandwidth for Tor circuits. Restart I2P when you need eepsites.
-* Check **InviZible Pro → Logs** tab to see active Tor circuits, DNSCrypt queries, and any errors.
-* Update InviZible Pro via F-Droid regularly - outdated Tor binaries can have known vulnerabilities.
-* Do not log into personal accounts (Google, Facebook, etc.) while routing through Tor - account-level identification defeats network-level anonymity.
+* Check **InviZible Pro Logs** to see active Tor circuits, DNSCrypt queries, and any errors.
+* Update InviZible Pro via F-Droid regularly, outdated Tor binaries can have known vulnerabilities.
+* Do not log into personal accounts (Google, Facebook, etc.) while routing through Tor, account level identification defeats network level anonymity.
+
+To Check whats being blocked and censored in your proxy network then follow the steps below to add OONI Probe to your device
 
 ---
 
-## OPSEC Step 3: Set Up AFWall+ - Root-Level Kernel Firewall
+### OPSEC Step 3: OONI Probe Network Censorship Detector
 
-**AFWall+** (Android Firewall+) is a root-level firewall for Android that uses **iptables** - the Linux kernel's built-in packet filtering framework - to control exactly which apps can access the internet and on which interfaces. Unlike InviZible Pro's proxy (which apps must cooperate with) or DuckDuckGo's App Tracking Protection (which works at the VPN layer), AFWall+ operates at the kernel level: it is enforced before any app or VPN stack even sees the traffic. An app cannot circumvent it.
+**Download:** [F-Droid](https://f-droid.org/packages/org.openobservatory.ooniprobe/)
 
-**Download:** F-Droid - [dev.ukanth.ufirewall](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall)
+OONI Probe (Open Observatory of Network Interference) is a network measurement tool developed by the Tor Project and independent researchers. It detects censorship, surveillance infrastructure, and network manipulation on your internet connection, telling you exactly what your ISP or government is blocking or tampering with.
+
+#### Key Features
+
+* **Website blocking detection**, tests whether specific websites are blocked on your network
+* **Censorship measurement**, detects DNS manipulation, HTTP blocking, TCP/IP blocking, and TLS interference
+* **Surveillance infrastructure detection**, identifies middleboxes (equipment used for network surveillance)
+* **VPN and Tor reachability**, tests whether Tor, VPNs, and circumvention tools are blocked
+* **Global network data**, contributes your test results to OONI's public database, helping document censorship worldwide
+* Runs automatic tests at scheduled intervals
+* Completely open source (Tor Project affiliated)
+
+#### Setup and Usage
+
+1. Install from F-Droid using the link above (or search "OONI Probe" in F-Droid).
+2. Open OONI Probe complete the onboarding by answering the questions (both are true).
+3. Go into settings then into test options, toggle off both things that are toggled on and if you want to run tests automatically
+4. **Run immediate tests:**
+   * Tap **Run** on the main dashboard
+   * OONI Probe runs the full test suite: websites, instant messaging, circumvention tools, middleboxes
+5. **View results:**
+   * Results appear under the **Test** tab
+   * Green checkmarks = no blocking detected
+   * Red X = blocking or manipulation detected
+   * Orange warning = anomaly (possible interference)
+6. **Interpret results:**
+   * If websites you expect to be accessible show as blocked, your ISP/government is censoring them, use InviZible Pro's Tor routing to bypass
+   * If circumvention tools (Tor, VPNs) show as blocked, use InviZible Pro's Tor bridge mode with obfs4 bridges (see OPSEC Step 2)
+
+Understanding your threat environment is the first step in defending against it. OONI Probe tells you exactly what your network operator is doing to your traffic whether you are in a heavily censored country or simply want to know if your ISP is silently blocking certain content. Along with telling you how free your proxy network is.
 
 ---
 
-### Why AFWall+ Is a Separate Layer From InviZible Pro
+### OPSEC Step 4: Install AFWall+ Root Level Firewall
 
-InviZible Pro's internal firewall (when running in proxy + root mode) handles routing decisions - which traffic goes through Tor, which goes through I2P. AFWall+ handles **access control** - which apps are allowed to communicate at all, on which network interfaces (Wi-Fi, mobile data, VPN), and to which addresses. These are complementary, not redundant:
+**Download:** F-Droid, [dev.ukanth.ufirewall](https://f-droid.org/packages/dev.ukanth.ufirewall/)
+
+AFWall+ (Android Firewall+) is a root level firewall that uses **iptables**, the same Linux kernel level packet filtering used in professional firewalls and servers. Unlike app based firewalls that operate through the Android VPN slot, AFWall+ works at the kernel level, meaning it intercepts and controls network traffic before any app can touch it. No VPN slot is used. No app can bypass it. It runs silently in the background and survives reboots via Magisk root.
+
+This is your system wide network policy layer. InviZible Pro (covered in Part 2) handles routing your traffic through Tor/I2P/DNSCrypt via proxy. AFWall+ handles which apps are permitted to reach the network at all, including blocking apps that would try to bypass the proxy entirely.
+
+#### Key Features
+
+* **Per app, per interface rules**, separately control Wi Fi, mobile data, and VPN for every installed app
+* **Whitelist mode**, default deny; only explicitly approved apps can reach the internet
+* **Custom iptables rules**, write raw iptables rules for advanced control (e.g. mobile data proxy redirect to port 8118)
+* **Logging**, logs every blocked connection attempt; reveals apps trying to phone home
+* **PIN lock**, locks the firewall UI so no app or accidental tap can disable rules
+* **LAN control**, optionally block apps from accessing your local network
+* Works on any rooted Android device with Magisk; no VPN slot consumed
+
+#### Why AFWall+ Is a Separate Layer From InviZible Pro
+
+InviZible Pro's internal firewall (when running in proxy mode) handles routing decisions which traffic goes through Tor, which goes through I2P. AFWall+ handles **access control** which apps are allowed to communicate at all, on which network interfaces (Wi Fi, mobile data, VPN), and to which addresses. These are complementary, not redundant:
 
 * InviZible Pro routes and anonymises traffic
 * AFWall+ decides at the kernel level which apps are even allowed to generate network traffic in the first place
 
-Running both gives you defence-in-depth: even if InviZible Pro's proxy routing fails or an app bypasses the system proxy, AFWall+'s iptables rules are still enforced at the kernel.
+Running both gives you defence in depth: even if InviZible Pro's proxy routing fails or an app bypasses the system proxy, AFWall+'s iptables rules are still enforced at the kernel.
 
----
-
-### Setup and Configuration
-
-#### Install and Grant Root
+#### Setup
 
 1. Install AFWall+ from F-Droid.
-2. Open AFWall+ → it will request root access via Magisk - grant it permanently.
-3. AFWall+ confirms it can control iptables.
+2. Open AFWall+ it will request root via Magisk. Grant it permanently.
+3. The main screen shows every installed app as a row with toggle switches for:
+   * **WiFi** (left column), allow/block on Wi Fi networks
+   * **Data** (middle column), allow/block on mobile data
+   * **VPN/Roaming** (right column, if shown), allow/block on VPN or roaming
+4. Tick all the apps then click the options menu in the right hand corner then press apply.
 
-#### Enable the Firewall
+Block everything else like games, offline tools, system apps that have no reason to phone home, and any remaining Google service remnants if you dont use internet with them.
 
-1. Tap the **≡ menu** (top-left) → **Preferences** → **Firewall rules**.
-2. Confirm **iptables** mode is selected (not ip6tables-only - enable both for full coverage).
-3. Go back to the main screen.
-4. Tap **Enable firewall** (the toggle at the top) → confirm.
-
-#### Configure Per-App Rules
+##### Configure Per App Rules
 
 AFWall+ shows all installed apps with toggles for each interface:
 
-* **Wi-Fi** column - whether this app can use Wi-Fi
-* **Data** column - whether this app can use mobile/cellular data
-* **VPN** column - whether this app can use VPN tunnel traffic (relevant for DuckDuckGo App Tracking Protection)
-* **LAN** column - whether this app can access local network (optional column)
+* **Wi Fi** column, whether this app can use Wi Fi
+* **Data** column, whether this app can use mobile/cellular data
 
 **Recommended starting rules:**
 
-| App | Wi-Fi | Mobile Data | Notes |
-|---|---|---|---|
+| App | Wi Fi | Mobile Data | Notes |
+| --- | --- | --- | --- |
 | DuckDuckGo Privacy Browser | ✓ | ✓ | Primary browser, allow all |
 | InviZible Pro | ✓ | ✓ | Must have access to reach Tor network |
 | Tuta Mail | ✓ | ✓ | Email, allow all |
 | Arcane Chat | ✓ | ✓ | Messaging, allow all |
-| Aurora Store | ✓ | ✗ | Updates via Wi-Fi only to save data |
-| Hypatia | ✓ | ✗ | Signature updates via Wi-Fi only |
+| Aurora Store | ✓ | ✗ | Updates via Wi Fi only to save data |
+| Hypatia | ✓ | ✗ | Signature updates via Wi Fi only |
 | OONI Probe | ✓ | ✓ | Needs both for network testing |
-| F-Droid | ✓ | ✗ | Update repo via Wi-Fi only |
+| F-Droid | ✓ | ✗ | Update repo via Wi Fi only |
 | DresSecureComms | ✓ | ✓ | Calls and SMS use data |
-| Metrolist | ✓ | ✗ | Stream via Wi-Fi only |
-| Games / offline apps | ✗ | ✗ | Block all - no reason for internet access |
+| Metrolist | ✓ | ✗ | Stream via Wi Fi only |
+| Games / offline apps | ✗ | ✗ | Block all, no reason for internet access |
 | Any Google remnant | ✗ | ✗ | Block completely |
 
-#### Custom iptables Rules for Mobile Data Proxy Routing
+##### Enable Logging
 
-Android's system proxy setting only applies to Wi-Fi. On mobile data, apps bypass the system proxy. To enforce Tor proxy routing on mobile data as well, add these custom iptables rules in AFWall+:
+1. **menu, Log, Enable log**, AFWall+ will log all blocked connection attempts.
+2. Check the log periodically, blocked entries reveal apps attempting to phone home, connect to ad networks, or bypass your privacy stack.
 
-1. Tap **≡ menu → Custom rules**
-2. Add the following (routes HTTP and HTTPS from all apps through InviZible Pro's local Tor HTTP proxy on mobile data):
+##### Set a PIN Lock on AFWall+
 
-```
-# Redirect HTTP traffic to InviZible Pro Tor proxy (mobile data)
--A OUTPUT -p tcp --dport 80 -o rmnet+ -j REDIRECT --to-port 8118
--A OUTPUT -p tcp --dport 443 -o rmnet+ -j REDIRECT --to-port 8118
-```
-
-> **Note:** `rmnet+` matches mobile data interfaces on most Android devices. On some devices this may be `rmnet_data+` - check your device's interface names in a terminal emulator if the rule does not apply.
-
-3. Save and apply.
-
-#### Enable Logging
-
-1. **≡ menu → Log → Enable log** - AFWall+ will log all blocked connection attempts.
-2. Check the log periodically - blocked entries reveal apps attempting to phone home, connect to ad networks, or bypass your privacy stack.
-
-#### Set a PIN Lock on AFWall+
-
-1. **≡ menu → Preferences → UI preferences → Password protection** → set a PIN.
+1. **menu, Preferences, security, enable protection**, set a PIN.
 2. This prevents any app or accidental tap from disabling your firewall.
+
+#### ADVANCED: Force Apps Through InviZible Pro Proxy via iptables
+
+On rooted devices, AFWall+ can redirect traffic at the kernel level to ensure apps route through InviZible Pro's local Tor proxy even if they do not respect Android's system proxy setting. Go to:
+
+**AFWall+, menu, Custom Scripts, Startup Script**
+
+Add the following rule to redirect all outgoing HTTP/HTTPS traffic through InviZible Pro's Tor HTTP proxy on port 8118 (replace `UID` with the app's Android user ID from Settings, Apps, [App], App info):
+
+```bash
+iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner UID -j DNAT --to-destination 127.0.0.1:8118
+```
+
+> For most users, the combination of InviZible Pro system proxy + DuckDuckGo App Tracking Protection + AFWall+ default deny whitelist is sufficient without custom iptables rules. The custom script approach is for advanced users who want guaranteed per app Tor enforcement regardless of system proxy compliance.
 
 ---
 
-## OPSEC Step 4: Set Up Secure Email - Tuta + Duck Addresses
+### OPSEC Step 5: Set Up The Tuta & DuckDuckGo Suite
 
-This two-layer setup gives you the strongest available email privacy. Tuta Mail is your real, encrypted inbox. Duck Addresses are disposable forwarding aliases you hand out to every app, website, and service instead of your real address - so your actual Tuta inbox is never exposed.
+This two layer setup gives you the strongest available email privacy. Tuta Mail is your real, encrypted inbox. Duck Addresses are disposable forwarding aliases you hand out to every app, website, and service instead of your real address, so your actual Tuta inbox is never exposed.
 
-### Part A - Set Up Tuta Mail
+#### Part A1, Set Up Tuta Mail
 
 1. Open **Tuta Mail** and create a new account.
-2. Use a `.de` domain address (e.g., `yourname@tuta.de`) - German privacy laws (DSGVO/GDPR) provide strong legal protections for accounts hosted in Germany.
-3. **No phone number is required.** Tuta only asks for an email address and an **encryption key / recovery code** - write this down and store it somewhere physically safe. This recovery code is how you regain access to your account if you ever lose access. Guard it the same way you would guard a physical key to your home.
+2. Use a `.de` domain address (e.g., `yourname@tuta.de`), German privacy laws (DSGVO/GDPR) provide strong legal protections for accounts hosted in Germany.
+3. **No phone number is required.** Tuta only asks for an email address and gives you an **encryption key / recovery code**, write this down and store it somewhere physically safe. This recovery code is how you regain access to your account if you ever lose access. Guard it the same way you would guard a physical key to your home.
 4. Enable **biometric lock** or a strong PIN within Tuta Mail's security settings.
-5. All emails between Tuta accounts are automatically end-to-end encrypted. Emails to external recipients (Gmail, etc.) can be password-encrypted using Tuta's "secure external password" feature.
+5. All emails between Tuta accounts are automatically end to end encrypted. Emails to external recipients (Gmail, etc.) can be password encrypted using Tuta's "secure external password" feature.
 
-**What Tuta does:** End-to-end encrypted email with zero trackers, zero ads, and zero data mining. Unlike Gmail, Tuta cannot read your emails. Unlike most providers, Tuta also encrypts subject lines and metadata - not just the body. Your encryption key means only you can access your account, even if Tuta's servers were ever compromised.
+#### Key Features
 
-### Part B - Set Up Duck Addresses (DuckDuckGo Email Protection)
+* **End to end encryption** for all emails (both subject and body, not just body like most providers)
+* **Zero knowledge**, Tuta cannot read your emails; they are encrypted before leaving your device
+* **Encrypted contacts and calendar** included in the free plan
+* Encrypted search (searches happen locally on your device, never on the server)
+* **Email aliases** for compartmentalization (use different aliases for different purposes)
+* Secure external email (password protected messages to non Tuta recipients)
+* German and EU jurisdiction with GDPR protections
+* Free plan available; paid plans add more aliases and storage
+* Fully open source client
 
-**Duck Addresses** are free, private email aliases provided by DuckDuckGo. The idea is simple: instead of giving any website, app, or service your real Tuta address, you give them a Duck Address like `yourname@duck.com`. DuckDuckGo strips all email trackers from messages and forwards them clean to your real Tuta inbox. If a service gets breached, sells your data, or starts spamming you - you just deactivate that alias. Your real Tuta address is never exposed.
+---
 
-**Setup:**
+#### Part A2: Set up Tuta Calendar
+
+Tuta Calendar is the standalone end to end encrypted calendar app from the Tuta team, split out from the Tuta Mail app into its own package. Your events, descriptions, attendees, and notifications are encrypted before they leave the device, and they sync across all your devices through the same Tuta account that holds your encrypted mail. It is the calendar counterpart to Tuta Mail and the DresOS choice when you want an encrypted calendar that syncs, rather than a purely local one.
+
+#### Key Features
+
+* End to end encrypted events, including titles, descriptions, and attendees
+* Zero knowledge: Tuta cannot read your calendar
+* Syncs across devices through your existing Tuta account, no Google account
+* Encrypted reminders and recurring events
+* German and EU jurisdiction with GDPR protections
+* Fully open source client
+
+#### Setup and Usage
+
+1. Install Tuta Calendar from F-Droid.
+2. Sign in with the same Tuta account you created in Part A1. Your encrypted calendar is available immediately and stays in sync with Tuta Mail.
+3. In AFWall+, allow Tuta Calendar on Wi Fi and Data, since it needs the network to sync your encrypted calendar.
+
+---
+
+#### Part A3, Setting Up DuckDuckGo,
+
+1. Install DuckDuckGo from F-Droid.
+2. When it offers App Tracking Protection, enable it. Android will ask you to allow a VPN connection for DuckDuckGo; confirm it. InviZible Pro uses proxy plus root mode and leaves the VPN slot free, so there is no conflict.
+3. Set it as your default browser in **Settings, Apps, Default apps, Browser**.
+4. Set up your Duck Address: **menu, Settings, Email Protection, Get Started**, enter your Tuta Mail address as the forwarding address, and store the generated key alongside your Tuta recovery code.
+5. Allow DuckDuckGo on Wi Fi and Data in AFWall+, since it is your browser and needs full access.
+6. For YouTube, turn on Duck Player in **menu, Settings, Duck Player** and set it to open YouTube videos automatically. Videos then play in a clean, distraction free window with targeted ads stripped and without YouTube tying the session to your watch history or recommendation profile.
+
+**Duck Addresses** are free, private email aliases provided by DuckDuckGo. The idea is simple: instead of giving any website, app, or service your real Tuta address, you give them a Duck Address like `yourname@duck.com`. DuckDuckGo strips all email trackers from messages and forwards them clean to your real Tuta inbox. If a service gets breached, sells your data, or starts spamming you, you just deactivate that alias. Your real Tuta address is never exposed.
+
+**Full Email Setup:**
 
 1. Open **DuckDuckGo Privacy Browser**.
-2. Tap the **≡ menu** → **Settings** → **Email Protection**.
+2. Tap the **menu**, **Settings**, **Email Protection**.
 3. Tap **Get Started** and follow the setup flow.
-4. When asked for your forwarding address, enter your **Tuta Mail address** - all forwarded emails will arrive in your Tuta inbox, stripped of trackers.
-5. You will receive a **Duck Address** (e.g., `yourname@duck.com`). This is your primary alias. **No phone number required** - just your Tuta address to receive forwarded mail.
-6. You will also be given an **encryption key / personal Duck Key** - store this safely alongside your Tuta recovery code. This is how you manage your account if needed.
+4. When asked for your forwarding address, enter your **Tuta Mail address**, all forwarded emails will arrive in your Tuta inbox, stripped of trackers.
+5. You will receive a **Duck Address** (e.g., `yourname@duck.com`). This is your primary alias. **No phone number required**, just your Tuta address to receive forwarded mail.
+6. You will also be given an **encryption key / personal Duck Key**, store this safely alongside your Tuta recovery code. This is how you manage your account if needed.
 
 **Using Duck Addresses everywhere:**
 
-* Whenever any app, website, or form asks for your email address, tap the DuckDuckGo keyboard suggestion **"Use Duck Address"** - or manually enter your `@duck.com` address
-* DuckDuckGo can also **auto-generate unique one-time aliases** for each service (e.g., `yourname_amazon_5k3j@duck.com`) - these appear as autofill suggestions in DuckDuckGo browser when you tap an email field
+* Whenever any app, website, or form asks for your email address, tap the DuckDuckGo keyboard suggestion **"Use Duck Address"**, or manually enter your `@duck.com` address
+* DuckDuckGo can also **auto generate unique one time aliases** for each service (e.g., `yourname_amazon_5k3j@duck.com`), these appear as autofill suggestions in DuckDuckGo browser when you tap an email field
 * Each unique alias forwards to your Tuta inbox with all trackers removed
-* If a specific service starts sending spam or your alias appears in a breach, go to **DuckDuckGo Settings → Email Protection → Manage** and deactivate just that alias - without touching your real address
+* If a specific service starts sending spam or your alias appears in a breach, go to **DuckDuckGo Settings, Email Protection, Manage** and deactivate just that alias, without touching your real address
 
 **What this stops:**
-* **Phishers** - they only have a disposable alias, never your real Tuta address
-* **Doxxers** - your real inbox cannot be searched for, looked up, or correlated across services
-* **Data brokers** - even if five different companies share your email address, they each have a different alias and cannot link your accounts together
-* **Email trackers** - DuckDuckGo strips tracking pixels, spy links, and hidden tracking code from every forwarded email before it reaches Tuta
-
-### Part C - Auto-Generated Passwords in DuckDuckGo
-
-DuckDuckGo's browser also includes a **built-in password manager** that integrates with Duck Address setup. Once you have Email Protection enabled:
-
-* When you create a new account on any website in the DuckDuckGo browser, it will **automatically suggest a strong, randomly generated password** for the password field - tap to accept and it is saved to DuckDuckGo's encrypted local password storage
-* Saved passwords are stored on-device, encrypted, and sync only to other devices you control via your Duck account (optional)
-* On returning to a site, DuckDuckGo autofills both the Duck Address alias and your saved password
-* This means for most sign-ups you never manually type or choose a password - the browser generates, saves, and fills it all automatically
-
-**Use IYPS** (App #2) to analyse the strength of any existing passwords you want to migrate, then replace weak ones with DuckDuckGo-generated passwords going forward.
+* **Phishers**, they only have a disposable alias, never your real Tuta address
+* **Doxxers**, your real inbox cannot be searched for, looked up, or correlated across services
+* **Data brokers**, even if five different companies share your email address, they each have a different alias and cannot link your accounts together
+* **Email trackers**, DuckDuckGo strips tracking pixels, spy links, and hidden tracking code from every forwarded email before it reaches Tuta
 
 **The complete email security chain:**
 ```
-Website/App → Duck Address alias (unique per service)
-    → DuckDuckGo strips email trackers
-        → Forwards clean to your Tuta Mail address
-            → Tuta decrypts with your encryption key
-                → You read it
+Website/App to Duck Address alias (unique per service)
+    to DuckDuckGo strips email trackers
+        to Forwards clean to your Tuta Mail address
+            to Tuta decrypts with your encryption key
+                to You read it
 ```
 Your real address never appears anywhere outside of the DuckDuckGo Email Protection settings on your own device.
 
 ---
 
-## OPSEC Step 5: Spoof Location with Fake Traveler
+#### Part A4, Auto Generated Passwords in DuckDuckGo
 
-> **Also in DresSecureComms.** The DresSecureComms app has a built-in Geo Spoofer that sets a fixed or random mock location, an alternative to Fake Traveler.
+DuckDuckGo's browser also includes a **built in password manager** that integrates with Duck Address setup. Once you have Email Protection enabled:
 
-Physical location is one of the most sensitive data points your phone broadcasts constantly. Fake Traveler lets you replace your real GPS coordinates with any location in the world.
+* When you create a new account on any website in the DuckDuckGo browser, it will **automatically suggest a strong, randomly generated password** for the password field tap to accept and it is saved to DuckDuckGo's encrypted local password storage
+* Saved passwords are stored on device, encrypted, and sync only to other devices you control via your Duck account (optional)
+* On returning to a site, DuckDuckGo autofills both the Duck Address alias and your saved password
+* This means for most sign ups you never manually type or choose a password the browser generates, saves, and fills it all automatically
 
-1. Open **Fake Traveler**.
-2. Browse the map and select a fake location (tap to pin it, or search for a city/place).
-3. Tap **Apply** or **Start mocking**.
-4. Go to **Settings → About phone** → tap **Build number** seven times to ensure Developer Options is open.
-5. In **Developer Options** → scroll to **Select mock location app** → choose **Fake Traveler**.
-6. Your device's GPS will now report the fake location to all apps that request it.
+**Use IYPS** (App #2) to analyse the strength of any existing passwords you want to migrate, then replace weak ones with DuckDuckGo generated or IYPS passwords going forward.
 
-**What this does:** Spoofs your device's geolocation, preventing apps from determining your real position. Combined with InviZible Pro's Tor routing (which masks your IP address from network observers), this gives you both network-level and sensor-level location protection simultaneously.
+IYPS (It's Your Password Security) is an open source password strength analyser and generator. It does **not** store passwords that job is handled by DuckDuckGo's built in password manager. What IYPS does is tell you exactly how strong or weak any given password is, with real world crack time estimates across different attack scenarios, and generate strong random passwords on demand.
+
+#### Key Features
+
+* **Password strength analyser**, paste any existing password and get a detailed breakdown: entropy score, estimated crack time under online attack, offline attack, and distributed cracking scenarios
+* **Password generator**, creates strong, random passwords with customisable length and character sets
+* **Completely offline**, no password ever leaves your device during analysis
+* No storage, no vault, no sync, purely an analysis and generation tool
+* No ads, no trackers, no telemetry
+
+#### Setup and Usage
+
+1. Install via SAI from the direct APK link **Here:** [GitHub Releases (latest)](https://github.com/StellarSand/IYPS/releases/latest).
+2. Open IYPS, no account or setup required.
+3. **Check an existing password:**
+   * Paste it into the analyser field
+   * IYPS shows the entropy score and estimated crack time across attack scenarios (online throttled, offline fast hash, distributed brute force)
+   * Anything under "centuries" for an offline attack is worth replacing
+4. **Generate a strong password:**
+   * Go to the **Generator** tab
+   * Set desired length (20+ characters recommended) and character set (uppercase, lowercase, numbers, symbols)
+   * Tap generate copy the result and save it in DuckDuckGo's password manager.
 
 ---
 
-## OPSEC Step 6: Final Checks and Hardening Tips
+### OPSEC Step 6: Set up DresSecureComms
+
+DresSecureComms is our in house FOSS, fully de Googled application that handles private messaging, calling, contacts, link threat scanning, photo metadata wiping, and location spoofing. It is built and signed by us The DresOS Team and is designed to be set as your default SMS and phone app.
+
+It puts the most sensitive parts of the device, your texts, calls, contacts, and the links you open, inside one audited, de Googled app built by DresOS. Nothing leaves the device except the VirusTotal lookups you choose to run.
+
+#### Key Features
+
+* Private offline SMS client with optional per message AES 256 GCM encryption, using a shared passphrase and readable only by another DresSecureComms user
+* Full default phone app with its own in call screen (mute, speaker, keypad, hold, add call) and a deletable call history
+* Caller ID and spam detection coming soon
+* An encrypted on device contacts vault with add, edit (name, number, email), and import
+* Threat Scan, which checks any link against VirusTotal and returns a clear safe, suspicious, or dangerous verdict
+* Metadata Wipe, which strips GPS and EXIF data from photos before you share them
+* Geo Spoofer, which sets a fixed or random mock GPS location
+* App lock (fingerprint or device PIN) and an app wide block screenshots mode
+* No Google services, no trackers, no analytics; the only network call is the VirusTotal lookup you trigger yourself
+* File scanning engine built up from Hypatias coming soon
+
+#### Setup and Usage
+
+1. Open the app then go into settings and set as defualt if it says it has been restricted then Open Settings, Apps, DresSecureComms, the options menu, then Allow restricted settings. This is required for sideloaded SMS and phone apps.
+2. For encrypted SMS, set a shared key in Settings and share it by hand with your contact.
+3. For link scanning get a Virus Total api key and set it in settings via the Threat scanning block.
+
+#### Setting up mock location
+
+Physical location is one of the most sensitive data points your phone broadcasts constantly. DresSecureComms lets you replace your real GPS coordinates with any location in the world.
+
+1. Open **DresSecureComms**.
+2. Go into settings
+3. Click Randomize location then press apply
+4. Go to **Settings**, About phone, tap **Build number** seven times to ensure Developer Options is open.
+5. In Developer Options scroll down to **Select mock location app** then choose **DresSecureComms**.
+6. Your device's GPS will now report the fake location to all apps that request it.
+
+**What this does:** Spoofs your device's geolocation, preventing apps from determining your real position. Combined with InviZible Pro's Tor routing (which masks your IP address from network observers), this gives you both network level and sensor level location protection simultaneously.
+
+---
+
+### OPSEC Step 7: Final Checks and Hardening Tips
+
+**Test & Backup:**
+* Make and receive a test phone call via **DresSecureComms**
+* Send and receive a test SMS via **DresSecureComms**
+* Send and receive a test email via **Tuta Mail**
+* Open a website in **DuckDuckGo Privacy Browser**, confirm it is working and App Tracking Protection shows active
+* Verify DresOS WebView is the active WebView provider via `adb shell dumpsys webviewupdate | grep "Current WebView package"`, the output should show `org.dresos.webview`
+* Open **AFWall+**, confirm firewall rules are applied and iptables is active
+* Open **Aurora Store**, verify apps load and anonymous mode works
+* Open an APK via **SAI**, confirm it installs correctly
+* Download a file in **DuckDuckGo**, confirm it opens in **Gopeed**
+* Everything working through microG and DresOS WebView as expected
 
 **InviZible Pro / proxy setup:**
-* Confirm InviZible Pro is running (all three services green) and the Android system proxy is set to `127.0.0.1:8118` on your Wi-Fi network.
-* Allow InviZible Pro background network access and disable any battery optimization that would kill it (Settings → Battery → Battery optimization → InviZible Pro → Not optimized).
+* Confirm InviZible Pro is running (all three services green) and the Android system proxy is set to `127.0.0.1:8118` on your Wi Fi network.
+* Allow InviZible Pro background network access and disable any battery optimization that would kill it (Settings, Battery, Battery optimization, InviZible Pro, Not optimized).
 * Allow background network and battery usage for Tuta Mail (for push notifications) the same way.
 
-**AFWall+ check:**
-* Open AFWall+ and confirm the default policy is **Deny (White List)** and only the apps you explicitly approved are green.
-* Check the Logs tab - you should see blocked connection attempts from apps you did not whitelist. This confirms it is working.
-
 **DuckDuckGo App Tracking Protection:**
-* Since InviZible Pro uses proxy mode and does not occupy the Android VPN slot, DuckDuckGo's App Tracking Protection **can and should be enabled**.
-* Open DuckDuckGo → ≡ menu → App Tracking Protection → Enable. Android will prompt you to confirm the VPN connection - this is DuckDuckGo using the VPN slot to monitor other apps' tracker traffic. Confirm it.
-* Both InviZible Pro (proxy mode) and DuckDuckGo App Tracking Protection will now run simultaneously without conflict.
+* Since InviZible Pro uses proxy mode and does not occupy the Android VPN slot, DuckDuckGo's App Tracking Protection should show up as a **VPN**.
 
 **Network preference:**
-* Use Wi-Fi over mobile data where possible - Tor performance is significantly better on Wi-Fi, and the system proxy applies automatically to saved Wi-Fi networks.
-* On public Wi-Fi, AFWall+'s whitelist ensures no unexpected apps phone home even on untrusted networks.
+* Use Wi Fi over mobile data where possible, Tor performance is significantly better on Wi Fi, and the system proxy applies automatically to saved Wi Fi networks.
+* On public Wi Fi, AFWall+'s whitelist ensures no unexpected apps phone home even on untrusted networks.
 
 **Periodic maintenance:**
 * Run **Hypatia** weekly to scan for malware.
 * Run **OONI Probe** to monitor for censorship or network manipulation in your area.
 * Run **SD Maid SE** monthly to clear leftover data from removed apps.
-* Update all apps via F-Droid regularly - security patches are critical.
+* Update all apps via F-Droid regularly, security patches are critical.
 
-**Your device now has a hardened, layered cybersecurity posture reducing risks from surveillance, phishing, malware, censorship, and network-level attacks.**
-
----
+**Your device is now a hardened security software Android system reducing risks from surveillance, phishing, malware, censorship, and network level attacks.**
 
 ---
 
-# PART 3 - DRESOS DEFENSIVE APP SUITE
+## Part 3: Fossify Suite
 
-## Apps Overview
+**Download:** All via F-Droid, search each app name or visit [fossify.org/apps](https://www.fossify.org/apps/)
 
-The following apps form the complete DresOS defensive security application suite. Every single one is open-source, has zero Google dependencies, and is sourced directly from verified developer releases or F-Droid. Together they cover encrypted file storage, password management, private social media, link safety scanning, malware detection, network censorship monitoring, privacy routing, private media, and secure communications - building a complete defensive security ecosystem on your device.
+Fossify is a suite of open source replacements for core Android system apps. In DresOS several of these are already covered: phone, SMS, and contacts by DresSecureComms, the gallery by Aves Libre, files by Amaze, and the calendar by Tuta Calendar. From Fossify you only need the system apps that nothing else covers, listed below.
 
----
+### Apps in the Suite
 
-## DresSecureComms - DresOS Secure Communications Suite
+| App | Replaces | Features |
+| --- | --- | --- |
+| **Fossify Launcher** | Pixel Launcher | Open source home screen, no Google Feed integration |
+| **Fossify Clock** | Google Clock | Alarm, timer, stopwatch, zero telemetry |
+| **Fossify Notes** | Google Keep | Local encrypted notes, no cloud sync |
 
-**Repository:** [github.com/DresOperatingSystems/DresSecureComms](https://github.com/DresOperatingSystems/DresSecureComms)
+### Setup
 
-### What It Is
-
-DresSecureComms is the DresOS in-house secure communications app: a single, FOSS, fully de-Googled application that handles private messaging, calling, contacts, link threat-scanning, photo metadata wiping, and location spoofing. It is built and signed by DresOS and is designed to be set as your default SMS and phone app, consolidating several separate tools from this guide into one hardened app.
-
-### Key Features
-
-* Private offline SMS client with optional per-message AES-256-GCM encryption, using a shared passphrase and readable only by another DresSecureComms user
-* Full default phone app with its own in-call screen (mute, speaker, keypad, hold, add call) and a deletable call history
-* Caller ID and spam screening
-* Encrypted on-device contacts vault with add, edit (name, number, email), and import
-* Threat Scan, which checks any link against VirusTotal and returns a clear safe, suspicious, or dangerous verdict
-* Metadata Wipe, which strips GPS and EXIF data from photos before you share them
-* Geo Spoofer, which sets a fixed or random mock GPS location
-* App lock (fingerprint or device PIN) and an app-wide block-screenshots mode
-* No Google services, no trackers, no analytics; the only network call is the VirusTotal lookup you trigger yourself
-
-### Setup and Usage
-
-1. Install the signed APK from the [DresSecureComms releases](https://github.com/DresOperatingSystems/DresSecureComms/releases).
-2. Open Settings, Apps, DresSecureComms, the three-dot menu, then Allow restricted settings. This is required for sideloaded SMS and phone apps.
-3. In the app, open Settings then Default apps and set it as your default SMS app, default phone app, and caller ID and spam app.
-4. For encrypted SMS, set a shared key in Settings and share it by hand with your contact.
-5. For the geo spoofer, enable Developer options, open Select mock location app, and choose DresSecureComms.
-
-### What It Replaces
-
-DresSecureComms brings several tools from this guide into one app:
-
-* **URL Check** (link scanning) is provided in-app by Threat Scan, the VirusTotal link checker.
-* **Fossify Phone, Messages, and Contacts** are covered by the dialer, the SMS client, and the encrypted contacts vault.
-* **Fake Traveler** (OPSEC Step 5) is covered by the built-in Geo Spoofer.
-
-Coming soon, its scanning engine will extend to media, files, APKs, and ZIPs, taking over the role currently filled by **Hypatia**. That engine is under wraps for now.
-
-### Why It's in the DresOS Suite
-
-It puts the most sensitive parts of the device, your texts, calls, contacts, and the links you open, inside one audited, de-Googled app built by DresOS. Nothing leaves the device except the VirusTotal lookups you choose to run.
+1. Install Fossify Launcher, Clock, and Notes via F-Droid.
+2. Set Fossify Launcher as your default home app in **Settings, Apps, Default apps, Home app**.
+3. Open Notes and Clock and just allow the permissions they ask for.
 
 ---
 
-## 1. Amaze File Manager - File Management & AES Encryption
+## Part 4: Additional Apps and Core Components
 
-**Download:** [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/)
+### Apps Overview
 
-### What It Is
-
-Amaze File Manager is a fully open-source (GPL-3.0) file manager built by Team Amaze. It replaces both a standard file manager and a separate encryption tool in a single app. Available on F-Droid with no Google dependencies, actively maintained, and supports Android 5.0 and up.
-
-### Key Features
-
-- Full file management: cut, copy, move, delete, rename, compress, extract
-- Built-in AES-256 encryption and decryption of files and folders
-- Biometric lock (fingerprint and face unlock) for the entire app
-- Multiple tabs open simultaneously
-- Root explorer for advanced system access on rooted devices
-- Built-in APK reader, installer, and App Manager
-- Built-in ZIP/RAR reader, text editor, and database viewer
-- SMB, SSH, FTP and SFTP support for network shares
-- No ads, no trackers, no Google dependencies
-
-### Setup and Usage
-
-1. Install via F-Droid.
-2. Open Amaze File Manager and grant storage permission.
-3. Set as default file manager: Settings > Apps > Default apps > Files > Amaze.
-
-**Enabling biometric lock:**
-Go to Amaze Settings > Security > Fingerprint lock. Enable it and enroll your fingerprint.
-
-**Encrypting a file or folder:**
-1. Long-press the file or folder you want to protect
-2. Tap the overflow menu (three dots) > Encrypt
-3. Set a strong password
-4. Amaze encrypts it and adds an .aes extension
-5. The original is replaced by the encrypted version
-
-**Decrypting:**
-1. Tap the .aes file
-2. Enter the password
-3. Amaze decrypts it in place
-
-**Root explorer:**
-Go to Amaze Settings > Root Explorer > Enable. Browse and manage system directories directly.
-
-**App Manager:**
-Tap the drawer icon > App Manager. View, backup as APK, or uninstall any installed app directly from Amaze.
-
-### Why It Replaced ZArchiver Pro and Fossify Files
-
-ZArchiver Pro was sourced from an unofficial GitHub mirror and is not available on F-Droid. Fossify Files has no encryption. Amaze covers both everyday file management and AES file encryption in a single GPL-3.0 app on F-Droid.
+The following apps form the complete DresOS defensive security system. Every single one is open source, has zero Google dependencies, and is sourced directly from verified developer releases or F-Droid.
 
 ---
 
-## 2. IYPS - Password Strength Analyser & Generator
-
-**Download:** [GitHub Releases (latest)](https://github.com/StellarSand/IYPS/releases/latest)
-
-### What It Is
-
-IYPS (It's Your Password Security) is an open-source password strength analyser and generator. It does **not** store passwords - that job is handled by DuckDuckGo's built-in password manager (covered in App #14). What IYPS does is tell you exactly how strong or weak any given password is, with real-world crack-time estimates across different attack scenarios, and generate strong random passwords on demand.
-
-### Key Features
-
-* **Password strength analyser** - paste any existing password and get a detailed breakdown: entropy score, estimated crack time under online attack, offline attack, and distributed cracking scenarios
-* **Password generator** - creates strong, random passwords with customisable length and character sets
-* **Completely offline** - no password ever leaves your device during analysis
-* No storage, no vault, no sync - purely an analysis and generation tool
-* No ads, no trackers, no telemetry
-
-### Setup and Usage
-
-1. Install via SAI from the direct APK link above.
-2. Open IYPS - no account or setup required.
-3. **Check an existing password:**
-   * Paste it into the analyser field
-   * IYPS shows the entropy score and estimated crack time across attack scenarios (online throttled, offline fast hash, distributed brute-force)
-   * Anything under "centuries" for an offline attack is worth replacing
-4. **Generate a strong password:**
-   * Go to the **Generator** tab
-   * Set desired length (20+ characters recommended) and character set (uppercase, lowercase, numbers, symbols)
-   * Tap generate - copy the result and save it in DuckDuckGo's password manager (see App #14)
-
-### Why It's in the DresOS Suite
-
-Most people massively overestimate how strong their passwords are. IYPS shows you in concrete terms exactly how quickly your password would fall - making it a practical tool for auditing your existing passwords before migrating them to DuckDuckGo's password manager. Use IYPS to generate and vet, DuckDuckGo to store.
-
----
-
-## 3. RedReader - Private Reddit Client
+### 1. RedReader, Private Reddit Client
 
 **Download:** [F-Droid](https://f-droid.org/packages/org.quantumbadger.redreader/)
 
-### What It Is
+RedReader is a free, open source Reddit client that removes all advertising, tracking, data collection, and analytics present in the official Reddit app and other third party clients.
 
-RedReader is a free, open-source Reddit client that removes all advertising, tracking, data collection, and analytics present in the official Reddit app and other third-party clients.
+#### Key Features
 
-### Key Features
-
-* **No ads whatsoever** - not even Reddit's own promoted posts
-* **No tracking or analytics** - no telemetry sent to Reddit or any third party
-* **No account required** to browse - full anonymous access to Reddit content
+* **No ads whatsoever**, not even Reddit's own promoted posts
+* **No tracking or analytics**, no telemetry sent to Reddit or any third party
+* **No account required** to browse, full anonymous access to Reddit content
 * Optional account login for commenting/voting without Reddit app telemetry
 * Clean, fast, highly readable interface
 * Full image, GIF, and video support
-* Offline reading mode - cache posts for reading without connectivity
+* Offline reading mode cache posts for reading without connectivity
 * Night mode and customizable text sizes
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install via SAI from the direct APK link above.
-2. Open RedReader - no setup required to start reading anonymously.
+2. Open RedReader, no setup required to start reading anonymously.
 3. **Browse without account:** You can immediately browse subreddits, search, and read posts without logging in.
 4. **Optional account login:**
-   * Settings → Accounts → Add Account
-   * Log in with your Reddit credentials - RedReader does not store these beyond the session token
+   * Settings, Accounts, Add Account
+   * Log in with your Reddit credentials, RedReader does not store these beyond the session token
 5. **Customize feed:**
    * Add subreddits to your front page by searching (magnifying glass) and subscribing
    * If not logged in, subreddits are stored locally in the app
 
-### Why It's in the DresOS Suite
-
-The official Reddit app is one of the most aggressive data-harvesting apps available - it requests extensive device permissions, tracks your reading behavior, and feeds data to advertising networks. RedReader provides the same content access with none of the surveillance.
-
 ---
 
-## 4. URL Check - Link Scanner
+### 2. Hypatia, Open Source Antivirus
 
-> **Now in DresSecureComms.** The DresOS DresSecureComms app includes Threat Scan, an in-app VirusTotal link checker. URL Check remains available as the standalone, more configurable scanner.
-
-**Download:** [F-Droid](https://f-droid.org/packages/com.trianguloy.urlchecker/)
-
-### What It Is
-
-URL Check is an open-source link analysis and scanning tool. Before opening any link, URL Check intercepts it and scans it for IP loggers, tracking parameters, malware indicators, phishing patterns, and URL redirects - showing you exactly where a link actually leads before you visit it.
-
-### Key Features
-
-* **IP logger detection** - identifies links from known IP-logging services (grabify, iplogger, etc.)
-* **Phishing detection** - flags domains that impersonate legitimate services
-* **Malware link scanning** - checks against known malicious URL databases
-* **URL unshortener** - expands bit.ly, t.co, and all other shorteners to reveal the real destination
-* **Tracking parameter stripping** - removes `utm_source`, `fbclid`, `gclid`, and all other tracking tags from URLs automatically
-* **Redirect following** - shows the full redirect chain so you can see every server a link passes through
-* VirusTotal integration (optional) - submit URLs to VirusTotal's multi-engine scanner
-* Clipboard monitoring (optional) - automatically checks any URL you copy
-
-### Setup and Usage
-
-1. Install via SAI from the direct APK link above.
-2. Open URL Check → go through the initial permissions setup (allow it to handle link intents).
-3. **Set as default link opener:**
-   * In URL Check settings → enable "Intercept links"
-   * Android will prompt you to set URL Check as the handler for links - confirm
-4. **How it works in practice:**
-   * Someone sends you a link in a chat app or email
-   * Instead of opening directly in the browser, URL Check intercepts it
-   * A screen appears showing: the original URL, expanded URL, any trackers detected, any malware flags
-   * Tap **Open** to proceed (if clean) or **Copy** to share the cleaned URL
-5. **Tracking removal:**
-   * Enable "Remove tracking parameters" in settings
-   * All UTM tags, Facebook click IDs, Google analytics parameters, etc. are stripped automatically
-
-### Why It's in the DresOS Suite
-
-Phishing and IP logging are two of the most common attack vectors in targeted surveillance. A single click on an IP logger reveals your real IP address, approximate location, device type, and OS - even if you are using a VPN. URL Check prevents this by scanning every link before it is opened.
-
----
-
-## 5. Hypatia - Open-Source Antivirus
-
-> **Coming to DresSecureComms.** A future DresSecureComms update will scan files, media, APKs, and ZIPs in-app, taking over this antivirus role. Until then, Hypatia is the malware layer.
+> **Coming to DresSecureComms.** A future DresSecureComms update will scan files, media, APKs, and ZIPs in app, taking over this antivirus role. Until then, Hypatia is the malware layer.
 
 **Download:** [GitHub Releases (latest)](https://github.com/MaintainTeam/Hypatia/releases/latest)
 
-### What It Is
+Hypatia is a fully open source antivirus and malware scanner for Android, powered by ClamAV signature databases. It scans APKs before installation, scans files on your storage, and can perform full device scans to detect known malware, trojans, ransomware, and other threats.
 
-Hypatia is a fully open-source antivirus and malware scanner for Android, powered by ClamAV signature databases. It scans APKs before installation, scans files on your storage, and can perform full-device scans to detect known malware, trojans, ransomware, and other threats.
+#### Key Features
 
-### Key Features
-
-* **ClamAV-powered** - uses the same signature database as the industry-standard ClamAV engine trusted by organizations worldwide
-* **APK scanning** - scans any APK file before you install it, including those from Aurora Store and direct downloads
-* **File scanning** - scans documents, archives, downloaded files, and any other content on your storage
-* **Full-device scan** - scans all installed apps and accessible storage in one pass
-* **Real-time protection** (optional) - monitors new files as they are created or downloaded
-* **Offline capable** - signatures are downloaded locally; scanning does not require internet once signatures are updated
+* **ClamAV powered**, uses the same signature database as the industry standard ClamAV engine trusted by organizations worldwide
+* **APK scanning**, scans any APK file before you install it, including those from Aurora Store and direct downloads
+* **File scanning**, scans documents, archives, downloaded files, and any other content on your storage
+* **Full device scan**, scans all installed apps and accessible storage in one pass
+* **Real time protection** (optional), monitors new files as they are created or downloaded
+* **Offline capable**, signatures are downloaded locally; scanning does not require internet once signatures are updated
 * Zero telemetry, no cloud scanning, no data sent to any server during scans
 * Regular signature updates via the app (or F-Droid)
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install via SAI from the direct APK link above.
-2. Open Hypatia → grant storage permission.
-3. **Update signatures first:**
-   * Settings → Update signatures → tap Update All
+2. Open Hypatia, grant storage permission.
+3. **Update databases first:**
+   * Tap the options menu then update databases
    * Wait for ClamAV, MSRT, and other signature databases to download
-4. **Scan a specific APK before installing:**
-   * Download an APK via Gopeed
-   * Open Hypatia → Scan file → navigate to the downloaded APK → scan
-   * If clean: green result → install with SAI
-   * If flagged: do not install - delete the file
-5. **Full device scan:**
-   * Tap the **Scan** button on the main screen → select Full Scan
+4. **Full device scan:**
+   * Tap the **Scan** button on the main screen, select Full Scan
    * Hypatia scans all installed apps and storage
-6. **Real-time monitoring:**
-   * Settings → Real-time protection → Enable
+5. **Real time monitoring:**
+   * Tap the options menu, Tick Realtime scanner.
    * Hypatia monitors new files as they land on your device and alerts you if anything malicious is detected
-7. **Scheduled scans:**
-   * Set up weekly scans in Settings → Schedule to run automatically
 
-### Why It's in the DresOS Suite
+#### Why It's in the DresOS Suite
 
-Side-loading APKs (which is necessary on a de-Googled phone without Play Protect) requires you to take responsibility for your own malware screening. Hypatia with ClamAV signatures provides robust detection of known threats in every APK you install - a critical piece of the defensive stack.
+Side loading APKs (which is necessary on a de Googled phone without Play Protect) requires you to take responsibility for your own malware screening. Hypatia with ClamAV signatures provides robust detection of known threats in every APK you install, a critical piece of the defensive stack.
 
 ---
 
-## 6. OONI Probe - Network Censorship Detector
-
-**Download:** [F-Droid](https://f-droid.org/packages/org.openobservatory.ooniprobe/)
-
-### What It Is
-
-OONI Probe (Open Observatory of Network Interference) is a network measurement tool developed by the Tor Project and independent researchers. It detects censorship, surveillance infrastructure, and network manipulation on your internet connection - telling you exactly what your ISP or government is blocking or tampering with.
-
-### Key Features
-
-* **Website blocking detection** - tests whether specific websites are blocked on your network
-* **Censorship measurement** - detects DNS manipulation, HTTP blocking, TCP/IP blocking, and TLS interference
-* **Surveillance infrastructure detection** - identifies middleboxes (equipment used for network surveillance)
-* **VPN and Tor reachability** - tests whether Tor, VPNs, and circumvention tools are blocked
-* **Global network data** - contributes your test results to OONI's public database, helping document censorship worldwide
-* Runs automatic tests at scheduled intervals
-* Completely open-source (Tor Project affiliated)
-
-### Setup and Usage
-
-1. Install from F-Droid using the link above (or search "OONI Probe" in F-Droid).
-2. Open OONI Probe → complete the onboarding (agree to data sharing terms - your test results are contributed to the public OONI database anonymously).
-3. **Run immediate tests:**
-   * Tap **Run** on the main dashboard
-   * OONI Probe runs the full test suite: websites, instant messaging, circumvention tools, middleboxes
-4. **View results:**
-   * Results appear under the **Test Results** tab
-   * Green checkmarks = no blocking detected
-   * Red X = blocking or manipulation detected
-   * Orange warning = anomaly (possible interference)
-5. **Automated testing:**
-   * Settings → Automated testing → Enable
-   * Set a schedule (e.g., daily at 3am on Wi-Fi only)
-6. **Interpret results:**
-   * If websites you expect to be accessible show as blocked → your ISP/government is censoring them → use InviZible Pro's Tor routing to bypass
-   * If circumvention tools (Tor, VPNs) show as blocked → use InviZible Pro's Tor bridge mode with obfs4 bridges (see OPSEC Step 2)
-
-### Why It's in the DresOS Suite
-
-Understanding your threat environment is the first step in defending against it. OONI Probe tells you exactly what your network operator is doing to your traffic - whether you are in a heavily censored country or simply want to know if your ISP is silently blocking certain content.
-
----
-
-## 7. InviZible Pro - Tor + I2P + DNSCrypt in Proxy + Root Mode
-
-**App Store Name:** InviZible Pro
-**Download:** [F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable/)
-
-*(Full step-by-step setup in Part 2 - OPSEC Step 2)*
-
-### What It Is
-
-**InviZible Pro** is the network privacy engine of the DresOS stack. It is a single application combining **Tor**, **I2P**, and **DNSCrypt** - running in **proxy + root mode**, which means it does not use the Android VPN slot and can run alongside DuckDuckGo App Tracking Protection simultaneously. It routes your traffic through Tor via Android's system proxy setting, giving every app that respects the system proxy a Tor exit node as its apparent IP address. Root access via Magisk lets it redirect all DNS at the iptables level - nothing bypasses DNSCrypt.
-
-### What It Replaces
-
-| Without InviZible Pro | With InviZible Pro |
-|---|---|
-| Orbot (Tor client - separate app) | Built-in Tor with isolation settings |
-| Standalone DNSCrypt app | Built-in DNSCrypt with DNSSEC |
-| Standalone I2P client | Built-in I2P with garlic routing |
-| Plain-text DNS leaking to ISP | All DNS encrypted via iptables redirect |
-| Real IP visible to websites | Tor exit node IP visible instead |
-
-### Summary of Features
-
-* **Tor** - three-hop onion routing for strong anonymity; circuit isolation per destination; obfs4 bridge support for censored networks
-* **I2P** - independent garlic-routing network for I2P eepsites and a distinct anonymity model from Tor
-* **DNSCrypt** - encrypts and authenticates all DNS queries via a local resolver on port 5354; prevents ISP-level domain surveillance
-* **DNSSEC** - cryptographically validates every DNS response; blocks spoofed DNS answers
-* **Root / iptables DNS redirect** - forces all device DNS (port 53 → 5354) through DNSCrypt at the kernel level; no app can bypass it
-* **Proxy mode** - exposes Tor as HTTP proxy on `127.0.0.1:8118` and SOCKS5 on `127.0.0.1:9050`; Android system proxy routes all compatible app traffic through Tor without touching the VPN slot
-* **Start on boot** - restores all services and iptables rules automatically after every reboot
-* Works alongside DuckDuckGo App Tracking Protection (VPN slot is completely free)
-
-*(Full setup guide covering all 9 phases - proxy mode config, DNS server selection, Tor isolation settings, I2P bootstrap, root iptables activation, Android system proxy IP spoofing, DuckDuckGo ATP enablement, and verification - is in Part 2 - OPSEC Step 2.)*
-
----
-
-## 8. AFWall+ - Root-Level iptables Firewall
-
-**Download:** F-Droid - [dev.ukanth.ufirewall](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall)
-
-*(Full setup and custom rules in Part 2 - OPSEC Step 3)*
-
-### What It Is
-
-**AFWall+** (Android Firewall+) is a root-level firewall that uses **iptables** - the Linux kernel's native packet filtering framework - to control internet access per app, per network interface. It operates at the kernel level, below all apps, VPNs, and proxy layers. An app cannot circumvent it by any means: iptables rules are enforced by the kernel before traffic ever reaches a network socket.
-
-AFWall+ is a completely separate and complementary layer to InviZible Pro. InviZible Pro handles routing and anonymisation - AFWall+ handles access control. Together they give defence in depth: even if InviZible Pro's proxy routing is temporarily unavailable or an app ignores the system proxy, AFWall+ still enforces which apps are allowed to communicate at all.
-
-### Key Features
-
-* **Per-app, per-interface rules** - separately control Wi-Fi, mobile data, and VPN for every installed app
-* **Whitelist mode** - default deny; only explicitly approved apps can reach the internet
-* **Custom iptables rules** - write raw iptables rules for advanced control (e.g. mobile data proxy redirect to port 8118)
-* **Logging** - logs every blocked connection attempt; reveals apps trying to phone home
-* **PIN lock** - locks the firewall UI so no app or accidental tap can disable rules
-* **LAN control** - optionally block apps from accessing your local network
-* Works on any rooted Android device with Magisk; no VPN slot consumed
-
-### Why It's in the DresOS Suite
-
-Every de-Googled phone still has apps that attempt to reach the internet - analytics libraries embedded in third-party APKs, microG service pings, update checkers, background sync services. InviZible Pro routes traffic anonymously but does not block apps from connecting. AFWall+ fills this gap: apps you have not explicitly approved cannot generate any network traffic at all. It also solves the mobile data proxy gap - Android's system proxy applies to Wi-Fi only, but AFWall+'s custom iptables rules can redirect HTTP/HTTPS traffic on mobile data interfaces through InviZible Pro's Tor proxy on port 8118 as well.
-
-*(Full configuration, recommended per-app rules table, and custom iptables rules for mobile data proxy routing are in Part 2 - OPSEC Step 3.)*
-
----
-
-## 9. Metrolist - Private YouTube Music Client
+### 3. Metrolist, Private YouTube Music Client
 
 **Download:** [GitHub Releases (latest)](https://github.com/MetrolistGroup/Metrolist/releases/latest)
 
-### What It Is
+#### What It Is
 
-Metrolist is a privacy-focused, modded YouTube Music client. It provides access to YouTube Music's full catalogue - including all your existing playlists and library if you have a YouTube Music account - without Google's tracking, advertising, or data collection.
+Metrolist is a privacy focused, modded YouTube Music client. It provides access to YouTube Music's full catalogue, including all your existing playlists and library if you have a YouTube Music account, without Google's tracking, advertising, or data collection.
 
-### Key Features
+#### Key Features
 
-* **Ad-free YouTube Music** - no pre-roll ads, no mid-song interruptions, no audio ads
-* **No tracking** - Google Analytics, advertising identifiers, and telemetry calls are removed
-* **Background playback** - music plays when the screen is off or when using other apps (normally requires a paid YouTube Music Premium subscription)
-* **Audio quality control** - select specific bitrates and codec preferences
-* **Offline capability** - cache songs locally for offline listening
-* **Account support** - optionally log in with a YouTube/Google account to access your playlists and liked songs (note: if you log in, Google still knows what you are listening to - use without account for maximum privacy)
+* **Ad free YouTube Music**, no pre roll ads, no mid song interruptions, no audio ads
+* **No tracking**, Google Analytics, advertising identifiers, and telemetry calls are removed
+* **Background playback**, music plays when the screen is off or when using other apps (normally requires a paid YouTube Music Premium subscription)
+* **Audio quality control**, select specific bitrates and codec preferences
+* **Offline capability**, cache songs locally for offline listening
+* **Account support**, optionally log in with a YouTube/Google account to access your playlists and liked songs (note: if you log in, Google still knows what you are listening to, use without account for maximum privacy)
 * Custom theme support, AMOLED dark mode
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install via SAI from the direct APK link above.
 2. Open Metrolist.
 3. **Without account (maximum privacy):**
    * Browse and search the full YouTube Music catalogue freely
    * Your listening history is stored locally only
+   * make playlists
 4. **With account (access your library):**
-   * Tap the account icon → sign in via **DuckDuckGo Privacy Browser** with your Google account
+   * Tap the account icon, sign in via **DuckDuckGo Privacy Browser** with your Google account
    * Your playlists, liked songs, and subscriptions will sync
-   * Understand that YouTube/Google will still log your listening activity server-side when you are logged in
+   * Understand that YouTube/Google will still log your listening activity server side when you are logged in
 5. **Background playback:**
-   * Just minimize the app - music continues playing without needing any subscription
+   * Just minimize the app, music continues playing without needing any subscription
 6. **Cache for offline listening:**
-   * Long-press a song or playlist → Download → select audio quality
+   * Long press a song or playlist, Download, select audio quality
    * Downloaded files are stored in your chosen directory (manage with Amaze File Manager)
-
-### Why It's in the DresOS Suite
-
-Music streaming should not come with a surveillance apparatus. Metrolist gives you full access to YouTube Music's catalogue without surrendering your listening habits to Google's advertising engine.
 
 ---
 
-## 10. Arcane Chat - Decentralized Encrypted Messaging
+### 4. Arcane Chat, Decentralized Encrypted Messaging
 
 **Download:** [GitHub Releases (latest)](https://github.com/ArcaneChat/android/releases/latest)
 
-### What It Is
+Arcane Chat is a fully decentralized, end to end encrypted messaging application built on the **Delta Chat** protocol, which uses **email as the transport layer** with **OpenPGP end to end encryption**. This means your messages are transmitted over email infrastructure, making them extremely difficult to block, and giving you full control of your identity (your email address) without depending on any centralized messaging server.
 
-Arcane Chat is a fully decentralized, end-to-end encrypted messaging application built on the **Delta Chat** protocol, which uses **email as the transport layer** with **OpenPGP end-to-end encryption**. This means your messages are transmitted over email infrastructure - making them extremely difficult to block, and giving you full control of your identity (your email address) without depending on any centralized messaging server.
+#### Key Features
 
-### Key Features
-
-* **End-to-end encryption** via OpenPGP (Autocrypt standard) - messages are encrypted on your device before transmission and can only be decrypted by the recipient
-* **Decentralized** - no central Arcane Chat server; messages route through standard email servers. There is no single point of failure or surveillance
-* **No phone number required** - your identity is your email address (use your Tuta Mail address for full privacy)
-* **No metadata harvesting** - unlike Signal, WhatsApp, or Telegram, there is no central server collecting who you talk to, when, or how frequently
-* **Censorship resistant** - email infrastructure is nearly impossible to block globally; even in censored regions, email typically works
+* **End to end encryption** via OpenPGP (Autocrypt standard), messages are encrypted on your device before transmission and can only be decrypted by the recipient
+* **Decentralized**, no central Arcane Chat server; messages route through standard email servers. There is no single point of failure or surveillance
+* **No phone number required**, your identity is your email address (use your Tuta Mail address for full privacy)
+* **No metadata harvesting**, unlike Messenger, WhatsApp, and Signal, there is no central server collecting who you talk to, when, or how frequently
+* **Censorship resistant**, email infrastructure is nearly impossible to block globally; even in censored regions, email typically works
 * Group chats, image/file sharing, voice messages
 * Multiple accounts (use different email addresses for different contexts)
-* FOSS (fully open-source), no ads, no tracking
+* FOSS (fully open source), no ads, no tracking
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install via SAI from the direct APK link above.
 2. Open Arcane Chat.
-3. **Configure with Tuta Mail (recommended):**
-   * Tap **Add Account**
-   * Enter your Tuta Mail address
-   * Arcane Chat will attempt auto-configuration; for Tuta you may need to enter IMAP/SMTP settings manually:
-     * IMAP server: `imap.tuta.com` | Port: `993` | Security: TLS
-     * SMTP server: `smtp.tuta.com` | Port: `465` | Security: TLS
-   * Enter your Tuta password → Connect
-4. **Start a conversation:**
-   * Tap the **+** button → enter a contact's email address → write message → send
-   * If the recipient also uses Arcane Chat (or any Autocrypt-compatible app), messages are automatically end-to-end encrypted - look for the **lock icon**
-5. **Verify encryption:**
-   * Open a chat → tap the contact name → **Encryption info**
-   * Verify the displayed fingerprint matches your contact's (do this via a separate channel, e.g., in person or via phone call)
-6. **Group chats:**
-   * Tap + → New Group → add contacts by email → name the group → create
-7. **Disappearing messages:**
-   * Open a chat → Settings → Disappearing Messages → set a timer
-
-### Why It's in the DresOS Suite
-
-Most encrypted messengers require you to trust a central server (Signal's servers, Telegram's servers, WhatsApp/Meta's servers). Arcane Chat removes this trust requirement entirely - your messages flow over email infrastructure you choose, encrypted with OpenPGP that only you and your recipient hold keys for. Using it with Tuta Mail combines the strongest available email privacy with the strongest available decentralized messaging protocol.
+   * Tap **Create new profile**
+   * Enter your name
+   * Click agree and create profile
+3. To talk to someome tap the plus button and scan the qr code they gave you or send the other person a link to connect to your profile.
+4. **Group chats:**
+   * Tap + then New Group give it a name, add members then click continue
+5. **Disappearing messages:**
+   * Open a chat press the options menu click Disappearing Messages and set a timer
 
 ---
 
-## 11. Aurora Store - Anonymous App Store
+### 5. HeliBoard, Offline Keyboard
 
-**Download:** Install via F-Droid - search "Aurora Store" or go to `https://f-droid.org/packages/com.aurora.store/`
+**Download:** F-Droid, search "HeliBoard" or visit `https://f-droid.org/packages/helium314.keyboard/`
 
-### What It Is
+HeliBoard is a fully open source, completely offline keyboard for Android. It is a direct replacement for Google's Gboard, which is one of the most invasive data collection tools on Android it can capture everything you type (passwords, messages, searches) and transmit it to Google's servers for "personalization" and other undisclosed purposes.
 
-Aurora Store is an open-source, unofficial Google Play Store client that lets you browse, download, and update apps from Google's Play catalogue **without a Google account** and without any Google Play Services telemetry. It is a full Google Play replacement with complete anonymity.
+#### Key Features
 
-### Key Features
-
-* **Anonymous mode** - browse and download apps using randomly generated anonymous credentials. Google sees an anonymous device, not your account.
-* No Google account login required
-* Full Play Store catalogue access - any app available on Google Play can be downloaded
-* App update management - check for updates for all Play-sourced apps
-* **Exodus Privacy integration** - shows you a detailed tracker and permission report for every app before you install it
-* Block automatic app updates for specific apps
-* Spoofed device profile - can present as a different Android device to access region-locked apps
-* No ads, no telemetry, zero Google components in the Aurora app itself
-
-### Setup and Usage
-
-1. Install via F-Droid.
-2. Open Aurora Store → select **Anonymous** mode during setup. **Do not log in with a Google account.**
-3. Browse, search, and install apps exactly as you would on the Play Store.
-4. **Before installing any app, check its tracker report:**
-   * Tap the app → scroll down to **Privacy** → check the Exodus Privacy report
-   * Apps with many trackers (advertising, analytics, fingerprinting) should be avoided or replaced with FOSS alternatives
-5. **Manage updates:**
-   * Aurora Store → Updates tab → review available updates
-   * Update FOSS apps via F-Droid instead (F-Droid verifies signatures; Aurora Store does not independently verify)
-
-### Why It's in the DresOS Suite
-
-Completely removing Play Store access is impractical for many users - some apps (banking, 2FA, essential services) only exist on Google Play. Aurora Store provides access to this catalogue without surrendering your identity or using Google Play Services. The Exodus Privacy integration helps you make informed decisions about which apps are safe to install.
-
----
-
-## 12. Fossify Suite - Complete FOSS System Apps
-
-> **Replaceable by DresSecureComms.** DresSecureComms can take the place of Fossify Phone, Messages, and Contacts with a single de-Googled app that adds optional per-message encryption and an encrypted contacts vault.
-
-**Download:** All via F-Droid - search each app name or visit [fossify.org/apps](https://www.fossify.org/apps/)
-
-### What It Is
-
-Fossify is a suite of open-source replacements for core Android system apps. In DresOS several of these are already covered: phone, SMS, and contacts by DresSecureComms, the gallery by Aves Libre, files by Amaze, and the calendar by Tuta Calendar. From Fossify you only need the system apps that nothing else covers, listed below.
-
-### Apps in the Suite
-
-| App | Replaces | Features |
-|---|---|---|
-| **Fossify Launcher** | Pixel Launcher | Open-source home screen, no Google Feed integration |
-| **Fossify Music** | YouTube Music / Play Music | Fully local music player, supports all common audio formats |
-| **Fossify Clock** | Google Clock | Alarm, timer, stopwatch - zero telemetry |
-| **Fossify Notes** | Google Keep | Local encrypted notes, no cloud sync |
-
-### Setup
-
-1. Install Fossify Launcher, Music, Clock, and Notes via F-Droid.
-2. Set Fossify Launcher as your default home app in **Settings → Apps → Default apps**.
-3. Your music is already on your storage - open it with Fossify Music.
-
-### Why It's in the DresOS Suite
-
-Stock Google system apps report usage data and metadata back to Google. These Fossify apps are clean, open-source replacements with zero reporting, covering the system functions that DresSecureComms, Aves Libre, Amaze, and Tuta do not.
-
----
-
-## 13. HeliBoard - Offline Keyboard
-
-**Download:** F-Droid - search "HeliBoard" or visit `https://f-droid.org/packages/helium314.keyboard/`
-
-### What It Is
-
-HeliBoard is a fully open-source, completely offline keyboard for Android. It is a direct replacement for Google's Gboard, which is one of the most invasive data-collection tools on Android - it can capture everything you type (passwords, messages, searches) and transmit it to Google's servers for "personalization" and other undisclosed purposes.
-
-### Key Features
-
-* **Completely offline** - zero network access, zero data transmission
+* **Completely offline**, zero network access, zero data transmission
 * Full multilingual support with offline dictionaries
 * Swipe typing (gesture input)
-* Auto-correction and predictive text (fully local)
+* Auto correction and predictive text (fully local)
 * Customizable themes, layouts, and key sizes
-* Voice input support via local speech-to-text (no cloud)
 * No analytics, no crash reporting, no permissions beyond keyboard input
 * Actively developed and maintained
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install via F-Droid.
-2. Open HeliBoard → follow the setup wizard to enable it as a system keyboard.
-3. Go to **Settings → General management → Keyboard list and default** → select HeliBoard.
-4. Disable Gboard (or remove it during the debloating step).
-5. Download offline language dictionaries for your languages within HeliBoard settings.
+2. Open HeliBoard, follow the setup wizard to enable it as a system keyboard.
+3. Remove Gboard during the debloating step.
+4. Download offline language dictionaries for your languages within HeliBoard settings.
 
-### DresOS HeliBoard Design (One-Tap Restore)
+#### DresOS HeliBoard Design (One Tap Restore)
 
-We worked up a ready-made DresOS HeliBoard configuration so you do not have to tune the keyboard by hand. It is a privacy-tuned setup with always-incognito mode on, contacts and personalized dictionaries off, sound off, and the DresOS theme with key borders, a number row, and narrow key gaps. You restore it as a single backup file and the keyboard is fully set up.
+We worked up a ready made DresOS HeliBoard configuration so you do not have to tune the keyboard by hand. It is a privacy tuned setup with always incognito mode on, contacts and personalized dictionaries off, sound off, and the DresOS theme with key borders, a number row, and narrow key gaps. You restore it as a single backup file and the keyboard is fully set up.
 
-1. Download the design file: [DresOS-HeliBoard-Design.zip](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System/raw/main/assets/DresOS-HeliBoard-Design.zip)
-2. Open **HeliBoard** -> **Settings** -> **Backup and restore**.
-3. Tap **Restore**, select the downloaded **DresOS-HeliBoard-Design.zip**, and confirm.
+1. Download the design file: [DresOS HeliBoard Design.zip](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System/raw/main/assets/DresOS-HeliBoard-Design.zip)
+2. Open HeliBoard then click advanced then scroll down to Backup and restore.
+3. Tap **Restore**, select the downloaded **DresOS HeliBoard Design.zip**, and confirm.
 4. HeliBoard applies the full DresOS configuration immediately. No further setup is needed.
 
 ---
 
-## 14. Tuta Mail - Encrypted Email
-
-**Download:** F-Droid - `https://f-droid.org/packages/de.tutao.tutanota/`
-
-*(Full setup in Part 2 - OPSEC Step 3)*
-
-### What It Is
-
-Tuta Mail (formerly Tutanota) is an end-to-end encrypted email service operated by a German company under German and EU privacy law. It is a full Gmail replacement with zero data mining, zero ads, and full content encryption.
-
-### Key Features
-
-* **End-to-end encryption** for all emails (both subject and body, not just body like most providers)
-* **Zero-knowledge** - Tuta cannot read your emails; they are encrypted before leaving your device
-* **Encrypted contacts and calendar** included in the free plan
-* Encrypted search (searches happen locally on your device, never on the server)
-* **Email aliases** for compartmentalization (use different aliases for different purposes)
-* Secure external email (password-protected messages to non-Tuta recipients)
-* German and EU jurisdiction with GDPR protections
-* Free plan available; paid plans add more aliases and storage
-* Fully open-source client
-
-### Setup and Usage
-
-Full step-by-step setup, including pairing Tuta with DuckDuckGo Duck Addresses, is in Part 2, OPSEC Step 4. In short: create a Tuta account with no phone number, write down the recovery code and store it physically, enable a biometric or PIN lock, and route all your Duck Addresses to your Tuta inbox.
-
-### Why It's in the DresOS Suite
-
-Tuta is the encrypted inbox at the centre of the DresOS email model. Your real address lives only in Tuta, every service gets a disposable Duck Address that forwards into it with trackers stripped, and even Tuta itself cannot read your mail because it is encrypted before it leaves the device.
-
----
-
-## 15. DuckDuckGo Privacy Browser - Primary Browser
-
-**Download:** [F-Droid](https://f-droid.org/packages/com.duckduckgo.mobile.android/)
-
-### What It Is
-
-DuckDuckGo Privacy Browser is your everyday browser in DresOS and the Chrome replacement. It blocks trackers before they load, forces encrypted connections, and ships a built-in Email Protection service that pairs directly with your Tuta inbox. It needs no Google account and sends no telemetry. DresOS WebView stays the invisible system WebView engine that other apps render through; DuckDuckGo is the browser you actually open.
-
-### Key Features
-
-* Built-in tracker blocking that stops third-party trackers before they load
-* Smarter Encryption that forces HTTPS wherever a site supports it
-* Fireproofing to keep chosen sites logged in while clearing everything else
-* Automatic cookie pop-up handling and a one-tap Fire Button that wipes tabs and data
-* Email Protection with @duck.com aliases that forward into your Tuta inbox with trackers stripped
-* Global Privacy Control, which broadcasts a legal opt-out signal to websites
-* Duck Player for YouTube, which plays videos in a private, ad-free view and keeps the session out of your Google and YouTube watch and recommendation profile
-* No Google account, no telemetry
-
-### App Tracking Protection - Enable This
-
-DuckDuckGo's App Tracking Protection watches tracker activity inside every other app on the phone using the Android VPN slot. Enable it. InviZible Pro runs in proxy plus root mode and does not touch the Android VPN slot at all, so there is no conflict and both run at once:
-
-* InviZible Pro (proxy plus iptables) handles network-level anonymity: Tor IP routing, DNSCrypt, and I2P
-* DuckDuckGo App Tracking Protection (VPN slot) handles app-layer tracker blocking, stopping trackers inside installed apps from phoning home
-
-Together they form the full DresOS defensive stack running simultaneously.
-
-### Setup and Usage
-
-1. Install DuckDuckGo from F-Droid and complete onboarding.
-2. When it offers App Tracking Protection, enable it. Android will ask you to allow a VPN connection for DuckDuckGo; confirm it. InviZible Pro uses proxy plus root mode and leaves the VPN slot free, so there is no conflict.
-3. Set it as your default browser in **Settings -> Apps -> Default apps -> Browser**.
-4. Set up your Duck Address: **menu -> Settings -> Email Protection -> Get Started**, enter your Tuta Mail address as the forwarding address, and store the generated key alongside your Tuta recovery code. Full pairing steps are in Part 2, OPSEC Step 4.
-5. Allow DuckDuckGo on Wi-Fi and Data in AFWall+, since it is your browser and needs full access.
-6. For YouTube, turn on Duck Player in **menu -> Settings -> Duck Player** and set it to open YouTube videos automatically. Videos then play in a clean, distraction-free window with targeted ads stripped and without YouTube tying the session to your watch history or recommendation profile.
-
-### Why It's in the DresOS Suite
-
-Your browser touches more of the web than any other app, so it has to be the most careful. DuckDuckGo blocks trackers at the source, pairs with Tuta through Duck Addresses so your real inbox never leaks, and runs its App Tracking Protection in the VPN slot that InviZible Pro deliberately leaves free, which lets the whole DresOS stack run at once without conflict.
-
----
-
-## 16. DresOS WebView - System WebView (Privacy-Hardened WebView Engine)
-
-**Download:** Installed by the DresOS WebView Module in Step 7. Also published standalone at [github.com/DresOperatingSystems/DresOS-WebView](https://github.com/DresOperatingSystems/DresOS-WebView/releases)
-
-### What It Is
-
-DresOS WebView, built by DresOperatingSystems from Cromite, is a Chromium engine carrying Cromite's privacy and security hardening throughout. The Android System WebView is the rendering engine hundreds of apps use internally any time they show web content, from social feeds to sign-in screens to in-app articles. By default that engine is Google's, which phones home on every render. DresOS WebView replaces it system-wide, so every app that draws web content does so through a Google-free, privacy-hardened engine. It is invisible: you never open DresOS WebView directly, and your actual browser is DuckDuckGo.
-
-### Key Features
-
-* Chromium engine built from Cromite with its privacy and security hardening throughout
-* Replaces Google's Android System WebView for every app on the device at once
-* No Google services, no telemetry, no anti-features
-* Installed systemlessly through the DresOS WebView Module, so it is bootloop-safe and fully reversible
-
-### Setup and Usage
-
-DresOS WebView is not installed by hand. The DresOS WebView Module v2.2.0 you flash in Step 7 drops the signed APK into the systemless tree, registers it through a static RRO, and promotes it to the active WebView provider with `cmd webviewupdate set-webview-implementation` after boot. Full flashing and verification steps, including the bootloop sentinel and inert-mode fallback, are in Step 7. Confirm it is active with `adb shell dumpsys webviewupdate | grep "Current WebView package"`, which should report `org.dresos.webview`.
-
-### Why It's in the DresOS Suite
-
-The system WebView is the most overlooked privacy hole on Android, because it quietly renders web content for dozens of apps that have nothing to do with browsing. Switching it to DresOS WebView closes that hole for the whole device in a single flash, which is why it is a core part of DresOS rather than an optional extra.
-
----
-
-## 17. Aves Libre - Gallery and Photo Manager
+### 6. Aves Libre, Gallery and Photo Manager
 
 **Download:** [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/)
 
-### What It Is
+Aves Libre is a fully open source gallery and photo manager for Android. It handles photos and videos of every common format, reads and displays full image metadata, and organises your library by album, country, place, tag, and date, all locally on the device with no cloud, no account, and no trackers.
 
-Aves Libre is a fully open-source gallery and photo manager for Android, and the DresOS replacement for Fossify Gallery and Google Photos. It handles photos and videos of every common format, reads and displays full image metadata, and organises your library by album, country, place, tag, and date, all locally on the device with no cloud, no account, and no trackers.
-
-### Key Features
+#### Key Features
 
 * Photos and videos, including raw, GIF, SVG, and many other formats
-* Map view and place or country grouping from on-device metadata only
+* Map view and place or country grouping from on device metadata only
 * Tags, favourites, and powerful search across your local library
 * Full EXIF and metadata viewer and editor
 * No cloud sync, no Google Photos backup, no AI face scanning, no telemetry
 * Works fully offline; you can block it from the network in AFWall+
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install Aves Libre from F-Droid.
 2. Grant it media and storage access when prompted.
-3. Set it as your default gallery in **Settings -> Apps -> Default apps** where the option is offered, and open your photos with it.
-4. In AFWall+, leave Aves Libre blocked on both Wi-Fi and Data, since a local gallery has no reason to reach the internet.
-
-### Why It's in the DresOS Suite
-
-A gallery app sees every photo on your device, which makes it one of the most privacy-sensitive apps you run. Google Photos uploads and scans your library by design. Aves Libre keeps everything on the device, reads metadata locally, and never phones home, which is exactly why it replaces the stock gallery in DresOS.
+3. In AFWall+, leave Aves Libre blocked on both Wi Fi and Data, since a local gallery has no reason to reach the internet.
 
 ---
 
-## 18. Stratum - 2FA Authenticator
+### 7. Stratum, 2FA Authenticator
 
 **Download:** [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app)
 
-### What It Is
+Stratum (formerly Authenticator Pro) is a free and open source two factor authentication app, released under GPL 3.0. It generates the rolling login codes that protect your accounts, and unlike Google Authenticator or Authy it does not lock your data in or talk to any server. Everything stays on the device, encrypted, and you can export it at any time.
 
-Stratum (formerly Authenticator Pro) is a free and open-source two-factor authentication app, released under GPL 3.0. It generates the rolling login codes that protect your accounts, and unlike Google Authenticator or Authy it does not lock your data in or talk to any server. Everything stays on the device, encrypted, and you can export it at any time.
-
-### Key Features
+#### Key Features
 
 * TOTP, HOTP, mOTP and more, compatible with almost every provider
 * Fully offline: it requires a single permission and never needs internet access
@@ -1789,97 +1359,31 @@ Stratum (formerly Authenticator Pro) is a free and open-source two-factor authen
 * Password and biometric lock on the code list
 * Import from other authenticator apps
 * Icons, categories, and Material You theming
-* Optional Wear OS companion
 
-### Setup and Usage
+#### Setup and Usage
 
 1. Install Stratum from the official download page or GitHub.
 2. Open it and set a password plus biometric unlock in the security settings.
 3. For each account choose add, then scan the provider's QR code or paste the secret. Stratum starts generating codes immediately.
-4. Make an encrypted backup from the backup menu and store it somewhere safe, for example inside an AES-256 archive, so you can restore your 2FA if you lose the phone.
-5. In AFWall+, block Stratum on both Wi-Fi and Data. It works entirely offline, so denying it the network is a free privacy and security win.
-
-### Why It's in the DresOS Suite
-
-Two-factor authentication is the single most effective step against account theft after a strong password, but the mainstream authenticators tie your second factor to a cloud account, which is its own risk. Stratum gives you the same protection with no cloud, no account, encrypted local backups, and no network access at all, which fits the rest of the DresOS stack.
+4. Make an encrypted backup from the backup menu and store it somewhere safe, for example inside an AES 256 archive, so you can restore your 2FA if you lose the phone.
+5. In AFWall+, block Stratum on both Wi Fi and Data. It works entirely offline, so denying it the network is a free privacy and security win.
 
 ---
 
-## 19. Tuta Calendar - Encrypted Calendar
+### Made with love for privacy by DresOS
 
-**Download:** [F-Droid](https://f-droid.org/packages/de.tutao.calendar/)
-
-### What It Is
-
-Tuta Calendar is the standalone end-to-end encrypted calendar app from the Tuta team, split out from the Tuta Mail app into its own package. Your events, descriptions, attendees, and notifications are encrypted before they leave the device, and they sync across all your devices through the same Tuta account that holds your encrypted mail. It is the calendar counterpart to Tuta Mail and the DresOS choice when you want an encrypted calendar that syncs, rather than a purely local one.
-
-### Key Features
-
-* End-to-end encrypted events, including titles, descriptions, and attendees
-* Zero-knowledge: Tuta cannot read your calendar
-* Syncs across devices through your existing Tuta account, no Google account
-* Encrypted reminders and recurring events
-* German and EU jurisdiction with GDPR protections
-* Fully open-source client
-
-### Setup and Usage
-
-1. Install Tuta Calendar from F-Droid.
-2. Sign in with the same Tuta account you created in OPSEC Step 4. Your encrypted calendar is available immediately and stays in sync with Tuta Mail.
-3. Set it as your default calendar in **Settings -> Apps -> Default apps** if you want calendar links to open in it.
-4. In AFWall+, allow Tuta Calendar on Wi-Fi and Data, since it needs the network to sync your encrypted calendar.
-
-### Calendar Is Covered by Tuta Calendar
-
-Tuta Calendar covers the calendar role in full, so Fossify Calendar is not part of the DresOS app list. The only reason to add Fossify Calendar is if you specifically want a calendar that lives only on the one device with no account and no sync at all; for the standard build, Tuta Calendar is the calendar.
-
-### Why It's in the DresOS Suite
-
-A calendar is a complete map of your life: where you will be, when, and with whom. Google Calendar reads all of it. Tuta Calendar gives you the convenience of cross-device sync while keeping every event encrypted so that not even Tuta can read it, which is why it sits alongside Tuta Mail at the centre of the DresOS encrypted account model.
+You now have a fully de Googled, secure Android device: no Google apps and no Google Services, DresOS WebView as the system WebView through the DresOS WebView Module v2.2.0, Google Play compatibility through the DresOS microG Module v3.1.2 with the ROM providing signature spoofing, Tor plus DNSCrypt through InviZible Pro in proxy mode, a kernel level iptables firewall through AFWall+, app tracker blocking through DuckDuckGo App Tracking Protection, and the full DresOS defensive app suite on top, from encrypted Tuta mail and calendar to offline two factor with Stratum, a local Aves Libre gallery, and an offline HeliBoard keyboard. Every tool is open source, every download is sourced directly from a verified developer, and every component is designed to hand control of your device, your data, and your privacy back to you.
 
 ---
 
-## Compatible Devices
+### License
 
-DresOS is built for universal compatibility: the degoogling and OPSEC steps work on any rooted Android 10 or newer device, and the Magisk modules are written to run on any ABI and any OEM partition layout. The combinations below are the ones confirmed working end to end so far:
-
-* Motorola Moto G32 (`devon`) on LineageOS, Android 15 and 16
-* Motorola ThinkPhone on Stock Android 15
-* Motorola Moto G7 Plus on Stock Android 10
-* Motorola Moto G7 Plus on LineageOS, Android 15
-* Samsung Galaxy A05s on Stock Android 10
-
-If you run DresOS on a device that is not listed, a confirmation report is welcome so the list can grow.
+This project is released under the Creative Commons Attribution Non Commercial Share Alike 4.0 International License (CC BY NC SA 4.0). See the [LICENSE](LICENSE) file for the full terms.
 
 ---
 
-## Contact DresOS
-
-* Project and source code: [github.com/DresOperatingSystems](https://github.com/DresOperatingSystems)
-* This guide: [DresOS-The-Android-Defensive-Security-System](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System)
-* Magisk modules and bug reports: [DresOS-Magisk-Modules](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules)
-* Support the project: [ko-fi.com/dresos](https://ko-fi.com/dresos)
-
----
-
-## License
-
-This project is released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0). See the [LICENSE](LICENSE) file for the full terms.
-
----
-
-## Made with ❤️ for privacy by DresOS
-
-You now have a fully de-Googled, operationally secure Android device: no Google apps and no Google Services, DresOS WebView as the system WebView through the DresOS WebView Module v2.2.0, Google Play compatibility through the DresOS microG Module v3.0.1 with the ROM providing signature spoofing, Tor plus I2P plus DNSCrypt through InviZible Pro in proxy plus root mode, a kernel-level iptables firewall through AFWall+, app-layer tracker blocking through DuckDuckGo App Tracking Protection, and the full DresOS defensive app suite on top, from encrypted Tuta mail and calendar to offline two-factor with Stratum, a local Aves Libre gallery, and an offline HeliBoard keyboard. Every tool is open source, every download is sourced directly from a verified developer, and every component is designed to hand control of your device, your data, and your privacy back to you.
-
----
----
-
-**This is an update to both the degoogled and opsec project**
-
-## Donate
+### Donate
 
 > **Help fund future development.** DresOS is built by a small open source team in our spare time. If our guide, Magisk modules or app saved you a weekend of research, please tip the jar. Funds go to test devices, dev stations, and developer time on updates and future projects.
 
 [![Please Help fund future projects and keep this one going](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/dresos)
-
