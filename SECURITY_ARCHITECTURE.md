@@ -88,7 +88,7 @@
 │  more. Replaced entirely via a single Magisk module flash.      │
 │                                                                  │
 │  INSTALLED BY - DresOS WebView Module v2.2.0                    │
-│  ├── Repo: github.com/DresOperatingSystems/DresOS-Magisk-Modules│
+│  ├── Repo: github.com/The-DresOS-Foundation/DresOS-Magisk-Modules│
 │  ├── Single flash handles entire installation process:          │
 │  │   ├── Validates Magisk 29.0+, Android 10-16, arm64           │
 │  │   ├── Aborts on x86/x86_64 and 32-bit arm (arm64 only)       │
@@ -187,7 +187,7 @@
 │  ├── Non-persistent MAC enabled in Developer Options            │
 │  └── Device name broadcast disabled                             │
 │                                                                  │
-│  GPS Spoofing - Fake Traveler                                    │
+│  GPS Spoofing - DresSecureComms                                  │
 │  ├── Mock GPS location set to anywhere in the world             │
 │  └── All apps requesting location receive the fake coordinates  │
 │                                                                  │
@@ -234,20 +234,20 @@ No single point of failure in the stack.
   DNS surveillance            -> Blocked by DNSCrypt + DNSSEC (iptables)
   In-app trackers             -> Blocked by DDG App Tracking Protection
   WebView data harvesting     -> Blocked by DresOS WebView (DresOS WebView Module)
-  GPS tracking                -> Blocked by Fake Traveler
+  GPS tracking                -> Blocked by DresSecureComms Geo Spoofer
   Wi-Fi MAC tracking          -> Blocked by MAC randomisation
   Phishing via email          -> Blocked by Duck Address aliases
   Email tracker pixels        -> Stripped by DuckDuckGo before delivery
   Unauthorised app internet   -> Blocked by AFWall+ whitelist
   Weak/reused passwords       -> Prevented by DDG password manager
   Google Play Services spying -> Replaced by DresOS microG Module
-  Malware in APKs             -> Scanned by Hypatia (ClamAV)
+  Malware in APKs             -> Scanned by DresSecureComms File Scan
   Sensitive files on device   -> AES-256 encrypted by Amaze File Manager
   Censorship / Tor blocking   -> Bypassed by obfs4 bridges
-  IP logging links            -> Scanned by URL Check before opening
+  IP logging links            -> Scanned by DresSecureComms Threat Scan
 ```
 
 ---
 
-**Full setup guide:** https://dresoperatingsystems.github.io/
+**Full setup guide:** https://dresos.org
 **The DresOS Team**

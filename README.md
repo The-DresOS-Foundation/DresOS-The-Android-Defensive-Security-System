@@ -58,12 +58,11 @@ Proceed at your own risk.
 
 * [Apps Overview](#apps-overview)
 * [1. RedReader, Private Reddit Client](#1-redreader-private-reddit-client)
-* [2. Hypatia, Open Source Antivirus](#2-hypatia-open-source-antivirus)
-* [3. Metrolist, Private YouTube Music Client](#3-metrolist-private-youtube-music-client)
-* [4. Arcane Chat, Decentralized Encrypted Messaging](#4-arcane-chat-decentralized-encrypted-messaging)
-* [5. HeliBoard, Offline Keyboard](#5-heliboard-offline-keyboard)
-* [6. Aves Libre, Gallery and Photo Manager](#6-aves-libre-gallery-and-photo-manager)
-* [7. Stratum, 2FA Authenticator](#7-stratum-2fa-authenticator)
+* [2. Metrolist, Private YouTube Music Client](#2-metrolist-private-youtube-music-client)
+* [3. Arcane Chat, Decentralized Encrypted Messaging](#3-arcane-chat-decentralized-encrypted-messaging)
+* [4. HeliBoard, Offline Keyboard](#4-heliboard-offline-keyboard)
+* [5. Aves Libre, Gallery and Photo Manager](#5-aves-libre-gallery-and-photo-manager)
+* [6. Stratum, 2FA Authenticator](#6-stratum-2fa-authenticator)
 
 #### Confirmed working devices:
 
@@ -98,10 +97,10 @@ Download **only** from these official links (2026). Install **F-Droid** first, i
 | **TWRP** | Custom recovery (full backups + flashing) | [twrp.me](https://twrp.me/) search your exact device model |
 | **Magisk** | Root + module framework | [GitHub Releases](https://github.com/topjohnwu/Magisk/releases) |
 | **DresOS microG Module** | Magisk module v3.1.2, universal systemless microG suite. Pure file overlay: no Zygisk payload, no Xposed, no boot scripts, so it cannot bootloop the device. Signature spoofing is provided by the ROM because the microG APKs carry the official microG key. | [DresOS Magisk Modules releases](https://github.com/The-DresOS-Foundation/DresOS-Magisk-Modules/releases/tag/microg-v3.1.2) |
-| **DresOS WebView Module** | Magisk module v2.2.0, systemless replacement of Android System WebView with DresOS WebView via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS Magisk Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/download/webview-v2.2.0/DresOS-WebView-v2_2_0.zip) |
+| **DresOS WebView Module** | Magisk module v2.2.0, systemless replacement of Android System WebView with DresOS WebView via static RRO plus bind mount, activated by cmd webviewupdate after boot, with bootloop sentinel and inert mode fallback | [DresOS Magisk Modules releases](https://github.com/The-DresOS-Foundation/DresOS-Magisk-Modules/releases/download/webview-v2.2.0/DresOS-WebView-v2_2_0.zip) |
 | **AFWall+** | Root level iptables firewall, per app kernel level rules, mobile data proxy redirect, no VPN slot | [F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall/) / [GitHub](https://github.com/ukanth/afwall) |
 | **SD Maid SE** | Deep system cleaner + remnant finder | [F-Droid](https://f-droid.org/packages/eu.darken.sdmse/) |
-| **DresSecureComms** | DresOS secure communications: SMS, dialer, contacts, link scanning, metadata wipe, geo spoofer (replaces Fossify Phone, Messages, Contacts, URL Checker and Fake Traveler) | [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) |
+| **DresSecureComms** | DresOS secure communications: SMS, dialer, contacts, link scanning, metadata wipe, geo spoofer (replaces Fossify Phone, Messages, Contacts, URL Checker, Fake Traveler and a separate antivirus app) | [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases) |
 | **Fossify Apps** | Launcher, Clock and Notes | [fossify.org/apps](https://www.fossify.org/apps/) (via F-Droid) |
 | **Aves Libre** | Gallery, photo and video manager (replaces Fossify Gallery and Google Photos) | [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/) |
 | **Amaze File Manager** | File manager with built in AES encryption and root explorer | [F-Droid](https://f-droid.org/packages/com.amaze.filemanager/) |
@@ -238,7 +237,7 @@ Reboot, open Magisk app, you are rooted. Keep Magisk app installed, you need it 
    * **Gopeed**
    * **SAI (Split APK Installer)**
 3. Install **DresSecureComms** from its [GitHub releases](https://github.com/DresOperatingSystems/DresSecureComms/releases). Set it as your default SMS and phone app after first launch.
-4. Download the **DresOS WebView module** from [DresOS Magisk Modules releases](https://github.com/DresOperatingSystems/DresOS-Magisk-Modules/releases/latest), you will flash it in Step 5.
+4. Download the **DresOS WebView module** from [DresOS Magisk Modules releases](https://github.com/The-DresOS-Foundation/DresOS-Magisk-Modules/releases/latest), you will flash it in Step 5.
 
 Do **not** open or configure these apps yet, follow each step in order.
 
@@ -627,7 +626,7 @@ Go to **Settings, Apps, Default apps** and set:
 
 This repository provides a guide to enhancing operational security (OPSEC) and cybersecurity on Android devices. It focuses on protecting against phishing, malware, IP tracking, data mining, device fingerprinting, censorship detection, and network surveillance, using free, open source tools only.
 
-This method creates a layered privacy setup: encrypted DNS at the OS level (Quad9 DNS over TLS), Tor routing + DNSCrypt + I2P at the network level via InviZible Pro in proxy + root mode (which leaves the VPN slot free), a root level iptables firewall via AFWall+ enforcing per app access control at the kernel level, app layer tracker blocking via DuckDuckGo App Tracking Protection in the VPN slot, and location spoofing at the sensor level via Fake Traveler. The result is an extremely hardened device with multiple independent, non conflicting privacy layers operating simultaneously.
+This method creates a layered privacy setup: encrypted DNS at the OS level (Quad9 DNS over TLS), Tor routing + DNSCrypt + I2P at the network level via InviZible Pro in proxy + root mode (which leaves the VPN slot free), a root level iptables firewall via AFWall+ enforcing per app access control at the kernel level, app layer tracker blocking via DuckDuckGo App Tracking Protection in the VPN slot, and location spoofing at the sensor level via DresSecureComms. The result is an extremely hardened device with multiple independent, non conflicting privacy layers operating simultaneously.
 
 ---
 
@@ -880,7 +879,6 @@ AFWall+ shows all installed apps with toggles for each interface:
 | Tuta Mail | ✓ | ✓ | Email, allow all |
 | Arcane Chat | ✓ | ✓ | Messaging, allow all |
 | Aurora Store | ✓ | ✗ | Updates via Wi Fi only to save data |
-| Hypatia | ✓ | ✗ | Signature updates via Wi Fi only |
 | OONI Probe | ✓ | ✓ | Needs both for network testing |
 | F-Droid | ✓ | ✗ | Update repo via Wi Fi only |
 | DresSecureComms | ✓ | ✓ | Calls and SMS use data |
@@ -1050,16 +1048,16 @@ It puts the most sensitive parts of the device, your texts, calls, contacts, and
 
 #### Key Features
 
-* Private offline SMS client with optional per message AES 256 GCM encryption, using a shared passphrase and readable only by another DresSecureComms user
+* Private offline SMS client with optional per message AES 256 GCM encryption, readable only by another DresSecureComms user. Keys are set per contact, so every person you talk to has their own code
 * Full default phone app with its own in call screen (mute, speaker, keypad, hold, add call) and a deletable call history
-* Caller ID and spam detection coming soon
+* Spam Shield, which screens incoming calls on the device before the phone rings. Premium rate numbers are rejected, short codes are silenced, and callers faking the first digits of your own number are flagged. Saved contacts always ring through and every block is listed in Settings so you can undo it
 * An encrypted on device contacts vault with add, edit (name, number, email), and import
 * Threat Scan, which checks any link against VirusTotal and returns a clear safe, suspicious, or dangerous verdict
 * Metadata Wipe, which strips GPS and EXIF data from photos before you share them
 * Geo Spoofer, which sets a fixed or random mock GPS location
 * App lock (fingerprint or device PIN) and an app wide block screenshots mode
 * No Google services, no trackers, no analytics; the only network call is the VirusTotal lookup you trigger yourself
-* File scanning engine built up from Hypatias coming soon
+* File Scan, which checks a single file or every app on your device against VirusTotal. The file never leaves the phone, only its SHA 256 fingerprint is sent, and that comes back checked against seventy or more antivirus engines at once. This is what replaces a separate antivirus app in DresOS
 
 #### Setup and Usage
 
@@ -1109,7 +1107,7 @@ Physical location is one of the most sensitive data points your phone broadcasts
 * On public Wi Fi, AFWall+'s whitelist ensures no unexpected apps phone home even on untrusted networks.
 
 **Periodic maintenance:**
-* Run **Hypatia** weekly to scan for malware.
+* Run a File Scan in **DresSecureComms** weekly, on anything you have downloaded and across your installed apps.
 * Run **OONI Probe** to monitor for censorship or network manipulation in your area.
 * Run **SD Maid SE** monthly to clear leftover data from removed apps.
 * Update all apps via F-Droid regularly, security patches are critical.
@@ -1179,46 +1177,7 @@ RedReader is a free, open source Reddit client that removes all advertising, tra
 
 ---
 
-### 2. Hypatia, Open Source Antivirus
-
-> **Coming to DresSecureComms.** A future DresSecureComms update will scan files, media, APKs, and ZIPs in app, taking over this antivirus role. Until then, Hypatia is the malware layer.
-
-**Download:** [GitHub Releases (latest)](https://github.com/MaintainTeam/Hypatia/releases/latest)
-
-Hypatia is a fully open source antivirus and malware scanner for Android, powered by ClamAV signature databases. It scans APKs before installation, scans files on your storage, and can perform full device scans to detect known malware, trojans, ransomware, and other threats.
-
-#### Key Features
-
-* **ClamAV powered**, uses the same signature database as the industry standard ClamAV engine trusted by organizations worldwide
-* **APK scanning**, scans any APK file before you install it, including those from Aurora Store and direct downloads
-* **File scanning**, scans documents, archives, downloaded files, and any other content on your storage
-* **Full device scan**, scans all installed apps and accessible storage in one pass
-* **Real time protection** (optional), monitors new files as they are created or downloaded
-* **Offline capable**, signatures are downloaded locally; scanning does not require internet once signatures are updated
-* Zero telemetry, no cloud scanning, no data sent to any server during scans
-* Regular signature updates via the app (or F-Droid)
-
-#### Setup and Usage
-
-1. Install via SAI from the direct APK link above.
-2. Open Hypatia, grant storage permission.
-3. **Update databases first:**
-   * Tap the options menu then update databases
-   * Wait for ClamAV, MSRT, and other signature databases to download
-4. **Full device scan:**
-   * Tap the **Scan** button on the main screen, select Full Scan
-   * Hypatia scans all installed apps and storage
-5. **Real time monitoring:**
-   * Tap the options menu, Tick Realtime scanner.
-   * Hypatia monitors new files as they land on your device and alerts you if anything malicious is detected
-
-#### Why It's in the DresOS Suite
-
-Side loading APKs (which is necessary on a de Googled phone without Play Protect) requires you to take responsibility for your own malware screening. Hypatia with ClamAV signatures provides robust detection of known threats in every APK you install, a critical piece of the defensive stack.
-
----
-
-### 3. Metrolist, Private YouTube Music Client
+### 2. Metrolist, Private YouTube Music Client
 
 **Download:** [GitHub Releases (latest)](https://github.com/MetrolistGroup/Metrolist/releases/latest)
 
@@ -1256,7 +1215,7 @@ Metrolist is a privacy focused, modded YouTube Music client. It provides access 
 
 ---
 
-### 4. Arcane Chat, Decentralized Encrypted Messaging
+### 3. Arcane Chat, Decentralized Encrypted Messaging
 
 **Download:** [GitHub Releases (latest)](https://github.com/ArcaneChat/android/releases/latest)
 
@@ -1288,7 +1247,7 @@ Arcane Chat is a fully decentralized, end to end encrypted messaging application
 
 ---
 
-### 5. HeliBoard, Offline Keyboard
+### 4. HeliBoard, Offline Keyboard
 
 **Download:** F-Droid, search "HeliBoard" or visit `https://f-droid.org/packages/helium314.keyboard/`
 
@@ -1315,14 +1274,14 @@ HeliBoard is a fully open source, completely offline keyboard for Android. It is
 
 We worked up a ready made DresOS HeliBoard configuration so you do not have to tune the keyboard by hand. It is a privacy tuned setup with always incognito mode on, contacts and personalized dictionaries off, sound off, and the DresOS theme with key borders, a number row, and narrow key gaps. You restore it as a single backup file and the keyboard is fully set up.
 
-1. Download the design file: [DresOS HeliBoard Design.zip](https://github.com/DresOperatingSystems/DresOS-The-Android-Defensive-Security-System/raw/main/assets/DresOS-HeliBoard-Design.zip)
+1. Download the design file: [DresOS HeliBoard Design.zip](https://github.com/The-DresOS-Foundation/DresOS-The-Android-Defensive-Security-System/raw/main/assets/DresOS-HeliBoard-Design.zip)
 2. Open HeliBoard then click advanced then scroll down to Backup and restore.
 3. Tap **Restore**, select the downloaded **DresOS HeliBoard Design.zip**, and confirm.
 4. HeliBoard applies the full DresOS configuration immediately. No further setup is needed.
 
 ---
 
-### 6. Aves Libre, Gallery and Photo Manager
+### 5. Aves Libre, Gallery and Photo Manager
 
 **Download:** [F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre/)
 
@@ -1345,7 +1304,7 @@ Aves Libre is a fully open source gallery and photo manager for Android. It hand
 
 ---
 
-### 7. Stratum, 2FA Authenticator
+### 6. Stratum, 2FA Authenticator
 
 **Download:** [stratumauth.com/download](https://stratumauth.com/download) / [GitHub](https://github.com/stratumauth/app)
 

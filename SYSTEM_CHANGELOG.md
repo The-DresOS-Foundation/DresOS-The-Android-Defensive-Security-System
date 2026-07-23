@@ -3,6 +3,16 @@
 
 ---
 
+## July 23, 2026 Update
+
+Dropped Hypatia from the system. Malware and file scanning is now handled in house by DresSecureComms, whose File Scan checks a single file or every installed app against seventy or more antivirus engines by fingerprint, so nothing you scan ever leaves the phone. DresSecureComms also took over caller ID and spam screening, which now runs entirely on the device with no number ever sent anywhere to be looked up.
+
+That removes another separate app from the build and debloats the guide further. With messaging, calling, contacts, spam screening, link scanning, file and malware scanning, metadata wiping and location spoofing all handled by DresSecureComms, and the WebView engine and Play Services layer handled by our own module and browser engine, over half of the system's core functions now run on components we build and sign ourselves rather than on third party apps.
+
+The Hypatia section, its entry in the app list, its AFWall+ rule and its weekly scan step are all gone. The remaining app sections were renumbered and every table of contents link was rechecked.
+
+---
+
 ## July 17, 2026 Update
 
 Debloated and refined the entire guide to make building the system much easier to understand, got rid of URL Checker, Fake Traveller along with some other apps that our own brand new app DresSecureComms now covers, reviewed the security throughout and made it less convoluted along with changing some steps to make it all a seamless and flawless build guide.
